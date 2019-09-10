@@ -1,0 +1,149 @@
+﻿@model KrishnaFinance.Models.ApplicationApproval
+
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<div class="row">
+    <div class="col-lg-7">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Loan Approval<small>Promissory Form</small></h5>
+
+            </div>
+            <div class="ibox-content">
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-lg-3">Approval Status</label>
+                        <div class="col-md-9">
+                            @Html.HiddenFor(a => a.ApplicantID, new { @id = "ApplicantID" })
+                            @Html.DropDownList("status", new SelectList((System.Collections.IEnumerable)ViewData["ApprovalStatus"], "Value", "Text", Model.status), "Select Status", new { @class = "form-control col-md-9", @id = "status", Title = "status" })
+
+                        </div>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3">Loan Amount</label>
+
+                        <div class="col-lg-9">
+                            <input type="text" placeholder="Email" class="form-control" id="Amount" value="@Model.Amount">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3">Interest Rate</label>
+
+                        <div class="col-lg-9"><input type="text" placeholder="Interest Rate" class="form-control" id="InterestRate" value="@Model.InterestRate"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3">Principal Amount</label>
+
+                        <div class="col-lg-9">
+                            <input type="text" placeholder="Principal Amount" class="form-control" id="PrincipalAmount" value="@Model.PrincipalAmount">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 ">Total Amount</label>
+
+                        <div class="col-lg-9"><input type="text" placeholder="Total Amount" class="form-control" id="TotalAmount" value="@Model.TotalAmount"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 "> Approval Remark</label>
+
+                        <div class="col-lg-9"><input type="text" placeholder="Remark" class="form-control" id="Remark" value="@Model.Remark"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 "> Duration</label>
+
+                        <div class="col-lg-9"><input type="text" placeholder="Remark" class="form-control" id="Duration" value="@Model.Duration"></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-8 pull-right">
+                            <div class="pull-right">
+                                <a class="btn btn-white" href="/Master/ApplicationList">Cancel</a>
+                                <button class="btn btn-primary" id="btnsave" type="button">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5> Applicant Details</h5>
+
+            </div>
+            <div class="ibox-content">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        Applicant
+                    </div>
+                    <div class="col-md-8">
+                        @Model.ApplicantFullName
+                    </div>
+
+                </div>
+                <div class="form-group" style="padding-top:10px;">
+                    <div class="col-md-4">
+                        Co Applicant
+                    </div>
+                    <div class="col-md-8">
+                        @Model.CoAplicantFullName
+                    </div>
+
+                </div>
+                <div class="form-group" style="padding-top:10px;">
+                    <div class="col-md-4">
+                        Applicant Occupation
+                    </div>
+                    <div class="col-md-8">
+                        @Model.ApplicantOccupation
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $('#btnsave').on('click', function () {
+
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Master/ApprovalResponse",
+                data: {
+                    ApplicantID: $("#ApplicantID ").val(),
+                    CreatedBy: 1,
+                    status: $("#status").val(),
+                    Amount: $("#Amount").val(),
+                    InterestRate: $("#InterestRate ").val(),
+                    PrincipalAmount: $("#PrincipalAmount ").val(),
+                    TotalAmount: $("#TotalAmount ").val(),
+                    Remark: $("#Remark ").val(),
+                    Duration: $("#Duration").val()
+
+                },
+                success: function (result) {
+                    alert(result);
+           
+                },
+                error: function (errorData) {
+                }
+            });
+
+        });
+    });
+
+</script>

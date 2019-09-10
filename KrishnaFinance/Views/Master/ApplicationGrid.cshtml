@@ -1,0 +1,134 @@
+﻿@model IEnumerable<KrishnaFinance.Models.ApplicationList>
+@using PagedList;
+@using PagedList.Mvc;
+@using GridMvc.Html
+<script src="~/js/jquery-2.1.1.js"></script>
+<div class="row">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th>#</th>
+                    <th>Name </th>
+                    <th>Co Applicant </th>
+                    <th>MobileNo</th>
+                    <th>Approval Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@item.ApplicantID</td>
+                    <td>@item.ApplicantName</td>
+                    <td>@item.CoApplicantName</td>
+                    <td>@item.ApplicantMobileNo</td>
+                    <td>@item.ApprovalStatus</td>
+                    <td>
+
+
+                        <div class="col-sm-1">
+                            <!-- Single button -->
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-grey btn-sm dropdown-toggle" data-toggle="dropdown">
+                                    ...
+                                </button>
+
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="edit" href="addApplication?ApplicantID=@item.ApplicantID" id="EditMember">
+                                            <i class="fa fa-pencil-square-o m-r-sm" aria-hidden="true"></i><span>Edit</span>
+                                        </a>
+                                    </li>
+
+                                    @if (item.ApprovalStatus != "" && Session["RoleID"].ToString()=="2")
+                                    {
+                                        <li>
+                                            <a href="../Master/ApprovalResponse?ApplicantID=@item.ApplicantID"> <i class="fa fa-pencil-square-o m-r-sm" aria-hidden="true"></i><span>Approval</span></a>
+                                        </li>
+                                    }
+                                    <li>
+                                        <a href="../Master/PrintApplication?ApplicantID=@item.ApplicantID"> <i class="fa fa-pencil-square-o m-r-sm" aria-hidden="true"></i><span>Print Application</span></a>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    
+        <div class="pnl-pagination m-b-md1">
+            <div class="pull-right">
+
+                @Html.PagedListPager((IPagedList)Model, page => Url.Action("", "", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 4, DisplayPageCountAndCurrentLocation = true }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "mgrid", OnComplete = "PagedOnComplete" }))
+                @if (Model.Count() == 0)
+                {
+                    <ul class="pagination pull-right"></ul>
+                }
+            </div>
+        </div> 
+</div>
+
+<script>
+    $(document).ready(function () { 
+        $('#mgrid .pagination li a').on('click', function (e) { 
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            $('.loader').show();
+            var temp = $(this).attr('href');
+
+           
+            var pageid = temp.replace('/?page=', '');
+
+            $.ajax({
+                url: "@Url.Action("LoadApplicationGrid", "Master")",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    page: pageid,
+                    CName: $('#CustomerFilter').val(), 
+                }),
+                dataType: "text",
+                type: "POST",
+                async: true,
+                success: function (data) {
+                    $('#mgrid').html(data);
+
+                },
+                error: function (data) {
+                },
+                complete: function () {
+                }
+            });
+
+        });
+
+         $('.Delete').click(function () {
+            if (confirm("Are you sure want to deleted!"))
+            {
+            var Id = $(this).attr('name');
+            $.ajax({
+                url: "@Url.Action("DeleteMaster", "Master")",
+                data: { Id: Id, MasterName: 'Application' },
+                dataType: "text",
+                type: "POST",
+                async: false,
+                success: function (data) {
+                    var mgs = data.replace(/"/g, "");
+                    alert(mgs);
+                   }
+            });
+            }
+                                 
+        });
+    });
+
+</script>

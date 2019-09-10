@@ -1,0 +1,37 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+@model KrishnaFinance.Models.Login  
+
+<div class="middle-box text-center loginscreen animated fadeInDown " style="margin-top:100px; " >
+    <div >
+        
+        <h3>Welcome to KRISHNA FINANCE</h3> 
+      
+        <p>Login in. To see it in action.</p>
+        @using (Html.BeginForm("Login", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", @style = "margin-left:40px;margin-right:40px;" }))
+                        {
+                            <div class="form-data">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(a => a.UserName, new { @class = "form-control", placeholder = "UserName", title = "UserName", @id = "UserName" })
+                                    @Html.ValidationMessageFor(m => m.UserName, "", new { @style = "color:Red;font-size:14px;" })
+
+                                </div>
+                                <div class="form-group">
+
+                                    @Html.PasswordFor(a => a.Password, new { @class = "form-control", placeholder = "Password", title = "Password", @id = "Password" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @style = "color:Red;font-size:14px;" })
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" name="btnLogin" value="Login" id="btnLogin" class="btn btn-primary btn-md btn-block">
+                                    @*<button type="submit" class="btn-blue"><span>Sign in</span></button>*@
+                                </div><span style="color:Red;font-size:14px;">@ViewBag.error</span>
+
+                            </div>
+                        }
+      
+    </div>
+</div>

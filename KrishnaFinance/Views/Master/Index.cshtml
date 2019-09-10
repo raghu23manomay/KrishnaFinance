@@ -1,0 +1,29 @@
+﻿<script>
+     function LoadApplication()
+        {
+
+            debugger;
+            $.ajax({
+            url: "@Url.Action("AddApplication", "Master")",
+            contentType: "application/json",
+            data: JSON.stringify( {
+                ApplicantID: $("#ApplicantID").val(),
+            }),
+            dataType: "text",
+            type: "POST",
+            async: true,
+            success: function (data) {
+                $('#MainTabGrid').html(data);
+                $('#MainTabGrid2').hide();
+                $('#MainTabGrid3').hide();
+                $('#MainTabGrid').show();
+            },
+            error: function (data) {
+            },
+            complete: function () {
+
+            }
+
+            });
+        }
+</script>

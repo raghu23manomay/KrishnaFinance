@@ -1,0 +1,565 @@
+﻿@model KrishnaFinance.Models.Application
+
+
+
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<style>
+
+    .cnt {
+        width: 820px;
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .lh {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        border: 0;
+        border-top: 1px solid #eee;
+    }
+
+    .Save {
+        margin-top: 18px;
+    }
+
+    .wrapper-content {
+        padding: 0px 10px 40px;
+    }
+
+    .fileUload {
+        margin-top: 23px;
+    }
+
+
+    .custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+    }
+
+    .main {
+        width: 50%;
+        margin: 50px auto;
+    }
+
+    /* Bootstrap 4 text input with search icon */
+
+    .has-search .form-control {
+        padding-left: 2.375rem;
+    }
+
+    .has-search .form-control-feedback {
+        position: absolute;
+        z-index: 2;
+        display: block;
+        width: 2.375rem;
+        height: 2.375rem;
+        line-height: 2.375rem;
+        text-align: center;
+        pointer-events: none;
+        color: #aaa;
+    }
+</style>
+
+<div class="row hedaerrow">
+    <div class="col-sm-6">
+        <h2 class="">Loan Application</h2>
+    </div>
+
+    <div class="col-sm-6 ">
+        <button type="button" class="btn btn-primary btn-md Save pull-right" id="Save">Save</button>
+        
+
+    </div>
+</div>
+<hr class="lh" />
+
+<div class="row">
+    <div class="col-lg-7">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+               
+                @*<div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="#">Config option 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Config option 2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>*@
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-6 b-r">
+                        
+                        <form role="form">
+                            <div class="form-group"><label>Email</label> 
+                            <input type="email" placeholder="Enter email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                            <label>Password</label> <input type="password" placeholder="Password" class="form-control">
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Log in</strong></button>
+                                <label> 
+                                <div class="icheckbox_square-green" style="position: relative;">
+                                    <input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;">
+                                    <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Remember me </label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>Not a member?</h4>
+                        <p>You can create an account:</p>
+                        <p class="text-center">
+                            <a href=""><i class="fa fa-sign-in big-icon"></i></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Horizontal form</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="#">Config option 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Config option 2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <form class="form-horizontal">
+                   
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Email</label>
+
+                        <div class="col-lg-10">
+                            <input type="email" placeholder="Email" class="form-control"> <span class="help-block m-b-none">Example block-level help text here.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Password</label>
+
+                        <div class="col-lg-10"><input type="password" placeholder="Password" class="form-control"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <div class="i-checks"><label> <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div><i></i> Remember me </label></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button class="btn btn-sm btn-white" type="submit">Sign in</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row ">
+    <div class="col-lg-6">
+
+        <div class="container cnt">
+            <h4 class="">Applicant Details</h4>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="">
+                       
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="">
+                        <label for="position" class="col-form-label">Age</label>
+                        <input id="ApplicanAge" type="text" class="form-control" placeholder="Age">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="">
+                        <label for="position" class="col-form-label">Loan Amount</label>
+                        <input id="LoanRequest" type="text" class="form-control" placeholder="Loan Amount">
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="">
+                        <label for="position" class="col-form-label">Loan Reason</label>
+                        <input id="LoanReason" type="text" class="form-control" placeholder="Loan Reason">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="">
+                        <label for="position" class="col-form-label">Occupation</label>
+                        <input id="ApplicanOccupation" type="text" class="form-control" placeholder="Occupation">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="">
+                        <label for="position" class="col-form-label">Mobile Number</label>
+                        <input id="MobileNo" type="text" class="form-control" placeholder="Mobile Number">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="">
+                        <label for="position" class="col-form-label"> Monthly Income</label>
+                        <input id="ApplicantMonthlyIncome" type="text" class="form-control" placeholder="Monthly Income">
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="">
+                        <label for="position" class="col-form-label">Permanent Address</label>
+
+                        <input id="PermanentAddress" type="text" class="form-control" placeholder="Permanent Address">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="">
+                        <label for="position" class="col-form-label">Present Address</label>
+                        <input type="checkbox" id="PAddress" title="Check  As Permanent Address" />
+                        <small>same Permanent Address</small>
+                        <input id="PresentAddress" type="text" class="form-control" placeholder="Present Address">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="">
+                        <label for="position" class="col-form-label">Office Address</label>
+
+                        <input id="OfficeAddress" type="text" class="form-control" placeholder="Office Address">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="container cnt">
+            <h4 class="">Document Details</h4>
+            <div class="row">
+
+                <div class="col-sm-4">
+                    <div class="">
+                        <label for="position" class="col-form-label">Pan Number</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Pan Number" id="PanNo" />
+                            <span class="input-group-addon">
+                                <input type="file" id="AddPanFile" style="display:none" />
+                                <i class="fa fa-paperclip" id="AddPanCard" title="Attach PenCard Xero"></i>
+                            </span>
+                        </div>
+                        <div id="viewImg">
+
+                        </div>
+                        <a href="~/UserDocument/PanCard/" id="PanfileLink"><label id="PanfileName"></label></a>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="">
+                        <label for="position" class="col-form-label">AadharCard Number</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="AadharCard Number" id="AdharCardNo" />
+                            <span class="input-group-addon">
+                                <input type="file" id="AddAdharFile" style="display:none" />
+                                <i class="fa fa-paperclip" id="AddAadharCard" title="Attach AadharCard Xero"></i>
+                            </span>
+                        </div>
+                        <div id="adharView"></div>
+                        @*<a href="~/UserDocument/Aadharcard/" id="Adharpath"><label id="adharName"></label></a>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container cnt">
+            <h4 class="">Bank Details</h4>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="">
+                        <label for="position" class="col-form-label">Bank Name</label>
+                        <input id="BankName" type="text" class="form-control" placeholder="Bank Name">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="">
+                        <label for="position" class="col-form-label">Branch Name</label>
+                        <input id="BranchName" type="text" class="form-control" placeholder="Bank Name">
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col-sm-4">
+                    <div class="">
+                        <label for="position" class="col-form-label">Cheques From</label>
+                        <input id="ChequesFrom" type="text" class="form-control" placeholder="Cheques Number">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="">
+                        <label for="position" class="col-form-label"> To</label>
+                        <input id="ChequesTo" type="text" class="form-control" placeholder="Cheques Number">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-lg-6">
+
+        <div class="container cnt">
+            <h4 class=""> Co-Applicant Details&nbsp;&nbsp;<i class="fa fa-plus-circle " aria-hidden="true" id="Addmore" style="font-size:16px;" title="Add More"></i></h4>
+            <div class="body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="">
+                            <label for="position" class="col-form-label"> Full Name</label>
+                            <input id="CoAplicantFullName" type="text" class="form-control" placeholder="Co-Applicant’s Full Name">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="">
+                            <label for="position" class="col-form-label"> Age</label>
+                            <input id="CoAplicantAge" type="text" class="form-control" placeholder="Co-Applicant’s Age">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="">
+                            <label for="position" class="col-form-label"> Occupation</label>
+                            <input id="CoAplicantOccupation" type="text" class="form-control" placeholder="Co-Applicant’s Occupation">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="">
+                            <label for="position" class="col-form-label"> Monthly Income</label>
+                            <input id="CoApplicantMonthlyIncome" type="text" class="form-control" placeholder=" Monthly Income">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="removeDiv" id="ShowMoreCoApplicant">
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        //Add more Co-Applicant
+        $("#Addmore").on("click", function () {
+            var data = '<div class="body mainDiv">  <i class="fa fa-times deleterow" aria-hidden="true"></i> <div class="row"><div class="col-sm-4"> <div class=""> <label for="position" class="col-form-label"> Full Name</label> <input id="CoApplicantFullName" type="text" class="form-control" placeholder="Co-Applicant’s Full Name"></div>  </div><div class="col-sm-4"> <div class=""> <label for="position" class="col-form-label"> Age</label>   <input id="CoApplicantAge" type="text" class="form-control" placeholder="Co-Applicant’s Age"> </div> </div> </div>  <div class="row">   <div class="col-sm-4">   <div class="">  <label for="position" class="col-form-label"> Occupation</label>  <input id="CoApplicantOccupation" type="text" class="form-control" placeholder="Co-Applicant’s Occupation">   </div>  </div>         <div class="col-sm-4">     <div class="">          <label for="position" class="col-form-label"> Monthly Income</label>   <input id="CoApplicantMonthlyIncome" type="text" class="form-control" placeholder=" Monthly Income"> </div> </div> </div> </div>';
+            $('#ShowMoreCoApplicant').append(data);
+        });
+        $(document).on('click', 'i.deleterow', function (e) {
+            e.preventDefault();
+            $(this).parents('.mainDiv').remove();
+        });
+
+        //Copy address
+        $("#PAddress").on("click", function () {
+
+            if (this.checked) {
+                $("#PresentAddress").val($("#PermanentAddress").val());
+
+            } else {
+
+                $('#PresentAddress').val("");
+               
+            }
+
+        });
+        //pan card
+        $('#AddPanCard').on('click', function () {
+            $('#AddPanFile').click();
+            $('#AddPanFile').change(function (e) {
+                var filePanName = e.target.files[0].name;
+                document.getElementById('PanfileName').innerHTML = filePanName;
+                UploadDocumentPanCardFile();
+            });
+            function UploadDocumentPanCardFile() {
+
+                if (window.FormData !== undefined) {
+
+                    var fileUpload = $("#AddPanFile").get(0);
+                    var files = fileUpload.files;
+
+                    //var ext = $('#fileadhar').val().split('.').pop().toLowerCase();
+
+                    // Create FormData object
+                    var fileData = new FormData();
+
+                    // Looping over all files and add it to FormData object
+                    for (var i = 0; i < files.length; i++) {
+                        fileData.append(files[i].name, files[i]);
+                    }
+
+                    $.ajax({
+                        url: '/Master/UploadDocumentPan',
+                        type: "POST",
+                        contentType: false, // Not to set any content header
+                        processData: false, // Not to process data
+                        data: fileData,
+                        success: function (result) {
+                            alert('file Uploaded sucesssfully');
+                        },
+                        error: function (err) {
+                            alert(err.statusText);
+                        }
+                    });
+                }
+                else {
+                    alert("FormData is not supported.");
+                }
+            }
+        });
+
+
+
+        //aadharcard upload
+        $('#AddAadharCard').on('click', function () {
+            $('#AddAdharFile').click();
+            $('#AddAdharFile').change(function (e) {
+                var fileadhar = e.target.files[0].name;
+                alert(fileadhar);
+                var data = '<a href="~/UserDocument/Aadharcard/' + fileadhar +'" id="Adharpath"><label id="adharName">' + fileadhar +'</label></a>';
+                $('#adharView').append(data);
+                //document.getElementById('adharName').innerHTML = fileadhar;
+                UploadDocumentAadharFile();
+
+            });
+            function UploadDocumentAadharFile() {
+
+                if (window.FormData !== undefined) {
+
+                    var fileUpload = $("#AddAdharFile").get(0);
+                    var files = fileUpload.files;
+
+                    //var ext = $('#fileadhar').val().split('.').pop().toLowerCase();
+
+                    // Create FormData object
+                    var fileData = new FormData();
+
+                    // Looping over all files and add it to FormData object
+                    for (var i = 0; i < files.length; i++) {
+                        fileData.append(files[i].name, files[i]);
+                    }
+
+                    $.ajax({
+                        url: '/Master/UploadDocumentAdhar',
+                        type: "POST",
+                        contentType: false, // Not to set any content header
+                        processData: false, // Not to process data
+                        data: fileData,
+                        success: function (result) {
+                            alert('file Uploaded sucesssfully');
+                        },
+                        error: function (err) {
+                            alert(err.statusText);
+                        }
+                    });
+                }
+                else {
+                    alert("FormData is not supported.");
+                }
+            }
+        });
+        //Save Apllication
+
+        $('#Save').on('click', function () {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Master/SaveApplication",
+                data: {
+                    ApplicantFullName: $("#ApplicantFullName        ").val(),
+                    ApplicanAge: $("#ApplicanAge ").val(),
+                    ApplicanOccupation: $("#ApplicanOccupation ").val(),
+                    MobileNo: $("#MobileNo ").val(),
+                    PanNo: $("#PanNo          ").val(),
+                    AdharCardNo: $("#AdharCardNo").val(),
+                    ApplicantMonthlyIncome: $("#ApplicantMonthlyIncome").val(),
+                    LoanRequest: $("#LoanRequest ").val(),
+                    LoanReason: $("#LoanReason").val(),
+                    CreatedBy:2,
+                    PresentAddress: $("#PresentAddress ").val(),
+                    OfficeAddress: $("#OfficeAddress").val(),
+                    PermanentAddress: $("#PermanentAddress").val(),
+                    BankName: $("#BankName ").val(),
+                    BranchName: $("#BranchName ").val(),
+                    ChequesFrom: $("#ChequesFrom ").val(),
+                    ChequesTo: $("#ChequesTo ").val(),
+                    CoAplicantFullName: $("#CoAplicantFullName ").val(),
+                    CoAplicantAge: $("#CoAplicantAge").val(),
+                    CoAplicantOccupation: $("#CoAplicantOccupation ").val(),
+                    CoApplicantMonthlyIncome: $("#CoApplicantMonthlyIncome").val(),
+                    Photograph: $("#Photograph ").val(),
+                    DocumentName: $("#DocumentName ").val(),
+                    DocumentPath: $("#DocumentPath ").val(),
+                    UploadBy: 2
+                },
+                success: function (result) {
+                    alert(result);
+
+                    FnLoadFeasibility();
+
+                    //location.reload(this);
+                },
+                error: function (errorData) {
+                }
+            });
+
+        });
+    });
+  
+</script>
+
