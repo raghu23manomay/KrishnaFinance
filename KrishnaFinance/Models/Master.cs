@@ -142,7 +142,21 @@ namespace KrishnaFinance.Models
 
 
     }
-} 
+    public class PrintDemandPromissory
+
+    {
+        [Key]
+        public int ApplicantID { get; set; }
+        public decimal CompanyPrice { get; set; }
+        public string CompanyAddress { get; set; }
+        public string ApplicantFullName { get; set; }
+        public int ApplicantAge { get; set; }
+        public string PermanentAddress { get; set; }
+        public decimal LoanRequest { get; set; }
+        public decimal InterestRate { get; set; }
+    }
+
+    } 
 
 
 

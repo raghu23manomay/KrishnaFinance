@@ -21,6 +21,7 @@
 
     .Save {
         margin-top: 18px;
+        margin-right:10px
     }
 
     .wrapper-content {
@@ -71,30 +72,30 @@
     </div>
     <div class="col-sm-6 form-group">
         <a class="btn btn-primary btn-md Save pull-right " href="/Master/ApplicationList">Cancel</a>
-     
-          @if (Model.ApplicantID != 0)
-          {
-            <button type="button" class="btn btn-primary btn-md Save pull-right" id="btnApproveRequest">Send To Approval</button> ;
-          }
 
-            <button type="button" class="btn btn-primary btn-md Save pull-right" id="Save">Save</button>  
-            &nbsp;
-        </div>
+        @if (Model.ApplicantID != 0)
+        {
+            <button type="button" class="btn btn-primary btn-md Save pull-right" id="btnApproveRequest">Send To Approval</button>;
+        }
+
+        <button type="button" class="btn btn-primary btn-md Save pull-right" id="Save">Save</button>
+        &nbsp;
+    </div>
     </div>
     <hr class="lh" />
     <div class="ibox-content">
 
         <div class="row">
-
+                
             <div class="col-md-6">
                 <div class="ibox-title">
                     Applicant Details
                 </div>
                 <div class="col-sm-6 b-r">
                     <div class="form-group">
-                        <label>Applicant Name</label>
+                        <label> Name</label>
                         @Html.HiddenFor(a => a.ApplicantID, new { @id = "ApplicantID" })
-                        <input id="ApplicantFullName" type="text" class="form-control" placeholder="Full Name" value="@Model.ApplicantFullName">
+                        <input id="ApplicantFullName" type="text" class="form-control" placeholder=" Name" value="@Model.ApplicantFullName">
                     </div>
 
                     <div class="form-group">
@@ -105,7 +106,7 @@
                 <div class="col-sm-6 b-r">
                     <div class="form-group">
                         <label>Loan Amount</label>
-                        <input id="LoanRequest" type="text" class="form-control" placeholder="Full Name" value="@Model.LoanRequest">
+                        <input id="LoanRequest" type="text" class="form-control" placeholder="Loan Amount" value="@Model.LoanRequest">
                     </div>
                     <div class="form-group">
                         <label for="position" class="col-form-label">Loan Reason</label>
@@ -114,13 +115,13 @@
                 </div>
                 <div class="col-sm-6 b-r">
                     <div class="form-group">
-                        <label for="position" class="col-form-label">Applicant Occupation</label>
+                        <label for="position" class="col-form-label"> Occupation</label>
                         <input id="ApplicantOccupation" type="text" class="form-control" placeholder="Occupation" value="@Model.ApplicantOccupation">
                     </div>
                     <div class="form-group">
 
                         <label>Mobile No</label>
-                        <input id="MobileNo" type="text" class="form-control" placeholder="Full Name" value="@Model.MobileNo">
+                        <input id="MobileNo" type="text" class="form-control" placeholder="Mobile No" value="@Model.MobileNo">
                     </div>
                 </div>
                 <div class="col-sm-6 b-r">
@@ -138,7 +139,7 @@
                     <div class="form-group">
                         <label for="position" class="col-form-label">Present Address</label>
                         <input type="checkbox" id="PAddress" title="" style="margin: 0 0 0;" />
-                        <small>same Permanent Address</small>
+                       <small>Same as Permanent Address</small>
                         <input id="PresentAddress" type="text" class="form-control" placeholder="Present Address" value="@Model.PresentAddress">
                     </div>
 
@@ -151,9 +152,9 @@
                 </div>
                 <div class="col-sm-6 b-r">
                     <div class="form-group">
-                        <label for="position" class="col-form-label">Pan Number</label>
+                        <label for="position" class="col-form-label">Pan Card </label>
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Pan Number" id="PanNo" value="@Model.PanNo" />
+                            <input type="text" class="form-control" placeholder="Pan Card" id="PanNo" value="@Model.PanNo" />
                             <span class="input-group-addon">
 
                                 <input type="file" id="AddPanFile" class="PanCardPath" style="display:none" />
@@ -168,9 +169,9 @@
 
 
                     <div class="form-group">
-                        <label for="position" class="col-form-label">AadharCard Number</label>
+                        <label for="position" class="col-form-label">Aadhar Card </label>
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="AadharCard Number" id="AdharCardNo" value="@Model.AdharCardNo" />
+                            <input type="text" class="form-control" placeholder="Aadhar Card " id="AdharCardNo" value="@Model.AdharCardNo" />
                             <span class="input-group-addon">
                                 <input type="file" id="AddAdharFile" class="AadharCardPath" style="display:none" />
                                 <i class="fa fa-paperclip" id="AddAadharCard" title="Attach AadharCard Xero"></i>
@@ -187,15 +188,16 @@
                         <input id="BankName" type="text" class="form-control" placeholder="Bank Name" value="@Model.BankName">
                     </div>
                     <div class="form-group">
-                        <label for="position" class="col-form-label">Branch Name</label>
-                        <input id="BranchName" type="text" class="form-control" placeholder="Bank Name" value="@Model.BranchName">
+                        <label for="position" class="col-form-label">Cheques From</label>
+                        <input id="ChequesFrom" type="text" class="form-control" placeholder="Cheques Number " value="@Model.ChequesFrom">
                     </div>
                 </div>
                 <div class="col-sm-6 b-r">
                     <div class="form-group">
-                        <label for="position" class="col-form-label">Cheques From</label>
-                        <input id="ChequesFrom" type="text" class="form-control" placeholder="Cheques Number" value="@Model.ChequesFrom">
+                        <label for="position" class="col-form-label">Branch Name</label>
+                        <input id="BranchName" type="text" class="form-control" placeholder="Branch Name" value="@Model.BranchName">
                     </div>
+                   
                     <div class="form-group">
                         <label for="position" class="col-form-label"> To</label>
                         <input id="ChequesTo" type="text" class="form-control" placeholder="Cheques Number" value="@Model.ChequesTo">
@@ -207,22 +209,22 @@
             <div class="col-sm-6">
 
                 <div class="ibox-title">
-                    Co Applicant Details
+                    Co-applicant Details
                 </div>
                 <div class="col-sm-6 b-r">
                     <div class="form-group">
-                        <label for="position" class="col-form-label"> Full Name</label>
-                        <input id="CoAplicantFullName" type="text" class="form-control" placeholder="Co-Applicant’s Full Name" value="@Model.CoAplicantFullName">
+                        <label for="position" class="col-form-label">  Name</label>
+                        <input id="CoAplicantFullName" type="text" class="form-control" placeholder=" Name" value="@Model.CoAplicantFullName">
                     </div>
                     <div class="form-group">
                         <label for="position" class="col-form-label"> Age</label>
-                        <input id="CoAplicantAge" type="text" class="form-control" placeholder="Co-Applicant’s Age" value="@Model.CoAplicantAge">
+                        <input id="CoAplicantAge" type="text" class="form-control" placeholder=" Age" value="@Model.CoAplicantAge">
                     </div>
                 </div>
                 <div class="col-sm-6 b-r">
                     <div class="form-group">
                         <label for="position" class="col-form-label"> Occupation</label>
-                        <input id="CoAplicantOccupation" type="text" class="form-control" placeholder="Co-Applicant’s Occupation" value="@Model.CoAplicantOccupation">
+                        <input id="CoAplicantOccupation" type="text" class="form-control" placeholder=" Occupation" value="@Model.CoAplicantOccupation">
                     </div>
                     <div class="form-group">
                         <label for="position" class="col-form-label"> Monthly Income</label>
@@ -242,6 +244,8 @@
 
     <script>
         $(document).ready(function () {
+            //validation
+
             //Add more Co-Applicant
             $("#Addmore").on("click", function () {
                 var data = '<div class="body mainDiv">  <i class="fa fa-times deleterow" aria-hidden="true"></i> <div class="row"><div class="col-sm-4"> <div class=""> <label for="position" class="col-form-label"> Full Name</label> <input id="CoApplicantFullName" type="text" class="form-control" placeholder="Co-Applicant’s Full Name"></div>  </div><div class="col-sm-4"> <div class=""> <label for="position" class="col-form-label"> Age</label>   <input id="CoApplicantAge" type="text" class="form-control" placeholder="Co-Applicant’s Age"> </div> </div> </div>  <div class="row">   <div class="col-sm-4">   <div class="">  <label for="position" class="col-form-label"> Occupation</label>  <input id="CoApplicantOccupation" type="text" class="form-control" placeholder="Co-Applicant’s Occupation">   </div>  </div>         <div class="col-sm-4">     <div class="">          <label for="position" class="col-form-label"> Monthly Income</label>   <input id="CoApplicantMonthlyIncome" type="text" class="form-control" placeholder=" Monthly Income"> </div> </div> </div> </div>';
