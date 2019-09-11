@@ -103,8 +103,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Calibration.dll" />
-    <Content Include="bin\Calibration.pdb" />
+    <!--<Content Include="bin\Calibration.dll" />
+    <Content Include="bin\Calibration.pdb" />-->
     <Content Include="bin\EntityFramework.dll" />
     <Content Include="bin\EntityFramework.SqlServer.dll" />
     <Content Include="bin\GridMvc.dll" />
@@ -699,9 +699,6 @@
     <Content Include="js\plugins\validate\jquery.validate.min.js" />
     <Content Include="js\plugins\video\responsible-video.js" />
     <Content Include="js\plugins\wow\wow.min.js" />
-    <Content Include="obj\Debug\Calibration.dll" />
-    <Content Include="obj\Debug\Calibration.pdb" />
-    <Content Include="obj\Debug\KrishnaFinance.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Release\Calibration.pdb" />
     <Content Include="obj\Release\_WPPLastBuildInfo.txt" />
     <Content Include="Office.csproj.user" />
@@ -810,12 +807,12 @@
     <Compile Include="Models\FinanceDbContext.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Master.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <!--<Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />-->
+    <!--<Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />-->
+    <!--<Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />-->
+    <!--<Compile Include="obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />-->
+    <!--<Compile Include="obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />-->
+    <!--<Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />-->
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -866,13 +863,8 @@
     <Content Include="js\plugins\chartist\chartist.min.js.map" />
     <Content Include="js\plugins\diff_match_patch\COPYING" />
     <Content Include="js\plugins\justified-gallery\README.md" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <Content Include="obj\Debug\KrishnaFinance.csproj.CopyComplete" />
-    <Content Include="obj\Debug\KrishnaFinance.csproj.CoreCompileInputs.cache" />
-    <Content Include="obj\Debug\KrishnaFinance.csprojAssemblyReference.cache" />
-    <Content Include="obj\Debug\Office.csproj.CoreCompileInputs.cache" />
-    <Content Include="obj\Debug\Office.csprojAssemblyReference.cache" />
-    <Content Include="obj\Release\KrishnaFinance.csproj.CoreCompileInputs.cache" />
+    <!--<Content Include="obj\Debug\KrishnaFinance.csproj.CoreCompileInputs.cache" />-->
+    <!--<Content Include="obj\Release\KrishnaFinance.csproj.CoreCompileInputs.cache" />-->
     <Content Include="obj\Release\TransformWebConfig\original\Web.config" />
     <Content Include="obj\Release\TransformWebConfig\transformed\Web.config" />
     <None Include="packages.config" />
@@ -951,6 +943,7 @@
     <Content Include="Views\Master\PrintApplication.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
