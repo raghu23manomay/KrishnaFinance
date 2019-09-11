@@ -867,8 +867,6 @@
     <Content Include="obj\Debug\KrishnaFinance.csproj.CopyComplete" />
     <Content Include="obj\Debug\KrishnaFinance.csproj.CoreCompileInputs.cache" />
     <Content Include="obj\Debug\KrishnaFinance.csprojAssemblyReference.cache" />
-    <Content Include="obj\Debug\Office.csproj.CoreCompileInputs.cache" />
-    <Content Include="obj\Debug\Office.csprojAssemblyReference.cache" />
     <Content Include="obj\Release\KrishnaFinance.csproj.CoreCompileInputs.cache" />
     <Content Include="obj\Release\TransformWebConfig\original\Web.config" />
     <Content Include="obj\Release\TransformWebConfig\transformed\Web.config" />
@@ -948,6 +946,9 @@
     <Content Include="Views\Master\PrintApplication.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
+    <Content Include="Views\Master\PrintDemandPromissory.cshtml" />
+    <Content Include="Views\Master\AddApplication2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
