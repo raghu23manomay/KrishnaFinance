@@ -413,7 +413,33 @@ namespace KrishnaFinance.Controllers
             }
         }
         #endregion
+        public ActionResult PrintDemandPromissory(int ApplicantID = 1)
+        {
+            try
+            {
 
+
+                FinanceDbContext _db = new FinanceDbContext();
+
+                var result = _db.PrintDemandPromissory.SqlQuery(@"exec GetPrintDemandPromissory @ApplicantID",
+                new SqlParameter("@ApplicantID", ApplicantID)
+                 ).ToList<PrintDemandPromissory>();
+                var data = result.FirstOrDefault();
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("PrintDemandPromissory", data)
+                        : View("PrintDemandPromissory", data);
+            }
+            catch (Exception ex)
+            {
+                var mgs = ex.Message;
+                return View();
+
+            }
+            finally
+            {
+
+            }
+        }
     }
 }
 
