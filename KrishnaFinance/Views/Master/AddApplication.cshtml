@@ -21,6 +21,7 @@
 
     .Save {
         margin-top: 18px;
+        margin-left:10px;
     }
 
     .wrapper-content {
@@ -72,7 +73,7 @@
     <div class="col-sm-6 form-group">
         <a class="btn btn-primary btn-md Save pull-right " href="/Master/ApplicationList">Cancel</a>
      
-          @if (Model.ApplicantID != 0)
+          @if (Model.ApplicantID != 0 )
           {
             <button type="button" class="btn btn-primary btn-md Save pull-right" id="btnApproveRequest">Send To Approval</button> ;
           }
@@ -242,6 +243,15 @@
 
     <script>
         $(document).ready(function () {
+            //Show Approve
+            if (@Session["RoleID"].ToString()== 2) {
+                $('#btnApproveRequest').hide();
+            }
+            else {
+
+                $('#btnApproveRequest').show();
+                }
+            
             //Add more Co-Applicant
             $("#Addmore").on("click", function () {
                 var data = '<div class="body mainDiv">  <i class="fa fa-times deleterow" aria-hidden="true"></i> <div class="row"><div class="col-sm-4"> <div class=""> <label for="position" class="col-form-label"> Full Name</label> <input id="CoApplicantFullName" type="text" class="form-control" placeholder="Co-Applicant’s Full Name"></div>  </div><div class="col-sm-4"> <div class=""> <label for="position" class="col-form-label"> Age</label>   <input id="CoApplicantAge" type="text" class="form-control" placeholder="Co-Applicant’s Age"> </div> </div> </div>  <div class="row">   <div class="col-sm-4">   <div class="">  <label for="position" class="col-form-label"> Occupation</label>  <input id="CoApplicantOccupation" type="text" class="form-control" placeholder="Co-Applicant’s Occupation">   </div>  </div>         <div class="col-sm-4">     <div class="">          <label for="position" class="col-form-label"> Monthly Income</label>   <input id="CoApplicantMonthlyIncome" type="text" class="form-control" placeholder=" Monthly Income"> </div> </div> </div> </div>';
@@ -430,6 +440,7 @@
                         Pancardpath: $("#PanfileName").val(),
                         Adharcardpath: $("#AdharfileName").val(),
                         UploadBy: 2
+                        , ApplicantID: $("#ApplicantID").val()
                     },
                     success: function (result) {
                         //  alert(result);
