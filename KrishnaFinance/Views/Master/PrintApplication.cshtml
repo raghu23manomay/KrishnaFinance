@@ -1,14 +1,9 @@
 ﻿@model KrishnaFinance.Models.PrintApplication
 
-
-<style>
-    
-
-</style>
-
-    <div class="container-fluid" style="margin-right:10px">
+<div class="ibox" style="border: solid 1px; width:100%; margin-bottom:10px">
+    <div class="container-fluid">
         <div class="row">
-            
+
             <center> <h2>KRISHNA FINANCE</h2></center>
         </div>
 
@@ -23,18 +18,18 @@
             </div>
         </div>
         <br />
-        <div class="row" style="margin-right:80px">
+        <div class="row" style="margin-right:120px">
             <center>  ( Application for Unsecured Loan)</center>
         </div>
         <br />
 
 
-        <div class="row" style="margin-left:130px">
+        <div class="row" style="margin-left:50px">
             <table>
 
                 <tr>
                     <td>
-                        <div class="col-sm-6" style="margin-right:100px">
+                        <div class="col-sm-6" style="margin-right:150px">
                             Applicant   <br /> (@Model.ApplicantFullName)
                                         <div class="col-md-4" style="border: solid 1px; width:90px;height:90px">
                                            
@@ -44,7 +39,7 @@
 
                     </td>
                     <td>
-                        <div class="col-sm-6" style="margin-right:100px">
+                        <div class="col-sm-6" style="margin-right:150px">
                             Co-Applicant <br /> (@Model.CoAplicantFullName)
                                               <div class="col-md-4" style="border: solid 1px; width:90px;height:90px">
                                               </div>
@@ -56,7 +51,7 @@
         </div>
 
         <br />
-        <div style="margin-left:50px">
+        <div style="margin-left:30px">
             <div class="row">
                 <div class="col-sm-12" style="margin-right:30px">
 
@@ -90,7 +85,7 @@
                     <p>
                         I/ We
                         has / have borrowed Rs.&nbsp;&nbsp;@Model.LoanRequest
-                        ( Rupees in words  )  from   <b>KRISHNA FINANCE</b> @Model.CompanyAddress.
+                        ( Rupees in words  )  from   <b>KRISHNA FINANCE</b> @Model.PermanentAddress .
 
 
                         <br />
@@ -102,7 +97,7 @@
             </div><br />
         </div>
         <center>
-            <div class="row" style="margin-left:50px;margin-bottom:20px">
+            <div class="row" style="margin-left:30px;margin-bottom:20px">
                 <table>
                     <tr>
                         <td>
@@ -119,19 +114,14 @@
             </div>
         </center>
     </div>
+</div>
 
-
-<div class="row print">
+<div class="row">
     <button type="button" class="btn btn-primary btn-md Save pull-right" id="Print" onclick="myFunction()">Print  <i class="fa fa-print " aria-hidden="true"></i></button>
 </div>
 <script>
     function myFunction() {
-        $('.print').css('display', 'none');
         window.print();
     }
-
-    window.close(function () {
-        $('.print').css('display', 'block');
-    })
 </script>
 
