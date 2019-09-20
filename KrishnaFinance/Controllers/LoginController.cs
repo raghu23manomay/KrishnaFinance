@@ -38,7 +38,7 @@ namespace KrishnaFinance.Controllers
             else
             {
                 Session["UserName"] = L.UserName;
-                Session["User_id"] = L.UserID;
+                Session["UserID"] = L.UserID;
                 Session["RoleID"] = L.RoleID;
                 Session["RoleName"] = L.RoleName;
                 return RedirectToAction("ApplicationList", "Master");

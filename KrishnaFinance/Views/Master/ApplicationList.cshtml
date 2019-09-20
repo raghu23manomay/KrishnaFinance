@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<KrishnaFinance.Models.ApplicationList>
 
 @{
-   
+
 
 }
 
@@ -16,29 +16,43 @@
 
             </div>
             <div class="ibox-content">
-                <div class="row">
-                    <div class="col-sm-9 m-b-xs">
+              
+                    <div class="row">
+                        <div class="col-sm-9 m-b-xs">
 
-                        @Html.ActionLink("Add New", "AddApplication", "Master", null, new { @class = "btn btn-sm btn-primary pull-left" })
+                            @Html.ActionLink("Add New", "AddApplication", "Master", null, new { @class = "btn btn-sm btn-primary pull-left AddNew"  })
 
+                        </div>
+                        <div class="col-sm-3">
+                            @*<div class="input-group">
+                        <input type="text" placeholder="Search" class="input-sm form-control" id="CustomerFilter"> <span class="input-group-btn">
+                            <button type="button" class="btn btn-sm btn-primary"> Go!</button>
+                        </span>
+                    </div>*@
+                        </div>
                     </div>
-                    <div class="col-sm-3">
-                        @*<div class="input-group">
-                            <input type="text" placeholder="Search" class="input-sm form-control" id="CustomerFilter"> <span class="input-group-btn">
-                                <button type="button" class="btn btn-sm btn-primary"> Go!</button>
-                            </span>
-                        </div>*@
+
+                    <div class="bindGrid">
+                        <div id="mgrid">
+                            @Html.Partial("ApplicationGrid")
+                        </div>
                     </div>
+
                 </div>
-
-                <div class="bindGrid">
-                    <div id="mgrid">
-                        @Html.Partial("ApplicationGrid")
-                    </div>
-                </div>
-
-            </div>
         </div>
     </div>
 
 </div>
+<script>
+     $(document).ready(function () {
+           
+            //Show Approve
+            if (@Session["RoleID"].ToString()== 2) {
+                $('.AddNew').hide();
+            }
+            else {
+
+                $('.AddNew').show();
+                }
+     });
+</script>
