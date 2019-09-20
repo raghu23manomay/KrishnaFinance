@@ -20,25 +20,18 @@ namespace KrishnaFinance.Controllers
         {
             return View();
         }
-   
-         [HttpPost]
-        public ActionResult EMIInsert(Transection T)
+        //EMI Update
+        [HttpPost]
+        public ActionResult EMIUpdate(int TransectionID, string BankTransactionID,DateTime EMIPaidDate,int status)
         {
             try
             {
                 FinanceDbContext _db = new FinanceDbContext();
-                var result = _db.Database.ExecuteSqlCommand(@"exec UspEMIInsert  @ApplicantID,@LoanAmount,@Duration,@EMICount,@BankTransactionID , @EMIDate,  @EMIPaidDate, @status",
-                         new SqlParameter("@ApplicantID", T.ApplicantID),
-                         new SqlParameter("@LoanAmount", T.LoanAmount),
-                         new SqlParameter("@Duration", T.Duration),
-                         new SqlParameter("@EMICount", T.EMICount),
-                         new SqlParameter("@BankTransactionID", T.BankTransactionID),
-                         new SqlParameter("@EMIDate", T.EMIDate),
-                         new SqlParameter("@EMIPaidDate", T.EMIPaidDate),
-                         new SqlParameter("@status", T.status));
-                      
-
-                return Json("EMI Paid Sucessfullly");
+                var result = _db.Database.ExecuteSqlCommand(@"exec UspEMIUpdate @TransectionID,@BankTransactionID, @EMIPaidDate, @status",
+                         new SqlParameter("@BankTransactionID", BankTransactionID),
+                         new SqlParameter("@EMIPaidDate", EMIPaidDate),
+                         new SqlParameter("@status", status));
+                       return Json("EMI Paid Sucessfullly");
 
             }
             catch (Exception ex)
@@ -47,6 +40,8 @@ namespace KrishnaFinance.Controllers
                 return Json(message);
             }
         }
+      
+     
         public ActionResult Collectiondata(int ApplicantID = 0)
         {
             try

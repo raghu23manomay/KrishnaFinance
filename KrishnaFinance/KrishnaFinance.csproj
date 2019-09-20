@@ -944,6 +944,11 @@
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
+    <Content Include="Views\Master\PrintDemandPromissory.cshtml" />
+    <Content Include="Views\Master\CollectionList.cshtml" />
+    <Content Include="Views\Master\CollectionGrid.cshtml" />
+    <Content Include="Views\Master\Collection.cshtml" />
+    <Content Include="Views\Master\Collectiondata.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
