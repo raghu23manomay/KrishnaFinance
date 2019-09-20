@@ -1,0 +1,176 @@
+﻿
+
+@model KrishnaFinance.Models.Collectiondata
+
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<style>
+    .Rightside {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: black;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-7">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Collection</h5>
+            </div>
+            <div class="ibox-content">
+
+                <form class="form-horizontal">
+                    <div hidden>
+                        <input type="text" class="form-control" id="ApplicantID" value="@Model.ApplicantID">
+                        <input type="text" class="form-control" id="LoanAmount" value="@Model.LoanAmount">
+                        <input type="text" class="form-control" id="Duration" value="@Model.Duration">
+                        <input type="text" class="form-control" id="EMICount" value="8">
+                       
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 ">EMI Amount</label>
+                        <div class="col-lg-9"><input type="text" placeholder="EMI Amount" class="form-control" id="TotalAmount" value="@Model.TotalEMI"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 "> Transaction ID</label>
+                        <div class="col-lg-9"><input type="text" placeholder="Transaction ID" class="form-control" id="BankTransactionID" value=""></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 "> EMI Date</label>
+                        <div class="col-lg-9"><input type="text" placeholder="EMI Date" class="form-control" id="EMIDate" value="@ViewBag.EMIDate" ></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 "> EMI Paid Date</label>
+                        <div class="col-lg-9"><input type="date" placeholder="EMI Paid Date" class="form-control" id="EMIPaidDate" value=""></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 "> EMI Paid Date</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("status", new SelectList((System.Collections.IEnumerable)ViewData["EMIStatus"], "Value", "Text"), "Select Status", new { @class = "form-control ", @id = "status", Title = "status" })
+                        </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3" id="PrintDemandPromissory">
+                                @*<a class="btn btn-primary" href="/Master/PrintDemandPromissory?ApplicantID=@Model.ApplicantID"><i class="fa fa-print " aria-hidden="true"></i> Promissory Note  </a>*@
+                            </div>
+                            <div class="col-md-8 pull-right">
+                                <div class="pull-right">
+                                    <a class="btn btn-primary" href="/Master/CollectionList">Cancel</a>
+                                    <button class="btn btn-primary" id="btnsave" type="button">Save </button>
+                                </div>
+                            </div>
+                        </div>
+
+</form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5> Collection Details</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="form-group ">
+                        <div class="col-sm-6 Rightside ">
+                            Applicant :
+                        </div>
+                        <div class="col-sm-6 pull-right ">
+                            @Model.ApplicantFullName
+                        </div>
+
+                    </div>
+                    <div class="form-group " style="padding-top:10px; ">
+                        <div class="col-sm-6 Rightside ">
+                            Loan Amount :
+                        </div>
+                        <div class="col-sm-6 pull-right ">
+                            @Model.LoanAmount
+                        </div>
+
+                    </div>
+                    <div class="form-group " style="padding-top:10px; ">
+                        <div class="col-sm-6 Rightside ">
+                            Disbursement Date :
+                        </div>
+                        <div class="col-sm-6 pull-right ">
+                          @ViewBag.DisbursementDate
+                        </div>
+
+                    </div>
+                    <div class="form-group " style="padding-top:10px; ">
+                        <div class="col-sm-6 Rightside ">
+                            Approval Date :
+                        </div>
+                        <div class="col-sm-6 pull-right ">
+                            @ViewBag.ApprovalDate
+                        </div>
+
+                    </div>
+                    <div class="form-group " style="padding-top:10px; ">
+                        <div class="col-sm-6 Rightside ">
+                            EMI Amount :
+                        </div>
+                        <div class="col-sm-6 pull-right ">
+                            @Model.TotalEMI
+                        </div>
+
+                    </div>
+                    <div class="form-group " style="padding-top:10px; ">
+                        <div class="col-sm-6 Rightside ">
+                            Duration :
+                        </div>
+                        <div class="col-sm-6 pull-right ">
+                            @Model.Duration Months
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+
+
+
+        $('#btnsave').on('click', function () {
+           
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Master/EMIInsert",
+                data: {
+                  
+                    ApplicantID: $("#ApplicantID ").val(),
+                    LoanAmount: $("#LoanAmount").val(),
+                    Duration: $("#Duration ").val(),
+                    EMICount: $("#EMICount ").val(),
+                    BankTransactionID: $("#BankTransactionID").val(),
+                    EMIDate: $("#EMIDate").val(),
+                    EMIPaidDate: $("#EMIPaidDate").val(),
+                    status: $("#status").val()
+                    
+                },
+                success: function (result) {
+                success: function (result) {
+                    alert(result);
+
+                },
+                error: function (errorData) {
+                }
+            });
+
+        });
+    });
+
+</script>
+

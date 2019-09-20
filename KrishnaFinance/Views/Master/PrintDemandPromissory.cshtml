@@ -1,0 +1,75 @@
+﻿@model KrishnaFinance.Models.PrintDemandPromissory
+<div class="container-fluid" style="margin-top:30px">
+
+
+    <div class="row">
+
+        <center> <h2> DEMAND PROMISSORY NOTE</h2></center>
+    </div><br /><br />
+    <div style="margin-left:50px">
+        <div class="row">
+
+            <div class="col-sm-6">
+                Amount: Rs:&nbsp;&nbsp;&nbsp;@Model.LoanRequest/-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Place:&nbsp;&nbsp;@Model.CompanyAddress<br />
+                Date :&nbsp;@DateTime.Now
+            </div>
+
+
+        </div><br />
+        <div class="row">
+            <div class="col-sm-6">
+                Promisee: KRISHNA FINANCE
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-6">
+                Promisor:&nbsp;&nbsp;&nbsp;@Model.ApplicantFullName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Age:&nbsp;&nbsp;@Model.ApplicantAge<br />
+                Resident of :&nbsp;&nbsp;@Model.PermanentAddress
+            </div>
+
+        </div><br />
+        <div class="row">
+            <div class="col-sm-8" style="margin-right:120px">
+                <p>
+                    I have availed a loan of Rs.&nbsp;&nbsp;@Model.LoanRequest/-( in words) in cash
+                    from you to be payable at the rate of   @Model.InterestRate    % p. a..
+                    I hereby promise to pay the same along with interest &
+                    my legal heirs shall be responsible for the same in
+                    their individual and joint capacity for the same.
+                </p>
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-10">
+                Revenue StampRevenue Stamp
+            </div>
+
+        </div><br />
+        <div class="row">
+            <div class="col-sm-10">
+                Signature of the applicantCo-Applicant’s signature
+                On revenue stampon revenue Stamp
+
+            </div>
+
+        </div><br />
+
+    </div>
+
+</div>
+<div class="row print">
+    <button type="button" class="btn btn-primary btn-md Save pull-right" id="Print" onclick="myFunction()">Print  <i class="fa fa-print " aria-hidden="true"></i></button>
+</div>
+<script>
+    function myFunction() {
+        $('.print').css('display', 'none');
+        window.print();
+    }
+
+    window.close(function () {
+        $('.print').css('display', 'block');
+    })
+</script>

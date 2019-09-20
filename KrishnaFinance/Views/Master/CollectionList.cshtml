@@ -1,0 +1,102 @@
+﻿@model IEnumerable<KrishnaFinance.Models.CollectionList>
+    <style>
+        .wrapper-content {
+            padding: 0px 3px 59px;
+         
+        }
+       
+    </style>
+<div id="cgrid" >
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 id="c"></h2> 
+        </div>
+        <div class="panel-body ">
+      
+            <div role="tabpanel">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active "><a href="#" aria-controls="profile" role="tab" data-toggle="tab" id="NotPaid">Not Paid</a></li>
+                    <li role="presentation" class=" "><a href="#" aria-controls="profile" role="tab" data-toggle="tab" id="Paid">Paid</a></li>
+
+                </ul>
+                
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="Current"> </div>
+
+                    @Html.Partial("CollectionGrid")
+                </div> 
+            </div>
+            <p id="mn" hidden></p>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+     
+        $('#NotPaid').click(function () {
+          
+
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Master/CollectionList",
+                data: {
+                    Paid: 2
+                },
+                success: function (result) {
+
+                    $('#cgrid').html(result);
+
+                    //location.reload(this);
+                },
+                error: function (errorData) {
+                }
+            });
+        });
+        $('#Paid').click(function () {
+        
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Master/CollectionList",
+                data: {
+                    Paid: 1
+                },
+                success: function (result) {
+
+                    $('#cgrid').html(result);
+
+                    //location.reload(this);
+                },
+                error: function (errorData) {
+                }
+            });
+        });
+        // getMonth method returns the month of the date (0-January :: 11-December)
+        var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var now = new Date();
+    
+        var Cmonth = months[now.getMonth()];
+     
+     
+        var c = document.getElementById('c');
+      
+     
+        console.log(Cmonth);
+      
+        
+        if (c.textContent !== undefined) {
+            c.textContent = Cmonth;
+        }
+        else {
+            c.innerText = Nmonth;
+        }
+      
+    });
+
+
+
+</script>

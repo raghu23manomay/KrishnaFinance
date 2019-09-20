@@ -3,11 +3,17 @@
 <script src="~/Scripts/jquery-2.1.1.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<style>
+    .Rightside {
+       font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+       color:black;
+    }
+</style>
 <div class="row">
     <div class="col-lg-7">
         <div class="ibox">
             <div class="ibox-title">
-                <h5>Loan Approval<small>Promissory Form</small></h5>
+                <h5>Loan Approval</h5>
 
             </div>
             <div class="ibox-content">
@@ -20,7 +26,7 @@
                             @Html.DropDownList("status", new SelectList((System.Collections.IEnumerable)ViewData["ApprovalStatus"], "Value", "Text", Model.status), "Select Status", new { @class = "form-control col-md-9", @id = "status", Title = "status" })
 
                         </div>
-                        
+
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3">Loan Amount</label>
@@ -42,7 +48,27 @@
                             <input type="text" placeholder="Principal Amount" class="form-control" id="PrincipalAmount" value="@Model.PrincipalAmount">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-lg-3">EMI Date</label>
 
+                        <div class="col-lg-9">
+                            <input type="date" placeholder="EMI Date" class="form-control" id="EMIDate" value="@ViewBag.EMI">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3">Disbursement Date</label>
+
+                        <div class="col-lg-9">
+                            <input type="date" placeholder="Disbursement Date" class="form-control" id="DisbursementDate" value="@ViewBag.Disbursement">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 "> Duration <small>(In Month)</small> </label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("DurationLoan", new SelectList((System.Collections.IEnumerable)ViewData["Duration"], "Value", "Text", Model.Duration), "Select Duration", new { @class = "form-control col-md-9", @id = "Duration", Title = "Duration" })
+                            @*<div class="col-lg-9"><input type="text" placeholder="Duration" class="form-control" id="Duration" value="@Model.Duration"></div>*@
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-lg-3 ">Total Amount</label>
 
@@ -53,18 +79,15 @@
 
                         <div class="col-lg-9"><input type="text" placeholder="Remark" class="form-control" id="Remark" value="@Model.Remark"></div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 "> Duration</label>
 
-                        <div class="col-lg-9"><input type="text" placeholder="Remark" class="form-control" id="Duration" value="@Model.Duration"></div>
-                    </div>
                     <div class="row form-group">
-                        <div class="col-md-3">
+                        <div class="col-md-3" id="PrintDemandPromissory">
+                            <a class="btn btn-primary" href="/Master/PrintDemandPromissory?ApplicantID=@Model.ApplicantID"><i class="fa fa-print " aria-hidden="true"></i> Promissory Note  </a>
                         </div>
                         <div class="col-md-8 pull-right">
                             <div class="pull-right">
                                 <a class="btn btn-white" href="/Master/ApplicationList">Cancel</a>
-                                <button class="btn btn-primary" id="btnsave" type="button">Save changes</button>
+                                <button class="btn btn-primary" id="btnsave" type="button">Save </button>
                             </div>
                         </div>
                     </div>
@@ -79,43 +102,154 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5> Applicant Details</h5>
-
             </div>
             <div class="ibox-content">
-                <div class="form-group">
-                    <div class="col-md-4">
-                        Applicant
+                <div class="row">
+                    <div class="form-group ">
+                        <div class="col-sm-6 Rightside "  >
+                            Applicant :
+                        </div>
+                       <div class="col-sm-6 pull-right ">
+                            @Model.ApplicantFullName
+                        </div>
+
                     </div>
-                    <div class="col-md-8">
-                        @Model.ApplicantFullName
+                    <div class="form-group " style="padding-top:10px; ">
+                        <div class="col-sm-6 Rightside">
+                            Loan Amount :
+                        </div>
+                       <div class="col-sm-6 pull-right ">
+                            @Model.Amount
+                        </div>
+
+                    </div>
+                    <div class="form-group" style="padding-top:10px;">
+                        <div class="col-sm-6 Rightside">
+                             Occupation :
+                        </div>
+                        <div class="col-sm-6 pull-right">
+                            @Model.ApplicantOccupation
+                        </div>
+                    </div>
+                    <div class="form-group " style="padding-top:10px;">
+                        <div class="col-sm-6 Rightside">
+                            Monthly Income :
+                        </div>
+                        <div class="col-sm-6 pull-right">
+                            @Model.ApplicantMonthlyIncome
+                        </div>
+
+                    </div>
+                    <div class="form-group " style="padding-top:10px;">
+                        <div class="col-sm-6 Rightside">
+                            Mobile No :
+                        </div>
+                       <div class="col-sm-6 pull-right ">
+                            @Model.MobileNo
+                        </div>
+
+                    </div>
+                    <div class="form-group " style="padding-top:10px;">
+                        <div class="col-sm-6 Rightside">
+                             Address :
+                        </div>
+                        <div class="col-sm-6 pull-right">
+                            @Model.PermanentAddress
+                        </div>
+                    </div>
+                    <div class="form-group " style="padding-top:10px;">
+                        <div class="col-sm-6 Rightside">
+                            Pan Card :
+                        </div>
+                        <div class="col-sm-6 pull-right">
+                            @Model.PanNo
+                        </div>
+                    </div>
+                    <div class="form-group " style="padding-top:10px;">
+                        <div class="col-sm-6 Rightside">
+                            Aadhar Card :
+                        </div>
+                        <div class="col-sm-6 pull-right">
+                            @Model.AdharCardNo
+                        </div>
+                    </div>
+                    <div class="form-group " style="padding-top:10px;">
+                        <div class="col-sm-6 Rightside">
+                            Bank Name :
+                        </div>
+                        <div class="col-sm-6 pull-right">
+                            @Model.BankName
+                        </div>
+                    </div>
+                    <div class="form-group " style="padding-top:10px;">
+                        <div class="col-sm-6 Rightside">
+                            Branch Name :
+                        </div>
+                        <div class="col-sm-6 pull-right">
+                            @Model.BranchName
+                        </div>
+                    </div>
+                    <div class="form-group " style="padding-top:10px;">
+                        <div class="col-sm-6 Rightside">
+                            Cheques From :
+                        </div>
+                        <div class="col-sm-6 pull-right">
+                            @Model.ChequesFrom
+                        </div>
+                    </div>
+                    <div class="form-group " style="padding-top:10px;">
+                        <div class="col-sm-6 Rightside">
+                            Cheques To :
+                        </div>
+                       <div class="col-sm-6 pull-right ">
+                            @Model.ChequesTo
+                        </div>
+                    </div>
+                    <div class="form-group  " style="padding-top:10px;">
+                        <div class="col-sm-6 Rightside">
+                            Loan Reason :
+                        </div>
+                        <div class="col-sm-6 pull-right">
+                            @Model.LoanReason
+
+                        </div>
+                    </div>
+                    <div class="form-group" style="padding-top:10px;">
+                        <div class="col-sm-6 Rightside">
+                            Co-applicant :
+                        </div>
+                        <div class="col-sm-6 pull-right">
+                            @Model.CoAplicantFullName
+                        </div>
                     </div>
 
+                    <div class="form-group" style="padding-top:10px;">
+                        <div class="col-sm-6 Rightside">
+                            Co-applicant Occupation :
+                        </div>
+                        <div class="col-sm-6 pull-right">
+                            @Model.CoAplicantOccupation
+
+                        </div>
+                    </div>
+                    <div class="form-group" style="padding-top:10px;">
+                        <div class="col-sm-6 Rightside">
+                            Monthly Income :
+                        </div>
+                        <div class="col-sm-6 pull-right">
+                            @Model.CoApplicantMonthlyIncome
+
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group" style="padding-top:10px;">
-                    <div class="col-md-4">
-                        Co Applicant
-                    </div>
-                    <div class="col-md-8">
-                        @Model.CoAplicantFullName
-                    </div>
-
-                </div>
-                <div class="form-group" style="padding-top:10px;">
-                    <div class="col-md-4">
-                        Applicant Occupation
-                    </div>
-                    <div class="col-md-8">
-                        @Model.ApplicantOccupation
-                    </div>
-
-                </div>
-
             </div>
         </div>
     </div>
 </div>
 <script>
     $(document).ready(function () {
+
+       
 
         $('#btnsave').on('click', function () {
 
@@ -132,8 +266,9 @@
                     PrincipalAmount: $("#PrincipalAmount ").val(),
                     TotalAmount: $("#TotalAmount ").val(),
                     Remark: $("#Remark ").val(),
-                    Duration: $("#Duration").val()
-
+                    Duration: $("#Duration").val(),
+                    EMIDate: $("#EMIDate").val(),
+                    DisbursementDate: $("#DisbursementDate").val()
                 },
                 success: function (result) {
                     alert(result);

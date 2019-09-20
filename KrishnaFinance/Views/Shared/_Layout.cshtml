@@ -2,7 +2,9 @@
 <html>
 
 <head>
-
+    <style>
+       
+    </style>
       <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -52,8 +54,10 @@
                         <ul class="nav nav-second-level">
                             <li><a href="../Master/ApplicationList">Application List</a></li>
                             <li><a href="../Master/AddApplication">Application</a></li>
+                            <li><a href="../Master/CollectionList">Collection List</a></li>
+                            <li><a href="../Master/Collection">Report</a></li>
+                            <li><a href="../Master/AddApplication">Setting</a></li>
 
-                     
                         </ul>
                     </li>
                     
@@ -75,7 +79,7 @@
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li>
-                            <span class="m-r-sm text-muted welcome-message">Welcome to @Session["UserName"].ToString() :@Session["RoleName"].ToString()  </span>
+                            <span class="m-r-sm text-muted welcome-message"> @Session["UserName"].ToString()   </span>
                         </li>
                         
 
@@ -84,11 +88,11 @@
                                 <i class="fa fa-sign-out"></i> Log out
                             </a>
                         </li>
-                        <li>
+                        @*<li>
                             <a class="right-sidebar-toggle">
                                 <i class="fa fa-tasks"></i>
                             </a>
-                        </li>
+                        </li>*@
                     </ul>
 
                 </nav>

@@ -43,12 +43,14 @@ h5 {
   font-weight: 600;
   padding: 14px 20px 14px 25px;
 }
+
 .nav.navbar-right > li > a {
   color: #999c9e;
 }
 .nav > li.active > a {
   color: #ffffff;
 }
+
 .navbar-default .nav > li > a:hover,
 .navbar-default .nav > li > a:focus {
   background-color: #293846;
@@ -3303,7 +3305,7 @@ body {
   background-color: #2f4050;
   font-size: 13px;
   color: #676a6c;
-  overflow-x: hidden;
+
 }
 html,
 body {
@@ -3434,11 +3436,8 @@ video {
 .modal-footer {
   margin-top: 0;
 }
-/* WRAPPERS */
-#wrapper {
-  width: 100%;
-  overflow-x: hidden;
-}
+
+
 .wrapper {
   padding: 0 20px;
 }
@@ -4319,7 +4318,7 @@ a.close-canvas-menu:hover {
   animation: none;
 }
 body.fullscreen-ibox-mode {
-  overflow-y: hidden;
+
 }
 .ibox.fullscreen {
   z-index: 2030;

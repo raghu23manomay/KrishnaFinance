@@ -20,15 +20,108 @@ namespace KrishnaFinance.Controllers
         {
             return View();
         }
-      
-     
-        //save Application
+   
          [HttpPost]
+        public ActionResult EMIInsert(Transection T)
+        {
+            try
+            {
+                FinanceDbContext _db = new FinanceDbContext();
+                var result = _db.Database.ExecuteSqlCommand(@"exec UspEMIInsert  @ApplicantID,@LoanAmount,@Duration,@EMICount,@BankTransactionID , @EMIDate,  @EMIPaidDate, @status",
+                         new SqlParameter("@ApplicantID", T.ApplicantID),
+                         new SqlParameter("@LoanAmount", T.LoanAmount),
+                         new SqlParameter("@Duration", T.Duration),
+                         new SqlParameter("@EMICount", T.EMICount),
+                         new SqlParameter("@BankTransactionID", T.BankTransactionID),
+                         new SqlParameter("@EMIDate", T.EMIDate),
+                         new SqlParameter("@EMIPaidDate", T.EMIPaidDate),
+                         new SqlParameter("@status", T.status));
+                      
+
+                return Json("EMI Paid Sucessfullly");
+
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format("<b>Message:</b> {0}<br /><br />", ex.Message);
+                return Json(message);
+            }
+        }
+        public ActionResult Collectiondata(int ApplicantID = 0)
+        {
+            try
+            {
+                if (ApplicantID == 0)
+                {
+                    Collectiondata d = new Collectiondata();
+                    d.ApplicantID = 0;
+                    return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("Collectiondata", d)
+                        : View("Collectiondata", d);
+                }
+
+                FinanceDbContext _db = new FinanceDbContext();
+                ViewData["EMIStatus"] = binddropdown("EMIStatus", 0);
+                var result = _db.Collectiondata.SqlQuery(@"exec GetTransection @ApplicantID",
+                new SqlParameter("@ApplicantID", ApplicantID)
+                 ).ToList<Collectiondata>();
+                var data = result.FirstOrDefault();
+                string EMIDate = data.EMIDate.ToString("dd/mm/yyyy", CultureInfo.InvariantCulture);
+                ViewBag.EMIDate = EMIDate;
+                string ApprovalDate = data.ApprovalDate.ToString("dd/mm/yyyy", CultureInfo.InvariantCulture);
+                ViewBag.ApprovalDate = ApprovalDate;
+                string DisbursementDate = data.DisbursementDate.ToString("dd/mm/yyyy", CultureInfo.InvariantCulture);
+                ViewBag.DisbursementDate = DisbursementDate;
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("Collectiondata", data)
+                        : View("Collectiondata", data);
+            }
+            catch (Exception ex)
+            {
+                var mgs = ex.Message;
+                return View();
+
+            }
+            finally
+            {
+
+            }
+        }
+
+        //save Application
+        [HttpPost]
         public ActionResult SaveApplication(Application AP)
         {
 
             try
             {
+                string AadharCardSavePath =  Session["UserID"] + @"/AadharCard"+ Path.GetExtension(AP.Adharcardpath);
+                 
+                string PancardSavePath =  Session["UserID"] + @"/Pancard" + Path.GetExtension(AP.Pancardpath);
+                if (AP.Pancardpath != null && AP.Pancardpath!="View")
+                {
+                    string sourcePath =@"~\UserDocument\PanCard";
+                    string targetPath =  @"~\UserDocument\PanCard\" +  Session["UserID"];
+
+                    // Use Path class to manipulate file and directory paths.
+                    string sourceFile = System.IO.Path.Combine(sourcePath, AP.Pancardpath);
+                    string destFile = System.IO.Path.Combine(targetPath, "Pancard" + Path.GetExtension(AP.Pancardpath));
+                     
+                    System.IO.Directory.CreateDirectory(Server.MapPath(targetPath)); 
+                    System.IO.File.Copy(Server.MapPath(sourceFile), Server.MapPath(destFile), true);
+                }
+                if (AP.Adharcardpath != null && AP.Adharcardpath!="View")
+                {
+                    string sourcePath = @"~\UserDocument\AadharCard";
+                    string targetPath = @"~\UserDocument\AadharCard\" + Session["UserID"];
+
+                    // Use Path class to manipulate file and directory paths.
+                    string sourceFile = System.IO.Path.Combine(sourcePath, AP.Adharcardpath);
+                    string destFile = System.IO.Path.Combine(targetPath, "Aadharcard" + Path.GetExtension(AP.Adharcardpath));
+
+                    System.IO.Directory.CreateDirectory(Server.MapPath(targetPath));
+                    System.IO.File.Copy(Server.MapPath(sourceFile), Server.MapPath(destFile), true);
+                }
                 FinanceDbContext _db = new FinanceDbContext();
                 var result = _db.Database.ExecuteSqlCommand(@"exec UspInsertApplication 
 
@@ -53,12 +146,10 @@ namespace KrishnaFinance.Controllers
                     @CoAplicantAge           ,
                     @CoAplicantOccupation    ,
                     @MonthlyIncome           ,
-                    @Photograph              ,
-                    @DocumentName            ,
-                    @DocumentPath            ,
-                    @UploadBy,@ApplicantID",
-
-
+                    @Pancardpath            ,
+                    @Adharcardpath            ,
+                    @UploadBy,
+                    @ApplicantID",
 
                     new SqlParameter("@ApplicantFullName",AP.ApplicantFullName),
                     new SqlParameter("@ApplicantAge",AP.ApplicantAge),
@@ -80,10 +171,9 @@ namespace KrishnaFinance.Controllers
                     new SqlParameter("@CoAplicantFullName",AP.CoAplicantFullName),
                     new SqlParameter("@CoAplicantAge",AP.CoAplicantAge),
                     new SqlParameter("@CoAplicantOccupation",AP.CoAplicantOccupation),
-                    new SqlParameter("@MonthlyIncome",AP.CoApplicantMonthlyIncome),
-                    new SqlParameter("@Photograph","Coapllicant"),
-                    new SqlParameter("@DocumentName","DocumentName"),
-                    new SqlParameter("@DocumentPath","DocumentPath"),
+                    new SqlParameter("@MonthlyIncome",AP.CoApplicantMonthlyIncome), 
+                    new SqlParameter("@Pancardpath", PancardSavePath),
+                    new SqlParameter("@Adharcardpath", AadharCardSavePath),
                     new SqlParameter("@UploadBy",AP.UploadBy),
                     new SqlParameter("@ApplicantID", AP.ApplicantID));
 
@@ -324,15 +414,15 @@ namespace KrishnaFinance.Controllers
                 return Json(message);
 
             }
-
+            
         }
         [HttpPost]
-        public ActionResult ApprovalResponse(int ApplicantID, int CreatedBy , int status, decimal Amount ,decimal InterestRate , decimal PrincipalAmount , decimal TotalAmount , string Remark , String Duration)
+        public ActionResult ApprovalResponse(int ApplicantID, int CreatedBy , int status, decimal Amount ,decimal InterestRate , decimal PrincipalAmount , decimal TotalAmount , string Remark , String Duration, DateTime EMIDate ,DateTime DisbursementDate)
         {
             try
             {
                 FinanceDbContext _db = new FinanceDbContext();
-                var result = _db.Database.ExecuteSqlCommand(@"exec uspLoanApprovalResponse @ApplicantID , @CreatedBy,@status,@Amount,@InterestRate,@PrincipalAmount,@TotalAmount,@Remark,@Duration",
+                var result = _db.Database.ExecuteSqlCommand(@"exec uspLoanApprovalResponse @ApplicantID , @CreatedBy,@status,@Amount,@InterestRate,@PrincipalAmount,@TotalAmount,@Remark,@Duration,@EMIDate,@DisbursementDate",
                      new SqlParameter("@ApplicantID", ApplicantID),
                      new SqlParameter("@CreatedBy", CreatedBy), 
                      new SqlParameter("@status", status),
@@ -341,7 +431,9 @@ namespace KrishnaFinance.Controllers
                      new SqlParameter("@PrincipalAmount", PrincipalAmount),
                      new SqlParameter("@TotalAmount", TotalAmount),
                      new SqlParameter("@Remark", Remark) ,
-                     new SqlParameter("@Duration", Duration));
+                     new SqlParameter("@Duration", Duration),
+                       new SqlParameter("@EMIDate", EMIDate),
+                      new SqlParameter("@DisbursementDate", DisbursementDate));
 
                 return Json("Application Approved Sucessfullly");
 
@@ -355,12 +447,17 @@ namespace KrishnaFinance.Controllers
         public ActionResult ApprovalResponse(int ApplicantID )
         {
             ViewData["ApprovalStatus"] = binddropdown("ApprovalStatus", 0);
+            ViewData["Duration"] = binddropdown("Duration", 0);
             FinanceDbContext _db = new FinanceDbContext();
             ApplicationApproval data = new ApplicationApproval();
             var result = _db.ApplicationApproval.SqlQuery(@"exec GetApplicationApproval @ApplicantID",
             new SqlParameter("@ApplicantID", ApplicantID)
              ).ToList<ApplicationApproval>();
-              data = result.FirstOrDefault();
+            data = result.FirstOrDefault();
+            string EMI = data.EMIDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+            ViewBag.EMI = EMI;
+            string Disbursement = data.DisbursementDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+            ViewBag.Disbursement = Disbursement;
             return Request.IsAjaxRequest()
                       ? (ActionResult)PartialView("ApprovalResponse", data)
                       : View("ApprovalResponse", data);
@@ -413,6 +510,83 @@ namespace KrishnaFinance.Controllers
             }
         }
         #endregion
+        public ActionResult PrintDemandPromissory(int ApplicantID = 1)
+        {
+            try
+            {
+
+
+                FinanceDbContext _db = new FinanceDbContext();
+
+                var result = _db.PrintDemandPromissory.SqlQuery(@"exec GetPrintDemandPromissory @ApplicantID",
+                new SqlParameter("@ApplicantID", ApplicantID)
+                 ).ToList<PrintDemandPromissory>();
+                var data = result.FirstOrDefault();
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("PrintDemandPromissory", data)
+                        : View("PrintDemandPromissory", data);
+            }
+            catch (Exception ex)
+            {
+                var mgs = ex.Message;
+                return View();
+
+            }
+            finally
+            {
+
+            }
+        }
+
+       
+          public ActionResult LoadCollectionGrid(int? page, String Name = null,int Paid = 2)
+        {
+            StaticPagedList<CollectionList> itemsAsIPagedList;
+            itemsAsIPagedList = CollectionGridList(page, Name, Paid);
+
+            return Request.IsAjaxRequest()
+                    ? (ActionResult)PartialView("CollectionGrid", itemsAsIPagedList)
+                    : View("CollectionGrid", itemsAsIPagedList);
+        }
+
+        public ActionResult CollectionList(int? page, String Name = null,int Paid = 2)
+        {
+            StaticPagedList<CollectionList> itemsAsIPagedList;
+            itemsAsIPagedList = CollectionGridList(page, Name, Paid);
+
+            return Request.IsAjaxRequest()
+                    ? (ActionResult)PartialView("CollectionList", itemsAsIPagedList)
+                    : View("CollectionList", itemsAsIPagedList);
+        }
+        public StaticPagedList<CollectionList> CollectionGridList(int? page, String Name = "" , int Paid = 2)
+        {
+            FinanceDbContext _db = new FinanceDbContext();
+            var pageIndex = (page ?? 1);
+            const int pageSize = 10;
+            
+            int totalCount = 10;
+            CollectionList clist = new CollectionList();
+
+            IEnumerable<CollectionList> result = _db.CollectionList.SqlQuery(@"exec GetCollectionList
+                   @pPageIndex, @pPageSize,@Name,@paidStatus",
+               new SqlParameter("@pPageIndex", pageIndex),
+               new SqlParameter("@pPageSize", pageSize),
+               new SqlParameter("@Name", Name == null ? (object)DBNull.Value : Name),
+                   new SqlParameter("@paidStatus", Paid)
+               ).ToList<CollectionList>();
+
+            totalCount = 0;
+            if (result.Count() > 0)
+            {
+                totalCount = Convert.ToInt32(result.FirstOrDefault().TotalRows);
+            }
+            var itemsAsIPagedList = new StaticPagedList<CollectionList>(result, pageIndex, pageSize, totalCount);
+            return itemsAsIPagedList;
+
+        }
+
+
+       
 
     }
 }

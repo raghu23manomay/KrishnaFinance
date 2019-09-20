@@ -17,10 +17,13 @@ namespace KrishnaFinance.Models
             : base("Name=FinanceDbContext")
         {
         }
+        public DbSet<Collectiondata> Collectiondata { get; set; }
         public DbSet<ApplicationList> ApplicationList { get; set; }
+        public DbSet<CollectionList> CollectionList { get; set; }
         public DbSet<Application> Application { get; set; }
         public DbSet<ApplicationApproval> ApplicationApproval { get; set; }
         public DbSet<PrintApplication> PrintApplication { get; set; }
+        public DbSet<PrintDemandPromissory> PrintDemandPromissory { get; set; }
         public DbSet<Login> LoginDetail { get; set; }
     }
     

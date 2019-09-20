@@ -11,9 +11,10 @@
 
                     <th>#</th>
                     <th>Name </th>
-                    <th>Co Applicant </th>
-                    <th>MobileNo</th>
-                    <th>Approval Status</th>
+                    <th>Loan Amount </th>
+                    <th>Mobile</th> 
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,39 +23,28 @@
                 <tr>
                     <td>@item.ApplicantID</td>
                     <td>@item.ApplicantName</td>
-                    <td>@item.CoApplicantName</td>
+                    <td>@item.LoanAmount</td>
                     <td>@item.ApplicantMobileNo</td>
                     <td>@item.ApprovalStatus</td>
                     <td>
+                       
 
+                        <div class="col-sm-8">
+                           
+                            <a class="edit" href="addApplication?ApplicantID=@item.ApplicantID" id="EditMember">
+                                <i class="fa fa-pencil-square-o m-r-sm" aria-hidden="true" title="Edit"></i><span></span>
+                            </a>
+                            <a href="../Master/PrintApplication?ApplicantID=@item.ApplicantID"> <i class="fa fa-print  m-r-sm" aria-hidden="true" title="Print"></i></a>
 
-                        <div class="col-sm-1">
-                            <!-- Single button -->
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-grey btn-sm dropdown-toggle" data-toggle="dropdown">
-                                    ...
-                                </button>
+                            @if (item.ApprovalStatus != "" && Session["RoleID"].ToString() == "2")
+                            {
+                                <a href="../Master/ApprovalResponse?ApplicantID=@item.ApplicantID"> <i class="fa fa-check  m-r-sm " aria-hidden="true" title="Approved"></i></a>
+                            }
+                            else
+                            {
+                                <a href="../Master/addApplication?ApplicantID=@item.ApplicantID"> <i class="fa fa-paper-plane  m-r-sm" id="btnApproveRequest" aria-hidden="true" title="Send For Approval"></i></a>
+                            }
 
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="edit" href="addApplication?ApplicantID=@item.ApplicantID" id="EditMember">
-                                            <i class="fa fa-pencil-square-o m-r-sm" aria-hidden="true"></i><span>Edit</span>
-                                        </a>
-                                    </li>
-
-                                    @if (item.ApprovalStatus != "" && Session["RoleID"].ToString()=="2")
-                                    {
-                                        <li>
-                                            <a href="../Master/ApprovalResponse?ApplicantID=@item.ApplicantID"> <i class="fa fa-pencil-square-o m-r-sm" aria-hidden="true"></i><span>Approval</span></a>
-                                        </li>
-                                    }
-                                    <li>
-                                        <a href="../Master/PrintApplication?ApplicantID=@item.ApplicantID"> <i class="fa fa-pencil-square-o m-r-sm" aria-hidden="true"></i><span>Print Application</span></a>
-                                    </li>
-
-
-                                </ul>
-                            </div>
                         </div>
 
                     </td>
@@ -79,14 +69,19 @@
 </div>
 
 <script>
-    $(document).ready(function () { 
-        $('#mgrid .pagination li a').on('click', function (e) { 
+    $(document).ready(function () {
+        //send for approval
+       
+
+
+
+        $('#mgrid .pagination li a').on('click', function (e) {
             e.preventDefault();
             e.stopImmediatePropagation();
             $('.loader').show();
             var temp = $(this).attr('href');
 
-           
+
             var pageid = temp.replace('/?page=', '');
 
             $.ajax({
@@ -94,7 +89,7 @@
                 contentType: "application/json",
                 data: JSON.stringify({
                     page: pageid,
-                    CName: $('#CustomerFilter').val(), 
+                    CName: $('#CustomerFilter').val(),
                 }),
                 dataType: "text",
                 type: "POST",
@@ -127,7 +122,7 @@
                    }
             });
             }
-                                 
+
         });
     });
 
