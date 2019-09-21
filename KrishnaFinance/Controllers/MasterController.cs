@@ -28,6 +28,7 @@ namespace KrishnaFinance.Controllers
             {
                 FinanceDbContext _db = new FinanceDbContext();
                 var result = _db.Database.ExecuteSqlCommand(@"exec UspEMIUpdate @TransectionID,@BankTransactionID, @EMIPaidDate, @status",
+                       new SqlParameter("@TransectionID", TransectionID),
                          new SqlParameter("@BankTransactionID", BankTransactionID),
                          new SqlParameter("@EMIPaidDate", EMIPaidDate),
                          new SqlParameter("@status", status));
@@ -42,13 +43,13 @@ namespace KrishnaFinance.Controllers
         }
       
      
-        public ActionResult Collectiondata(int ApplicantID = 0)
+        public ActionResult Collectiondata(int ApplicantID = 0, int TransectionID = 0)
         {
             try
             {
-                if (ApplicantID == 0)
+                if (TransectionID == 0)
                 {
-                    Collectiondata d = new Collectiondata();
+                    GetTransection d = new GetTransection();
                     d.ApplicantID = 0;
                     return Request.IsAjaxRequest()
                         ? (ActionResult)PartialView("Collectiondata", d)
@@ -57,15 +58,14 @@ namespace KrishnaFinance.Controllers
 
                 FinanceDbContext _db = new FinanceDbContext();
                 ViewData["EMIStatus"] = binddropdown("EMIStatus", 0);
-                var result = _db.Collectiondata.SqlQuery(@"exec GetTransection @ApplicantID",
-                new SqlParameter("@ApplicantID", ApplicantID)
-                 ).ToList<Collectiondata>();
+                var result = _db.GetTransection.SqlQuery(@"exec GetTransection @ApplicantID,@TransectionID",
+                new SqlParameter("@ApplicantID", ApplicantID),
+                new SqlParameter("@TransectionID", TransectionID)
+                 ).ToList<GetTransection>();
                 var data = result.FirstOrDefault();
-                string EMIDate = data.EMIDate.ToString("dd/mm/yyyy", CultureInfo.InvariantCulture);
-                ViewBag.EMIDate = EMIDate;
-                string ApprovalDate = data.ApprovalDate.ToString("dd/mm/yyyy", CultureInfo.InvariantCulture);
-                ViewBag.ApprovalDate = ApprovalDate;
-                string DisbursementDate = data.DisbursementDate.ToString("dd/mm/yyyy", CultureInfo.InvariantCulture);
+                string EMIDate = data.EMIDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+                ViewBag.EMIDate = EMIDate;               
+                string DisbursementDate = data.DisbursementDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
                 ViewBag.DisbursementDate = DisbursementDate;
                 return Request.IsAjaxRequest()
                         ? (ActionResult)PartialView("Collectiondata", data)
@@ -532,9 +532,8 @@ namespace KrishnaFinance.Controllers
 
             }
         }
-
        
-          public ActionResult LoadCollectionGrid(int? page, String Name = null,int Paid = 2)
+          public ActionResult LoadCollectionGrid(int? page, String Name = null,int Paid = 0)
         {
             StaticPagedList<CollectionList> itemsAsIPagedList;
             itemsAsIPagedList = CollectionGridList(page, Name, Paid);
@@ -544,7 +543,7 @@ namespace KrishnaFinance.Controllers
                     : View("CollectionGrid", itemsAsIPagedList);
         }
 
-        public ActionResult CollectionList(int? page, String Name = null,int Paid = 2)
+        public ActionResult CollectionList(int? page, String Name = null,int Paid = 0)
         {
             StaticPagedList<CollectionList> itemsAsIPagedList;
             itemsAsIPagedList = CollectionGridList(page, Name, Paid);
@@ -553,7 +552,7 @@ namespace KrishnaFinance.Controllers
                     ? (ActionResult)PartialView("CollectionList", itemsAsIPagedList)
                     : View("CollectionList", itemsAsIPagedList);
         }
-        public StaticPagedList<CollectionList> CollectionGridList(int? page, String Name = "" , int Paid = 2)
+        public StaticPagedList<CollectionList> CollectionGridList(int? page, String Name = "" , int Paid = 0)
         {
             FinanceDbContext _db = new FinanceDbContext();
             var pageIndex = (page ?? 1);
