@@ -169,10 +169,9 @@ namespace KrishnaFinance.Models
         public decimal PrincipalAmount { get; set; }
         public decimal TotalAmount { get; set; }
         public string EMIDate { get; set; }
-        //public string TransactionID { get; set; }
+        public int TransectionID { get; set; }
         public string Status { get; set; }
         public int? TotalRows { get; set; }
-
 
     }
     public class Collectiondata
@@ -207,6 +206,21 @@ namespace KrishnaFinance.Models
         public int status { get; set; }
      
 
+    }
+    public class GetTransection
+
+    {
+        [Key]
+        public int TransectionID { get; set; }
+        public int ApplicantID { get; set; }
+        public string ApplicantFullName { get; set; }
+        public string MobileNo { get; set; }
+        public decimal LoanAmount { get; set; }
+        public int Duration { get; set; }        
+        public DateTime EMIDate { get; set; }
+        public DateTime DisbursementDate { get; set; }
+        public decimal TotalEMI { get; set; }
+        
     }
 } 
 

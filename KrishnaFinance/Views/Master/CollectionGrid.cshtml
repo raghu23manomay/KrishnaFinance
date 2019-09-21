@@ -40,7 +40,9 @@
 
                         @if (item.Status == "Not Paid")
                         {
-                            <a href="../Master/Collectiondata?ApplicantID=@item.ApplicantID">@item.ApplicantFullName</a>
+                        <a href="@Url.Action("Collectiondata", "Master",new {ApplicantID = @item.ApplicantID,TransectionID=@item.TransectionID})">@item.ApplicantFullName</a>
+
+                            @*<a href="../Master/Collectiondata?TransactionID=@item.TransectionID">@item.ApplicantFullName</a>*@
                         }
                         else
                         {

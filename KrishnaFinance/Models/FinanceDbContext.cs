@@ -17,6 +17,7 @@ namespace KrishnaFinance.Models
             : base("Name=FinanceDbContext")
         {
         }
+        public DbSet<GetTransection> GetTransection { get; set; }
         public DbSet<Collectiondata> Collectiondata { get; set; }
         public DbSet<ApplicationList> ApplicationList { get; set; }
         public DbSet<CollectionList> CollectionList { get; set; }
