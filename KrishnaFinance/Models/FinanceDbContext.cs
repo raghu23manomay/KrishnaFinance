@@ -26,6 +26,10 @@ namespace KrishnaFinance.Models
         public DbSet<PrintApplication> PrintApplication { get; set; }
         public DbSet<PrintDemandPromissory> PrintDemandPromissory { get; set; }
         public DbSet<Login> LoginDetail { get; set; }
+        public DbSet<EMIList> EMIList { get; set; }
+        public DbSet<ApplicantEmiReport> ApplicantEmiReport { get; set; }
+        public DbSet<DashboardChart> DashboardChart { get; set; }
+      
     }
     
 }

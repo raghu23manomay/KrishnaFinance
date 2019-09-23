@@ -8,7 +8,6 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-
                     <th>#</th>
                     <th>Name </th>
                     <th>Loan Amount </th>
@@ -38,7 +37,7 @@
 
                                 if (item.ApprovalStatus == "Reject")
                                 {
-                                 <a href="../Master/ApprovalResponse?ApplicantID=@item.ApplicantID">  <i class="fa fa-ban" aria-hidden="true" style="color: orangered;"></i></a>
+                                    <a href="../Master/ApprovalResponse?ApplicantID=@item.ApplicantID">  <i class="fa fa-ban" aria-hidden="true" style="color: orangered;"></i></a>
                                 }
                                 else if (item.ApprovalStatus == "Approval pending")
                                 {
@@ -47,14 +46,19 @@
                                 else if (item.ApprovalStatus == "Approved")
                                 {
                                     <a href="../Master/ApprovalResponse?ApplicantID=@item.ApplicantID"> <i class="fa fa-check  m-r-sm " aria-hidden="true" title="Approved"></i></a>
+                                    <a href="../Master/GetClientEMIReport?ApplicantID=@item.ApplicantID">  <i class="fa fa-file-text-o" aria-hidden="true"></i></a>
                                 }
-
 
                             }
                             else if (item.ApprovalStatus != "Approved" && item.ApprovalStatus != "Approval pending")
                             {
                                 <a href="../Master/addApplication?ApplicantID=@item.ApplicantID"> <i class="fa fa-paper-plane  m-r-sm" id="btnApproveRequest" aria-hidden="true" title="Send For Approval"></i></a>
                             }
+                            else
+                            {
+                                <a href="../Master/GetClientEMIReport?ApplicantID=@item.ApplicantID">  <i class="fa fa-file-text-o" aria-hidden="true"></i></a>
+                            }
+
 
                         </div>
 
@@ -82,16 +86,12 @@
 <script>
     $(document).ready(function () {
         //send for approval
-       
-
-
-
+      
         $('#mgrid .pagination li a').on('click', function (e) {
             e.preventDefault();
             e.stopImmediatePropagation();
             $('.loader').show();
             var temp = $(this).attr('href');
-
 
             var pageid = temp.replace('/?page=', '');
 

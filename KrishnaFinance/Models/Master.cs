@@ -39,17 +39,15 @@ namespace KrishnaFinance.Models
 
     }
     public class ApplicationList
-
     {
         [Key]
         public int ApplicantID { get; set; }
-        public string ApplicantName { get; set; }
-         
-         public int ApplicantAge { get; set; }
+        public string ApplicantName { get; set; }         
+        public int ApplicantAge { get; set; }
         public string CoApplicantName { get; set; }
-         public string ApplicantMobileNo { get; set; }
-         public string PanNo { get; set; }
-         public decimal LoanAmount { get; set; }
+        public string ApplicantMobileNo { get; set; }
+        public string PanNo { get; set; }
+        public decimal LoanAmount { get; set; }
         public string ApprovalStatus { get; set; }
         public int? TotalRows { get; set; }
         
@@ -177,8 +175,7 @@ namespace KrishnaFinance.Models
     public class Collectiondata
 
     {
-        [Key]
-  
+        [Key]  
         public int ApplicantID { get; set; }
         public string ApplicantFullName { get; set; }
         public string MobileNo { get; set; }
@@ -221,6 +218,48 @@ namespace KrishnaFinance.Models
         public DateTime DisbursementDate { get; set; }
         public decimal TotalEMI { get; set; }
         
+    }
+
+    public class ApplicantEmiReport
+    {
+        [Key]
+        public int ApplicantID { get; set; }
+        public string ApplicantName { get; set; }
+        public int ApplicantAge { get; set; }
+        public string CoApplicantName { get; set; }
+        public string ApplicantMobileNo { get; set; }
+        public string PanNo { get; set; }
+        public decimal LoanAmount { get; set; }
+        public string ApprovalStatus { get; set; }
+        public int? TotalRows { get; set; }
+        public int? Duration { get; set; }
+        
+
+        public IEnumerable<EMIList> _objEMIList { get; set; }
+    }
+
+    public class EMIList
+    {
+        [Key]
+        public int TransectionID { get; set; }
+        public int ApplicantID   { get; set; }
+        public int Duration { get; set; }
+        public string BankTransactionID { get; set; }
+        public string EMIDate     { get; set; }
+        public string EMIPaidDate { get; set; }
+        public int? status      { get; set; }
+        public string status1     { get; set; }
+        public decimal TotalAmount { get; set; }
+
+    }
+
+    public class DashboardChart
+    {
+        [Key]
+        public int? MonthID { get; set; }        
+        public string MonthNames { get; set; }
+        public decimal LoanAmount { get; set; }        
+
     }
 } 
 

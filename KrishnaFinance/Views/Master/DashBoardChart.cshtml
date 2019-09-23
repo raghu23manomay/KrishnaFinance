@@ -1,0 +1,95 @@
+﻿
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+@using Highsoft.Web.Mvc.Charts
+@using Highsoft.Web.Mvc.Charts.Rendering
+
+@{ var chartOptions = new Highcharts
+    {
+        Title = new Title
+        {
+            Text = "TOTAL LOAN AMOUNT 2019"
+        },
+        //Subtitle = new Subtitle
+        //{
+        //    Text = "Click the columns to view versions ."
+        //},
+        XAxis = new List<XAxis>
+{
+
+new XAxis
+{
+Categories =ViewData["Categories1"] as List<string>
+}
+
+},
+        YAxis = new List<YAxis>
+{
+new YAxis
+{
+Title = new YAxisTitle
+{
+Text =   "Total loan amount of year 2019"
+}
+}
+},
+        Legend = new Legend
+        {
+            Enabled = false
+        },
+        Tooltip = new Tooltip
+        {
+            HeaderFormat = "<span style='font-size:11px'>{series.name}</span><br>",
+            PointFormat = "<span style=\"color:{point.color}\">{point.name}</span>: <b>{point.y:.2f}</b> Rs<br/>"
+        },
+
+        PlotOptions = new PlotOptions
+        {
+            Series = new PlotOptionsSeries
+            {
+                DataLabels = new PlotOptionsSeriesDataLabels
+                {
+                    Enabled = true,
+                    Format = "{point.y:.1f}%"
+                }
+            }
+        },
+
+        Series = new List<Series>
+{
+new ColumnSeries
+{
+
+DataLabels = new ColumnSeriesDataLabels
+{
+Enabled = true,
+Rotation = -90,
+Color = "#FFFFFF",
+Align = ColumnSeriesDataLabelsAlign.Right,
+Format = "{point.y:.1f}",
+Y = 10,
+
+Shadow = new Shadow()
+{
+Enabled = true,
+Color = "black",
+Width = 10,
+OffsetX = 0,
+OffsetY = 0
+}
+},
+Name="Total Loan",
+Data = @ViewData["data"] as List<ColumnSeriesData>
+}
+}
+};
+
+    chartOptions.ID = "chart";
+    var renderer = new HighchartsRenderer(chartOptions);
+}
+
+@Html.Raw(renderer.RenderHtml())
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+
