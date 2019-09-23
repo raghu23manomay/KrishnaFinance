@@ -26,21 +26,32 @@
                     <td>@item.LoanAmount</td>
                     <td>@item.ApplicantMobileNo</td>
                     <td>@item.ApprovalStatus</td>
-                    <td>
-                       
+                    <td>                      
 
                         <div class="col-sm-8">
-                           
-                            <a class="edit" href="addApplication?ApplicantID=@item.ApplicantID" id="EditMember">
-                                <i class="fa fa-pencil-square-o m-r-sm" aria-hidden="true" title="Edit"></i><span></span>
-                            </a>
+                            <a href="@Url.Action("AddApplication", "Master",new {ApplicantID = @item.ApplicantID,AppStatus=@item.ApprovalStatus})"><i class="fa fa-pencil-square-o m-r-sm" aria-hidden="true" title="Edit"></i><span></span></a>
+
                             <a href="../Master/PrintApplication?ApplicantID=@item.ApplicantID"> <i class="fa fa-print  m-r-sm" aria-hidden="true" title="Print"></i></a>
 
                             @if (item.ApprovalStatus != "" && Session["RoleID"].ToString() == "2")
                             {
-                                <a href="../Master/ApprovalResponse?ApplicantID=@item.ApplicantID"> <i class="fa fa-check  m-r-sm " aria-hidden="true" title="Approved"></i></a>
+
+                                if (item.ApprovalStatus == "Reject")
+                                {
+                                 <a href="../Master/ApprovalResponse?ApplicantID=@item.ApplicantID">  <i class="fa fa-ban" aria-hidden="true" style="color: orangered;"></i></a>
+                                }
+                                else if (item.ApprovalStatus == "Approval pending")
+                                {
+                                    <a href="../Master/ApprovalResponse?ApplicantID=@item.ApplicantID"><i class="fa fa-clock-o" aria-hidden="true" style="font-size: 15px;color: darkgray;"></i></a>
+                                }
+                                else if (item.ApprovalStatus == "Approved")
+                                {
+                                    <a href="../Master/ApprovalResponse?ApplicantID=@item.ApplicantID"> <i class="fa fa-check  m-r-sm " aria-hidden="true" title="Approved"></i></a>
+                                }
+
+
                             }
-                            else
+                            else if (item.ApprovalStatus != "Approved" && item.ApprovalStatus != "Approval pending")
                             {
                                 <a href="../Master/addApplication?ApplicantID=@item.ApplicantID"> <i class="fa fa-paper-plane  m-r-sm" id="btnApproveRequest" aria-hidden="true" title="Send For Approval"></i></a>
                             }
@@ -88,8 +99,7 @@
                 url: "@Url.Action("LoadApplicationGrid", "Master")",
                 contentType: "application/json",
                 data: JSON.stringify({
-                    page: pageid,
-                    CName: $('#CustomerFilter').val(),
+                    page: pageid,                   
                 }),
                 dataType: "text",
                 type: "POST",
@@ -106,24 +116,7 @@
 
         });
 
-         $('.Delete').click(function () {
-            if (confirm("Are you sure want to deleted!"))
-            {
-            var Id = $(this).attr('name');
-            $.ajax({
-                url: "@Url.Action("DeleteMaster", "Master")",
-                data: { Id: Id, MasterName: 'Application' },
-                dataType: "text",
-                type: "POST",
-                async: false,
-                success: function (data) {
-                    var mgs = data.replace(/"/g, "");
-                    alert(mgs);
-                   }
-            });
-            }
-
-        });
+     
     });
 
 </script>

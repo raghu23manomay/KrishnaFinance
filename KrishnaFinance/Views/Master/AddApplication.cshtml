@@ -79,9 +79,11 @@
 
         @if (Model.ApplicantID != 0)
         {
-            <button type="button" class="btn btn-primary btn-md Save pull-right" id="btnApproveRequest">Send To Approval</button> ;
+            if (ViewBag.status != "Approved" && ViewBag.status != "Approval pending" && ViewBag.status != "New" && ViewBag.status != "Reject")
+            {
+                <button type="button" class="btn btn-primary btn-md Save pull-right" id="btnApproveRequest">Send To Approval</button>
+            }
         }
-      
 
         <button type="button" class="btn btn-primary btn-md Save pull-right" id="Save">Save</button>
         &nbsp;
