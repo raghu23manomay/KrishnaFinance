@@ -8,7 +8,8 @@ using KrishnaFinance.Models;
 namespace KrishnaFinance.Models
 {
     public class FinanceDbContext : DbContext
-    { 
+    {
+        
         static FinanceDbContext()
         {
             Database.SetInitializer<FinanceDbContext>(null);
@@ -17,6 +18,7 @@ namespace KrishnaFinance.Models
             : base("Name=FinanceDbContext")
         {
         }
+        public DbSet<ReportsGrid> ReportsGrid { get; set; }
         public DbSet<GetTransection> GetTransection { get; set; }
         public DbSet<Collectiondata> Collectiondata { get; set; }
         public DbSet<ApplicationList> ApplicationList { get; set; }

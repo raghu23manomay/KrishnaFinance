@@ -1225,6 +1225,13 @@
     <Content Include="Views\Master\CollectionGrid.cshtml" />
     <Content Include="Views\Master\Collection.cshtml" />
     <Content Include="Views\Master\Collectiondata.cshtml" />
+    <Content Include="Views\Reports.cshtml" />
+    <Content Include="Views\Master\Reports.cshtml" />
+    <Content Include="Views\Master\Settings.cshtml" />
+    <Content Include="Views\Master\ApplicationForm.cshtml" />
+    <Content Include="Views\Master\EMINonClearance.cshtml" />
+    <Content Include="Views\Master\NotPaidGrid.cshtml" />
+    <Content Include="Views\Master\NotPaidList.cshtml" />
     <Content Include="Views\Master\ClientEMIReport.cshtml" />
     <Content Include="Views\Master\DashBoardChart.cshtml" />
     <None Include="Web.Debug.config">

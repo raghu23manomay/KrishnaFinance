@@ -1,0 +1,28 @@
+﻿@model IEnumerable<KrishnaFinance.Models.CollectionList>
+
+
+<div id="EMINonClearance" style="padding: 10px;">
+    @Html.Partial("EMINonClearance")
+</div>
+<script>
+    $(document).ready(function () {
+
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Master/LoadCollectionGrid",
+                data: {
+                    Paid: 0
+                },
+                success: function (result) {
+
+                    $('#EMINonClearance').html(result);
+
+                    //location.reload(this);
+                },
+                error: function (errorData) {
+                }
+            });
+       
+    });
+</script>

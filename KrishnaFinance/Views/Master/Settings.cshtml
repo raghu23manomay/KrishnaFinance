@@ -1,0 +1,68 @@
+﻿
+
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<div class="row">
+    <div class="col-lg-7">
+
+        <div class="ibox-content">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-lg-3">Settings</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3">Duration</label>
+                    <div class="col-lg-9">
+                        <input type="text" placeholder="Duration" class="form-control" id="Duration" value="">
+                    </div>
+                </div>
+               <div class="form-group">
+                    <label class="col-lg-3">EMI Due Amount</label>
+                    <div class="col-lg-9">
+                        <input type="text" placeholder="EMI Due Amount" class="form-control" id="EMIDueAmount" value="">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+
+                    <div class="col-md-8 pull-right">
+                        <div class="pull-right">
+                            <a class="btn btn-white" href="/Master/ApplicationList">Cancel</a>
+                            <button class="btn btn-primary" id="btnsave" type="button">Save </button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+        <script>
+            $(document).ready(function () {
+
+
+
+                $('#btnsave').on('click', function () {
+
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: "/Master/Settings",
+                        data: {
+                            Duration: $('#Duration').val()
+                        },
+                        success: function (result) {
+                            alert(result);
+
+                        },
+                        error: function (errorData) {
+                        }
+                    });
+
+                });
+            });
+
+        </script>

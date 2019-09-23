@@ -2,9 +2,7 @@
 @using PagedList;
 @using PagedList.Mvc;
 @using GridMvc.Html
-@{ 
-    Layout = null;
-}
+
 <style>
     .disabled {
         text-decoration: none;
@@ -18,7 +16,7 @@
             <thead>
                 <tr>
 
-                  
+
                     <th>EMI Date</th>
                     <th>Name</th>
                     <th>Loan Amount </th>
@@ -34,51 +32,51 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                   
-                <tr>
-                    <td>@item.EMIDate</td>
-                    
-                    <td>
+
+                    <tr>
+                        <td>@item.EMIDate</td>
+
+                        <td>
 
 
-                        @if (item.Status == "Not Paid" || item.Status == "dues")
-                        {
-                        <a href="@Url.Action("Collectiondata", "Master",new {ApplicantID = @item.ApplicantID,TransectionID=@item.TransectionID})">@item.ApplicantFullName</a>
+                            @if (item.Status == "Not Paid" || item.Status == "dues")
+                            {
+                                <a href="@Url.Action("Collectiondata", "Master",new {ApplicantID = @item.ApplicantID,TransectionID=@item.TransectionID})">@item.ApplicantFullName</a>
 
-                            @*<a href="../Master/Collectiondata?TransactionID=@item.TransectionID">@item.ApplicantFullName</a>*@
-                        }
-                        else
-                        {
-                            @item.ApplicantFullName
+                                @*<a href="../Master/Collectiondata?TransactionID=@item.TransectionID">@item.ApplicantFullName</a>*@
+                            }
+                            else
+                            {
+                                @item.ApplicantFullName
 
-                        }
+                            }
 
-                    </td>
-                   
-
-
-                    <td>@item.LoanAmount</td>
-                    <td>@item.MobileNo</td>
-                    <td>@item.Duration</td>
-                    <td>@item.InterestRate</td>
-                    <td>@item.PrincipalAmount</td>
-                    <td>@item.TotalAmount</td>
-                    <td>@item.Status</td>
-                    <td>
+                        </td>
 
 
-                        <div class="col-sm-8">
 
-                        
+                        <td>@item.LoanAmount</td>
+                        <td>@item.MobileNo</td>
+                        <td>@item.Duration</td>
+                        <td>@item.InterestRate</td>
+                        <td>@item.PrincipalAmount</td>
+                        <td>@item.TotalAmount</td>
+                        <td>@item.Status</td>
+                        <td>
 
-                        </div>
 
-                    </td>
-                </tr>
+                            <div class="col-sm-8">
+
+
+
+                            </div>
+
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
-      
+
     </div>
 </div>
 <div class="row">
@@ -97,7 +95,7 @@
 
 <script>
     $(document).ready(function () {
-    
+
 
         $('#cgrid .pagination li a').on('click', function (e) {
             e.preventDefault();
@@ -109,18 +107,18 @@
             var pageid = temp.replace('/?page=', '');
 
             $.ajax({
-            url: "@Url.Action("LoadCollectionGrid", "Master")",
+            url: "@Url.Action("LoadNotPaidGrid", "Master")",
                 contentType: "application/json",
                 data: JSON.stringify({
                 page: pageid,
                     CName: $('#CustomerFilter').val(),
-                   
+
                 }),
                 dataType: "text",
                 type: "POST",
                 async: true,
                 success: function (data) {
-                 
+
                     $('#cgrid').html(data);
 
                 },
@@ -133,7 +131,7 @@
 
         });
 
-      
+
     });
 
 </script>

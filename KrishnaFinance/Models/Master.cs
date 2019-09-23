@@ -219,6 +219,24 @@ namespace KrishnaFinance.Models
         public decimal TotalEMI { get; set; }
         
     }
+    public class ReportsGrid
+
+    {
+        [Key]
+        public int TransectionID { get; set; }
+        public int ApplicantID { get; set; }
+        public string ApplicantFullName { get; set; }
+        public string MobileNo { get; set; }
+        public decimal LoanAmount { get; set; }
+        public int Duration { get; set; }
+        public decimal InterestRate { get; set; }
+        public decimal PrincipalAmount { get; set; }
+        public decimal TotalAmount { get; set; }
+        public string EMIDate { get; set; }
+        public string Status { get; set; }
+        public int? TotalRows { get; set; }
+
+    }
 
     public class ApplicantEmiReport
     {
