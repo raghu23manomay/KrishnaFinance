@@ -20,6 +20,27 @@ namespace KrishnaFinance.Controllers
         {
             return View();
         }
+        public ActionResult Settings()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Settings(int Duration=0)
+        {
+            try
+            {
+                FinanceDbContext _db = new FinanceDbContext();
+                var result = _db.Database.ExecuteSqlCommand(@"exec UspSettings @value",
+                         new SqlParameter("@value", Duration));
+                return Json("Settings Changes Sucessfullly");
+
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format("<b>Message:</b> {0}<br /><br />", ex.Message);
+                return Json(message);
+            }
+        }
         //EMI Update
         [HttpPost]
         public ActionResult EMIUpdate(int TransectionID, string BankTransactionID,DateTime EMIPaidDate,int status)

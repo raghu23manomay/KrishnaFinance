@@ -84,8 +84,8 @@
                 <div class="col-sm-10" style="margin-right:150px">
                     <p>
                         I/ We
-                        has / have borrowed Rs.&nbsp;&nbsp;@Model.LoanRequest
-                        ( Rupees in words  )  from   <b>KRISHNA FINANCE</b> @Model.PermanentAddress .
+                        has / have borrowed Rs.&nbsp;&nbsp;<span id="number">@Model.LoanRequest</span>
+                        ( <span id="words"></span> )  from   <b>KRISHNA FINANCE</b> @Model.PermanentAddress .
 
 
                         <br />
@@ -115,7 +115,7 @@
         </center>
     </div>
 </div>
-
+<input id="number" type="text" hidden value="5000"/>
 <div class="row">
     <button type="button" class="btn btn-primary btn-md Save pull-right" id="Print" onclick="myFunction()">Print  <i class="fa fa-print " aria-hidden="true"></i></button>
 </div>
@@ -123,5 +123,8 @@
     function myFunction() {
         window.print();
     }
+   
+
+  
 </script>
 
