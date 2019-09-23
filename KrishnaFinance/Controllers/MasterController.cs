@@ -20,10 +20,8 @@ namespace KrishnaFinance.Controllers
         {
             return View();
         }
-        public ActionResult Settings()
-        {
-            return View();
-        }
+       
+       
         [HttpPost]
         public ActionResult Settings(int Duration=0)
         {
@@ -33,7 +31,6 @@ namespace KrishnaFinance.Controllers
                 var result = _db.Database.ExecuteSqlCommand(@"exec UspSettings @value",
                          new SqlParameter("@value", Duration));
                 return Json("Settings Changes Sucessfullly");
-
             }
             catch (Exception ex)
             {
@@ -41,6 +38,7 @@ namespace KrishnaFinance.Controllers
                 return Json(message);
             }
         }
+      
         //EMI Update
         [HttpPost]
         public ActionResult EMIUpdate(int TransectionID, string BankTransactionID,DateTime EMIPaidDate,int status)
@@ -608,8 +606,52 @@ namespace KrishnaFinance.Controllers
 
         }
 
+        //--------
+        public ActionResult LoadNotPaidGrid(int? page, String Name = null, int Paid = 0)
+        {
+            StaticPagedList<CollectionList> itemsAsIPagedList;
+            itemsAsIPagedList = NotPaidGridList(page, Name, Paid);
 
-       
+            return Request.IsAjaxRequest()
+                    ? (ActionResult)PartialView("NotPaidGrid", itemsAsIPagedList)
+                    : View("NotPaidGrid", itemsAsIPagedList);
+        }
+
+        public ActionResult NotPaidList(int? page, String Name = null, int Paid = 0)
+        {
+            StaticPagedList<CollectionList> itemsAsIPagedList;
+            itemsAsIPagedList = NotPaidGridList(page, Name, Paid);
+
+            return Request.IsAjaxRequest()
+                    ? (ActionResult)PartialView("NotPaidList", itemsAsIPagedList)
+                    : View("NotPaidList", itemsAsIPagedList);
+        }
+        public StaticPagedList<CollectionList> NotPaidGridList(int? page, String Name = "", int Paid = 0)
+        {
+            FinanceDbContext _db = new FinanceDbContext();
+            var pageIndex = (page ?? 1);
+            const int pageSize = 10;
+
+            int totalCount = 10;
+            CollectionList clist = new CollectionList();
+
+            IEnumerable<CollectionList> result = _db.CollectionList.SqlQuery(@"exec GetCollectionList
+                   @pPageIndex, @pPageSize,@Name,@paidStatus",
+               new SqlParameter("@pPageIndex", pageIndex),
+               new SqlParameter("@pPageSize", pageSize),
+               new SqlParameter("@Name", Name == null ? (object)DBNull.Value : Name),
+                   new SqlParameter("@paidStatus", Paid)
+               ).ToList<CollectionList>();
+
+            totalCount = 0;
+            if (result.Count() > 0)
+            {
+                totalCount = Convert.ToInt32(result.FirstOrDefault().TotalRows);
+            }
+            var itemsAsIPagedList = new StaticPagedList<CollectionList>(result, pageIndex, pageSize, totalCount);
+            return itemsAsIPagedList;
+
+        }
 
     }
 }

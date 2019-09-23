@@ -1,0 +1,64 @@
+﻿@model IEnumerable<KrishnaFinance.Models.CollectionList>
+<style>
+    .wrapper-content {
+        padding: 0px 3px 59px;
+    }
+</style>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2 id="c"></h2>
+    </div>
+    <div class="panel-body ">
+
+        <div role="tabpanel">
+
+
+           
+
+
+            <!-- Nav tabs -->
+            <!-- Tab panes -->
+
+            <div id="cgrid" style="padding: 10px;">
+                @Html.Partial("NotPaidGrid")
+            </div>
+
+
+
+            <p id="mn" hidden></p>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+      
+
+
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Master/LoadNotPaidGrid",
+                data: {
+                    Paid: 1
+                },
+                success: function (result) 
+                     $('#cgrid').html(result);
+                    //location.reload(this);
+                },
+                error: function (errorData) {
+                }
+          
+        });
+       
+
+      
+      
+
+  
+
+
+
+</script>
