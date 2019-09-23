@@ -2,6 +2,9 @@
 @using PagedList;
 @using PagedList.Mvc;
 @using GridMvc.Html
+@{ 
+    Layout = null;
+}
 <style>
     .disabled {
         text-decoration: none;
@@ -38,7 +41,7 @@
                     <td>
 
 
-                        @if (item.Status == "Not Paid")
+                        @if (item.Status == "Not Paid" || item.Status == "dues")
                         {
                         <a href="@Url.Action("Collectiondata", "Master",new {ApplicantID = @item.ApplicantID,TransectionID=@item.TransectionID})">@item.ApplicantFullName</a>
 
@@ -66,19 +69,7 @@
 
                         <div class="col-sm-8">
 
-                            @*<a class="edit" href="addApplication?ApplicantID=@item.ApplicantID" id="EditMember">
-                    <i class="fa fa-pencil-square-o m-r-sm" aria-hidden="true" title="Edit"></i><span></span>
-                </a>
-                <a href="../Master/PrintApplication?ApplicantID=@item.ApplicantID"> <i class="fa fa-print  m-r-sm" aria-hidden="true" title="Print"></i></a>
-
-                @if (item.ApprovalStatus != "" && Session["RoleID"].ToString() == "2")
-                {
-                    <a href="../Master/ApprovalResponse?ApplicantID=@item.ApplicantID"> <i class="fa fa-check  m-r-sm " aria-hidden="true" title="Approved"></i></a>
-                }
-                else
-                {
-                    <a href="../Master/addApplication?ApplicantID=@item.ApplicantID"> <i class="fa fa-paper-plane  m-r-sm" id="btnApproveRequest" aria-hidden="true" title="Send For Approval"></i></a>
-                }*@
+                        
 
                         </div>
 

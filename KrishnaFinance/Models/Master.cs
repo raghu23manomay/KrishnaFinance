@@ -160,6 +160,7 @@ namespace KrishnaFinance.Models
 
     {
         [Key]
+        public int TransectionID { get; set; }
         public int ApplicantID { get; set; }
         public string ApplicantFullName { get; set; }
         public string MobileNo { get; set; }
@@ -168,8 +169,7 @@ namespace KrishnaFinance.Models
         public decimal InterestRate { get; set; }
         public decimal PrincipalAmount { get; set; }
         public decimal TotalAmount { get; set; }
-        public string EMIDate { get; set; }
-        public int TransectionID { get; set; }
+        public string EMIDate { get; set; }       
         public string Status { get; set; }
         public int? TotalRows { get; set; }
 

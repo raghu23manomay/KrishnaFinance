@@ -303,7 +303,7 @@ namespace KrishnaFinance.Controllers
             }
         }
 
-        public ActionResult AddApplication(int ApplicantID = 0)
+        public ActionResult AddApplication(int ApplicantID = 0,String AppStatus = "")
         {
             try
             {
@@ -322,6 +322,14 @@ namespace KrishnaFinance.Controllers
                 new SqlParameter("@ApplicantID", ApplicantID)
                  ).ToList<Application>();
                 var data = result.FirstOrDefault();
+                if(AppStatus == "")
+                {
+                    ViewBag.status = "NA";
+                }
+                else
+                {
+                    ViewBag.status = AppStatus;
+                }               
                 return Request.IsAjaxRequest()
                         ? (ActionResult)PartialView("AddApplication", data)
                         : View("AddApplication", data);

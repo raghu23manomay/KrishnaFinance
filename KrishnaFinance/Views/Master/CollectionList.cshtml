@@ -6,7 +6,7 @@
         }
        
     </style>
-<div id="cgrid" >
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h2 id="c"></h2> 
@@ -18,16 +18,14 @@
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active "><a href="#" aria-controls="profile" role="tab" data-toggle="tab" id="NotPaid">Not Paid</a></li>
                     <li role="presentation" class=" "><a href="#" aria-controls="profile" role="tab" data-toggle="tab" id="Paid">Paid</a></li>
+                    <li role="presentation" class=" "><a href="#" aria-controls="profile" role="tab" data-toggle="tab" id="Dues">Dues</a></li>
 
                 </ul>
-                
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="Current"> </div>
 
-                    @Html.Partial("CollectionGrid")
-                </div> 
-            </div>
+                <!-- Tab panes -->
+                <div id="cgrid" style="padding: 10px;">            
+                 @Html.Partial("CollectionGrid")                   
+               </div>
             <p id="mn" hidden></p>
         </div>
 
@@ -42,7 +40,7 @@
             $.ajax({
                 type: "POST",
                 cache: false,
-                url: "/Master/CollectionList",
+                url: "/Master/LoadCollectionGrid",
                 data: {
                     Paid: 0
                 },
@@ -56,12 +54,32 @@
                 }
             });
         });
-        $('#Paid').click(function () {
+        $('#Dues').click(function () {
         
             $.ajax({
                 type: "POST",
                 cache: false,
-                url: "/Master/CollectionList",
+                url: "/Master/LoadCollectionGrid",
+                data: {
+                    Paid: 2
+                },
+                success: function (result) {
+
+                    $('#cgrid').html(result);
+
+                    //location.reload(this);
+                },
+                error: function (errorData) {
+                }
+            });
+        });
+
+        $('#Paid').click(function () {
+
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Master/LoadCollectionGrid",
                 data: {
                     Paid: 1
                 },

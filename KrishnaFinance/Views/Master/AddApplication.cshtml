@@ -76,15 +76,18 @@
     </div>
     <div class="col-sm-6 form-group">
         <a class="btn btn-primary btn-md Save pull-right " href="/Master/ApplicationList">Cancel</a>
-     
-          @if (Model.ApplicantID != 0 )
-          {
-            <button type="button" class="btn btn-primary btn-md Save pull-right" id="btnApproveRequest">Send To Approval</button> ;
-          }
 
-            <button type="button" class="btn btn-primary btn-md Save pull-right" id="Save">Save</button>  
-            &nbsp;
-        </div>
+        @if (Model.ApplicantID != 0)
+        {
+            if (ViewBag.status != "Approved" && ViewBag.status != "Approval pending" && ViewBag.status != "New" && ViewBag.status != "Reject")
+            {
+                <button type="button" class="btn btn-primary btn-md Save pull-right" id="btnApproveRequest">Send To Approval</button>
+            }
+        }
+
+        <button type="button" class="btn btn-primary btn-md Save pull-right" id="Save">Save</button>
+        &nbsp;
+    </div>
     </div>
     <hr class="lh" />
     <div class="ibox-content" >
