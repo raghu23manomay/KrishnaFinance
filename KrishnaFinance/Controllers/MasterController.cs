@@ -615,7 +615,92 @@ namespace KrishnaFinance.Controllers
         public ActionResult GetClientEMIReport(int? ApplicantID)        {            ApplicantEmiReport data = new ApplicantEmiReport();            try            {                                   FinanceDbContext _db = new FinanceDbContext();                    var result = _db.ApplicantEmiReport.SqlQuery(@"exec GetApplicationDetailsForEMIReport                     @ApplicantID",                       new SqlParameter("@ApplicantID", ApplicantID)                       ).ToList<ApplicantEmiReport>();                    data = result.FirstOrDefault();                    IEnumerable<EMIList> result2 = _db.EMIList.SqlQuery(@"exec GetApplicationWaiseEMIDetails                     @ApplicantID",                        new SqlParameter("@ApplicantID", ApplicantID)                                                  ).ToList<EMIList>();                    data._objEMIList = result2;                                                }            catch (Exception e) { }            return View("ClientEMIReport", data);        }
 
         public ActionResult DashBoardChart()
+        //--------
+        public ActionResult NotPaidReports( int Paid = 0)
         {
+            try
+            {
+              
+
+                FinanceDbContext _db = new FinanceDbContext();
+                
+                IEnumerable<CollectionList> result = _db.CollectionList.SqlQuery(@"exec GetCollectionList  @paidStatus",
+                new SqlParameter("@paidStatus", Paid)
+                 ).ToList<CollectionList>();
+                var data = result;
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("NotPaidReports", data)
+                        : View("NotPaidReports", data);
+            }
+            catch (Exception ex)
+            {
+                var mgs = ex.Message;
+                return View();
+
+            }
+            finally
+            {
+
+            }
+        }
+        public ActionResult EMIClearance(int? page, String Name = "", int Paid = 0)
+        {
+            try
+            {
+
+
+                FinanceDbContext _db = new FinanceDbContext();
+                var pageIndex = (page ?? 1);
+                const int pageSize = 10;
+                IEnumerable<CollectionList> result = _db.CollectionList.SqlQuery(@"exec GetCollectionList    @pPageIndex, @pPageSize,@Name,@paidStatus",
+                      new SqlParameter("@pPageIndex", pageIndex),
+               new SqlParameter("@pPageSize", pageSize),
+               new SqlParameter("@Name", Name == null ? (object)DBNull.Value : Name),
+                new SqlParameter("@paidStatus", Paid)
+                 ).ToList<CollectionList>();
+                var data = result;
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("PaidReports", data)
+                        : View("PaidReports", data);
+            }
+            catch (Exception ex)
+            {
+                var mgs = ex.Message;
+                return View();
+
+            }
+            finally
+            {
+
+            }
+        }
+        public ActionResult EMIDues(int? page, String Name = "", int Paid = 0)
+        {
+            try
+            {
+
+
+                FinanceDbContext _db = new FinanceDbContext();
+                var pageIndex = (page ?? 1);
+                const int pageSize = 10;
+                IEnumerable<CollectionList> result = _db.CollectionList.SqlQuery(@"exec GetCollectionList    @pPageIndex, @pPageSize,@Name,@paidStatus",
+                      new SqlParameter("@pPageIndex", pageIndex),
+               new SqlParameter("@pPageSize", pageSize),
+               new SqlParameter("@Name", Name == null ? (object)DBNull.Value : Name),
+                new SqlParameter("@paidStatus", Paid)
+                 ).ToList<CollectionList>();
+                var data = result;
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("DuesReports", data)
+                        : View("DuesReports", data);
+            }
+            catch (Exception ex)
+            {
+                var mgs = ex.Message;
+                return View();
+
+            }
+            finally
             FinanceDbContext _db = new FinanceDbContext();
             List<DashboardChart> result = _db.DashboardChart.SqlQuery(@"exec DashbordChartDetails").ToList<DashboardChart>();
             List<ColumnSeriesData> data = new List<ColumnSeriesData>();

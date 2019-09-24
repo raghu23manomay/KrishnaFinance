@@ -1,0 +1,58 @@
+﻿@model IEnumerable<KrishnaFinance.Models.CollectionList>
+<div class="row" style="margin-bottom:20px">
+    <button type="button" class="btn btn-primary btn-md Save pull-right" id="Print" onclick="myFunction()">Print  <i class="fa fa-print " aria-hidden="true"></i></button>
+</div>
+<div class="ibox">
+    <div class="container-fluid">
+        <div class="row" style="margin-bottom:20px">
+            <center> <h2>EMI Dues Reports</h2></center>
+        </div>
+
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+
+
+                            <th>EMI Date</th>
+                            <th>Name</th>
+                            <th>Loan Amount </th>
+                            <th>Mobile</th>
+                            <th>Duration </th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>@item.EMIDate</td>
+                                <td>@item.ApplicantFullName</td>
+                                <td>@item.LoanAmount</td>
+                                <td>@item.MobileNo</td>
+                                <td>@item.Duration Months</td>
+                                <td>@item.TotalAmount</td>
+                                <td>@item.Status</td>
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function myFunction() {
+        window.print();
+    }
+
+
+
+</script>
+
