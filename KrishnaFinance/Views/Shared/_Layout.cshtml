@@ -79,9 +79,10 @@
                     <li class="">
                         <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Reports</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="../Master/NotPaidList">EMI Non Clearance </a></li>
-                            <li><a href="../Master/CollectionList">EMI Dues </a></li>
-                            <li><a href="../Master/CollectionList">EMI Clearance </a></li>
+                            <li><a href="@Url.Action("NotPaidReports", "Master",new {Paid = 0})">EMI Non Clearance</a></li>
+                            <li><a href="@Url.Action("EMIDues", "Master",new {Paid = 2})">EMI Dues</a></li>
+                            <li><a href="@Url.Action("EMIClearance", "Master",new {Paid = 1})">EMI Clearance</a></li>
+                          
                         </ul>
                     </li>
                     <li class="">

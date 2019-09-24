@@ -607,52 +607,95 @@ namespace KrishnaFinance.Controllers
         }
 
         //--------
-        public ActionResult LoadNotPaidGrid(int? page, String Name = null, int Paid = 0)
+        public ActionResult NotPaidReports( int Paid = 0)
         {
-            StaticPagedList<CollectionList> itemsAsIPagedList;
-            itemsAsIPagedList = NotPaidGridList(page, Name, Paid);
+            try
+            {
+              
 
-            return Request.IsAjaxRequest()
-                    ? (ActionResult)PartialView("NotPaidGrid", itemsAsIPagedList)
-                    : View("NotPaidGrid", itemsAsIPagedList);
+                FinanceDbContext _db = new FinanceDbContext();
+                
+                IEnumerable<CollectionList> result = _db.CollectionList.SqlQuery(@"exec GetCollectionList  @paidStatus",
+                new SqlParameter("@paidStatus", Paid)
+                 ).ToList<CollectionList>();
+                var data = result;
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("NotPaidReports", data)
+                        : View("NotPaidReports", data);
+            }
+            catch (Exception ex)
+            {
+                var mgs = ex.Message;
+                return View();
+
+            }
+            finally
+            {
+
+            }
         }
-
-        public ActionResult NotPaidList(int? page, String Name = null, int Paid = 0)
+        public ActionResult EMIClearance(int? page, String Name = "", int Paid = 0)
         {
-            StaticPagedList<CollectionList> itemsAsIPagedList;
-            itemsAsIPagedList = NotPaidGridList(page, Name, Paid);
+            try
+            {
 
-            return Request.IsAjaxRequest()
-                    ? (ActionResult)PartialView("NotPaidList", itemsAsIPagedList)
-                    : View("NotPaidList", itemsAsIPagedList);
-        }
-        public StaticPagedList<CollectionList> NotPaidGridList(int? page, String Name = "", int Paid = 0)
-        {
-            FinanceDbContext _db = new FinanceDbContext();
-            var pageIndex = (page ?? 1);
-            const int pageSize = 10;
 
-            int totalCount = 10;
-            CollectionList clist = new CollectionList();
-
-            IEnumerable<CollectionList> result = _db.CollectionList.SqlQuery(@"exec GetCollectionList
-                   @pPageIndex, @pPageSize,@Name,@paidStatus",
-               new SqlParameter("@pPageIndex", pageIndex),
+                FinanceDbContext _db = new FinanceDbContext();
+                var pageIndex = (page ?? 1);
+                const int pageSize = 10;
+                IEnumerable<CollectionList> result = _db.CollectionList.SqlQuery(@"exec GetCollectionList    @pPageIndex, @pPageSize,@Name,@paidStatus",
+                      new SqlParameter("@pPageIndex", pageIndex),
                new SqlParameter("@pPageSize", pageSize),
                new SqlParameter("@Name", Name == null ? (object)DBNull.Value : Name),
-                   new SqlParameter("@paidStatus", Paid)
-               ).ToList<CollectionList>();
-
-            totalCount = 0;
-            if (result.Count() > 0)
-            {
-                totalCount = Convert.ToInt32(result.FirstOrDefault().TotalRows);
+                new SqlParameter("@paidStatus", Paid)
+                 ).ToList<CollectionList>();
+                var data = result;
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("PaidReports", data)
+                        : View("PaidReports", data);
             }
-            var itemsAsIPagedList = new StaticPagedList<CollectionList>(result, pageIndex, pageSize, totalCount);
-            return itemsAsIPagedList;
+            catch (Exception ex)
+            {
+                var mgs = ex.Message;
+                return View();
 
+            }
+            finally
+            {
+
+            }
         }
+        public ActionResult EMIDues(int? page, String Name = "", int Paid = 0)
+        {
+            try
+            {
 
+
+                FinanceDbContext _db = new FinanceDbContext();
+                var pageIndex = (page ?? 1);
+                const int pageSize = 10;
+                IEnumerable<CollectionList> result = _db.CollectionList.SqlQuery(@"exec GetCollectionList    @pPageIndex, @pPageSize,@Name,@paidStatus",
+                      new SqlParameter("@pPageIndex", pageIndex),
+               new SqlParameter("@pPageSize", pageSize),
+               new SqlParameter("@Name", Name == null ? (object)DBNull.Value : Name),
+                new SqlParameter("@paidStatus", Paid)
+                 ).ToList<CollectionList>();
+                var data = result;
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("DuesReports", data)
+                        : View("DuesReports", data);
+            }
+            catch (Exception ex)
+            {
+                var mgs = ex.Message;
+                return View();
+
+            }
+            finally
+            {
+
+            }
+        }
     }
 }
 
