@@ -954,8 +954,9 @@
     <Content Include="Views\Master\Settings.cshtml" />
     <Content Include="Views\Master\ApplicationForm.cshtml" />
     <Content Include="Views\Master\EMINonClearance.cshtml" />
-    <Content Include="Views\Master\NotPaidGrid.cshtml" />
-    <Content Include="Views\Master\NotPaidList.cshtml" />
+    <Content Include="Views\Master\NotPaidReports.cshtml" />
+    <Content Include="Views\Master\DuesReports.cshtml" />
+    <Content Include="Views\Master\PaidReports.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
