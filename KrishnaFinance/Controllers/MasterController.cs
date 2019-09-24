@@ -21,8 +21,13 @@ namespace KrishnaFinance.Controllers
         {
             return View();
         }
-       
-       
+
+
+        public ActionResult Settings()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Settings(int Duration=0)
         {

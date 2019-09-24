@@ -2,9 +2,179 @@
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/drilldown.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
+@model IEnumerable<KrishnaFinance.Models.DashboardData>
 
 @using Highsoft.Web.Mvc.Charts
 @using Highsoft.Web.Mvc.Charts.Rendering
+<div class="row">
+    @foreach (var item in Model)
+    {
+        if (item.Status == "TotalApplication")
+        {
+            <div class="col-lg-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+
+                        <h5>Applications</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">@item.count</h1>
+                        <small>Total Applications</small>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        if (item.Status == "TotalApprovedApplication")
+        {
+            <div class="col-lg-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Approved</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">@item.count</h1>
+                        <small>Total Approved </small>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+        @*if (item.Status == "TotalRejectedApplication")
+            {
+                <div class="col-lg-2">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Rejected</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">@item.count</h1>
+
+                            <small>Total Rejected </small>
+                        </div>
+                    </div>
+                </div>
+            }*@
+
+
+        if (item.Status == "TotalLoanAmount")
+        {
+            <div class="col-lg-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Loan</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">@item.count</h1>
+                        <small>Total Loan</small>
+                    </div>
+                </div>
+            </div>
+        }
+
+        if (item.Status == "Paid")
+        {
+            <div class="col-lg-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>EMI Paid</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">@item.count</h1>
+                        <small>Total Paid</small>
+                    </div>
+                </div>
+            </div>
+        }
+
+        if (item.Status == "Not Paid")
+        {
+            <div class="col-lg-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>EMI Not Paid</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">@item.count</h1>
+                        <small>Total Not Paid</small>
+                    </div>
+                </div>
+            </div>
+        }
+
+        if (item.Status == "dues")
+        {
+            <div class="col-lg-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>EMI Dues</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">@item.count</h1>
+                        <small>Total Dues</small>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+        @*<div class="row">
+                <div class="col-lg-3">
+                    @if (item.Status == "Paid")
+                    {
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <span class="label label-success pull-right">Annual</span>
+                                <h5>Paid EMI</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">@item.count</h1>
+                                <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+                                <small>Total Paid EMI</small>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="col-lg-3">
+                    @if (item.Status == "Not Paid")
+                    {
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <span class="label label-info pull-right">Annual</span>
+                                <h5>Not Paid EMI</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">@item.count</h1>
+                                <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
+                                <small>Total Not Paid EMI</small>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="col-lg-3">
+                    @if (item.Status == "dues")
+                    {
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <span class="label label-primary pull-right">Annual</span>
+                                <h5>Dues EMI</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">@item.count</h1>
+                                <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i></div>
+                                <small>Total Dues EMI</small>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>*@
+  
 
 @{ var chartOptions = new Highcharts
     {
@@ -84,7 +254,7 @@ Name="Total Loan",
 Data = @ViewData["data"] as List<ColumnSeriesData>
 }
 }
-};
+    };
 
     chartOptions.ID = "chart";
     var renderer = new HighchartsRenderer(chartOptions);

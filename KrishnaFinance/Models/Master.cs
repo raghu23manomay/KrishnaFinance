@@ -250,10 +250,10 @@ namespace KrishnaFinance.Models
         public decimal LoanAmount { get; set; }
         public string ApprovalStatus { get; set; }
         public int? TotalRows { get; set; }
-        public int? Duration { get; set; }
-        
+        public int? Duration { get; set; }        
 
         public IEnumerable<EMIList> _objEMIList { get; set; }
+        public IEnumerable<DashboardData> _objDashboardData { get; set; }
     }
 
     public class EMIList
@@ -279,6 +279,16 @@ namespace KrishnaFinance.Models
         public decimal LoanAmount { get; set; }        
 
     }
+
+    public class DashboardData
+    {
+        [Key]
+        public string Status { get; set; }
+        public Int64? count { get; set; }
+               
+
+    }
+
 } 
 
 
