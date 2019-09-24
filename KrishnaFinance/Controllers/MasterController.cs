@@ -615,7 +615,27 @@ namespace KrishnaFinance.Controllers
         public ActionResult GetClientEMIReport(int? ApplicantID)        {            ApplicantEmiReport data = new ApplicantEmiReport();            try            {                                   FinanceDbContext _db = new FinanceDbContext();                    var result = _db.ApplicantEmiReport.SqlQuery(@"exec GetApplicationDetailsForEMIReport                     @ApplicantID",                       new SqlParameter("@ApplicantID", ApplicantID)                       ).ToList<ApplicantEmiReport>();                    data = result.FirstOrDefault();                    IEnumerable<EMIList> result2 = _db.EMIList.SqlQuery(@"exec GetApplicationWaiseEMIDetails                     @ApplicantID",                        new SqlParameter("@ApplicantID", ApplicantID)                                                  ).ToList<EMIList>();                    data._objEMIList = result2;                                                }            catch (Exception e) { }            return View("ClientEMIReport", data);        }
 
         public ActionResult DashBoardChart()
-        //--------
+        {
+            FinanceDbContext _db = new FinanceDbContext();
+            List<DashboardChart> result = _db.DashboardChart.SqlQuery(@"exec DashbordChartDetails").ToList<DashboardChart>();
+            List<ColumnSeriesData> data = new List<ColumnSeriesData>();
+            for (int i = 0; i < result.Count; i++)
+            {
+                data.Add(new ColumnSeriesData { Name = result[i].MonthNames, Y = Convert.ToDouble(result[i].LoanAmount), Drilldown = "FIRST" });
+            }
+            List<string> Categories = new List<string>();
+            for (int i = 0; i < result.Count; i++)
+            {
+                Categories.Add(result[i].MonthNames);
+            }
+
+            List<DashboardData> result1 = _db.DashboardData.SqlQuery(@"exec GetDashboardData").ToList<DashboardData>();
+
+            ViewData["Categories1"] = Categories;
+            ViewData["data"] = data;
+            return View(result1);
+        }
+
         public ActionResult NotPaidReports( int Paid = 0)
         {
             try
@@ -701,24 +721,11 @@ namespace KrishnaFinance.Controllers
 
             }
             finally
-            FinanceDbContext _db = new FinanceDbContext();
-            List<DashboardChart> result = _db.DashboardChart.SqlQuery(@"exec DashbordChartDetails").ToList<DashboardChart>();
-            List<ColumnSeriesData> data = new List<ColumnSeriesData>();
-            for (int i = 0; i < result.Count; i++)
             {
-                data.Add(new ColumnSeriesData { Name = result[i].MonthNames, Y = Convert.ToDouble(result[i].LoanAmount), Drilldown = "FIRST" });
-            }
-            List<string> Categories = new List<string>();
-            for (int i = 0; i < result.Count; i++)
-            {
-                Categories.Add(result[i].MonthNames);
+
             }
 
-            List<DashboardData> result1 = _db.DashboardData.SqlQuery(@"exec GetDashboardData").ToList<DashboardData>();
-            
-            ViewData["Categories1"] = Categories;
-            ViewData["data"] = data;
-            return View(result1);
+       
         }
     }
 }
