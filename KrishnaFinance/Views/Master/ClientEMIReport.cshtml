@@ -1,0 +1,86 @@
+﻿
+@model KrishnaFinance.Models.ApplicantEmiReport
+
+<div class="ibox">
+    <div class="container-fluid">
+        <div class="row">
+
+            <center> <h2>TRUSHANA FINANCE</h2></center>
+            <center> <h4>Email Account Statment </h4></center>
+        </div>
+        <div class="row">
+            <center> <h4> @Model.ApplicantName</h4></center>
+            <div class="col-md-8">
+
+                Loan Amount Rs:&nbsp;@Model.LoanAmount<br />
+                Phone / Mobile:&nbsp;@Model.ApplicantMobileNo<br />
+                Duration:@Model.Duration Months<br />
+               
+            </div>
+        </div>
+        <br />        
+        <div class="row">
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+
+                        <th>#</th>
+                        <th> EMI Date    </th>
+                        <th>EMIPaidDate </th>
+                        <th>BankTransactionID</th>
+                        <td>EMI Amount</td>
+                        <th>Status</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 1;
+                     }          
+                    
+                    @foreach (var item in Model._objEMIList)
+                    {
+                    <tr>
+                        <td>@i</td>
+                        <td>@item.EMIDate</td>
+                        @if (item.EMIPaidDate == null)
+                        {
+                            <td>NA</td>
+                        }
+                        else
+                        {
+                            <td>@item.EMIPaidDate</td>
+                        }
+                                              
+                        @if (item.BankTransactionID == "0" || item.BankTransactionID == null)
+                        {
+                            <td>NA</td>
+                        }
+                        else
+                        {
+                            <td>@item.BankTransactionID</td>
+                        }
+                        <td>@item.TotalAmount</td>
+                        <td>@item.status1</td>
+                    </tr>
+                        i = i + 1;
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <button type="button" class="btn btn-primary btn-md Save pull-right" id="Print" onclick="myFunction()">Print  <i class="fa fa-print " aria-hidden="true"></i></button>
+</div>
+<script>
+    function myFunction() {
+        window.print();
+    }
+
+
+
+</script>
