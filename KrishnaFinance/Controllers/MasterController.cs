@@ -21,8 +21,13 @@ namespace KrishnaFinance.Controllers
         {
             return View();
         }
-       
-       
+
+
+        public ActionResult Settings()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Settings(int Duration=0)
         {
@@ -623,9 +628,12 @@ namespace KrishnaFinance.Controllers
             {
                 Categories.Add(result[i].MonthNames);
             }
+
+            List<DashboardData> result1 = _db.DashboardData.SqlQuery(@"exec GetDashboardData").ToList<DashboardData>();
+            
             ViewData["Categories1"] = Categories;
             ViewData["data"] = data;
-            return View();
+            return View(result1);
         }
     }
 }

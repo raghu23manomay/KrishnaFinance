@@ -31,7 +31,8 @@ namespace KrishnaFinance.Models
         public DbSet<EMIList> EMIList { get; set; }
         public DbSet<ApplicantEmiReport> ApplicantEmiReport { get; set; }
         public DbSet<DashboardChart> DashboardChart { get; set; }
-      
+        public DbSet<DashboardData> DashboardData { get; set; }
+        
     }
     
 }
