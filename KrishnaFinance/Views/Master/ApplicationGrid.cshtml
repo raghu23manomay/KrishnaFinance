@@ -24,8 +24,10 @@
                     <td>@item.ApplicantName</td>
                     <td>@item.LoanAmount</td>
                     <td>@item.ApplicantMobileNo</td>
+                   
                     <td>@item.ApprovalStatus</td>
-                    <td>                      
+                   
+                        <td>                      
 
                         <div class="col-sm-8">
                             <a href="@Url.Action("AddApplication", "Master",new {ApplicantID = @item.ApplicantID,AppStatus=@item.ApprovalStatus})"><i class="fa fa-pencil-square-o m-r-sm" aria-hidden="true" title="Edit"></i><span></span></a>
@@ -37,16 +39,16 @@
 
                                 if (item.ApprovalStatus == "Reject")
                                 {
-                                    <a href="../Master/ApprovalResponse?ApplicantID=@item.ApplicantID">  <i class="fa fa-ban" aria-hidden="true" style="color: orangered;"></i></a>
+                                    <a href="../Master/ApprovalResponse?ApplicantID=@item.ApplicantID">  <i class="fa fa-ban" aria-hidden="true" style="color: orangered;" title="Reject"></i></a>
                                 }
                                 else if (item.ApprovalStatus == "Approval pending")
                                 {
-                                    <a href="../Master/ApprovalResponse?ApplicantID=@item.ApplicantID"><i class="fa fa-clock-o" aria-hidden="true" style="font-size: 15px;color: darkgray;"></i></a>
+                                    <a href="../Master/ApprovalResponse?ApplicantID=@item.ApplicantID"><i class="fa fa-clock-o" aria-hidden="true" style="font-size: 15px;color: darkgray;" title="Approval Pending"></i></a>
                                 }
                                 else if (item.ApprovalStatus == "Approved")
                                 {
                                     <a href="../Master/ApprovalResponse?ApplicantID=@item.ApplicantID"> <i class="fa fa-check  m-r-sm " aria-hidden="true" title="Approved"></i></a>
-                                    <a href="../Master/GetClientEMIReport?ApplicantID=@item.ApplicantID">  <i class="fa fa-file-text-o" aria-hidden="true"></i></a>
+                                    <a href="../Master/GetClientEMIReport?ApplicantID=@item.ApplicantID">  <i class="fa fa-file-text-o" aria-hidden="true" title="Reports"></i></a>
                                 }
 
                             }

@@ -52,14 +52,31 @@
                         <label class="col-lg-3">EMI Date</label>
 
                         <div class="col-lg-9">
-                            <input type="date" placeholder="EMI Date" class="form-control" id="EMIDate" value="@ViewBag.EMI">
+                           @if(Model.status == 0)
+                           {
+                               <input type="date" placeholder="EMI Date" class="form-control" id="EMIDate" value="@DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd")" disabled>
+                           }
+                           else
+                           {
+                               <input type="date" placeholder="EMI Date" class="form-control" id="EMIDate" value="@ViewBag.EMI">
+                           }
+                            
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3">Disbursement Date</label>
 
                         <div class="col-lg-9">
-                            <input type="date" placeholder="Disbursement Date" class="form-control" id="DisbursementDate" value="@ViewBag.Disbursement">
+                            @if (Model.status == 0)
+                            {
+                                <input type="date" placeholder="Disbursement Date" class="form-control" id="DisbursementDate" value="@DateTime.Now.ToString("yyyy-MM-dd")" disabled>
+                                
+                            }
+                            else
+                            {
+                                <input type="date" placeholder="Disbursement Date" class="form-control" id="DisbursementDate" value="@ViewBag.Disbursement">
+                            }
+
                         </div>
                     </div>
                     <div class="form-group">
@@ -67,6 +84,7 @@
                         <div class="col-lg-9">
                             @Html.DropDownList("DurationLoan", new SelectList((System.Collections.IEnumerable)ViewData["Duration"], "Value", "Text", Model.Duration), "Select Duration", new { @class = "form-control col-md-9", @id = "Duration", Title = "Duration" })
                             @*<div class="col-lg-9"><input type="text" placeholder="Duration" class="form-control" id="Duration" value="@Model.Duration"></div>*@
+                            <div class="text-danger" id="EDuration"></div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -252,7 +270,18 @@
        
 
         $('#btnsave').on('click', function () {
+    //validation
+            var error = 0;
 
+            if ($('#Duration').val() == 0) {
+                error = 1;
+                $('#EDuration').html("Select Duration.");
+                $('#EDuration').show();
+
+            }
+            else {
+                $('#EDuration').hide();
+            }
             $.ajax({
                 type: "POST",
                 cache: false,

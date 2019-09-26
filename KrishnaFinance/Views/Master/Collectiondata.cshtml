@@ -15,46 +15,48 @@
     <div class="col-lg-7">
         <div class="ibox">
             <div class="ibox-title">
-                <h5>Collection</h5>
+                <h5>Collection </h5>
+               
             </div>
             <div class="ibox-content">
 
                 <form class="form-horizontal">
-                  <input type="text" class="hidden" value="@Model.TransectionID" id="TransectionID"/>
+                    <input type="text" class="hidden" value="@Model.TransectionID" id="TransectionID" />
+                    <div class="form-group">
+                        <label class="col-lg-3 "> Status</label>
+                        <div class="col-lg-9">
+                            @Html.DropDownList("status", new SelectList((System.Collections.IEnumerable)ViewData["EMIStatus"], "Value", "Text"), "Select Status", new { @class = "form-control ", @id = "status", Title = "status" })
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-lg-3 ">EMI Amount</label>
                         <div class="col-lg-9"><input type="text" placeholder="EMI Amount" class="form-control" id="TotalAmount" value="@Model.TotalEMI"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 "> EMI Date</label>
+                        <div class="col-lg-9"><input type="text" placeholder="EMI Date" class="form-control" id="EMIDate" value="@ViewBag.EMIDate"></div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 "> Transaction ID</label>
                         <div class="col-lg-9"><input type="text" placeholder="Transaction ID" class="form-control" id="BankTransactionID" value=""></div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-3 "> EMI Date</label>
-                        <div class="col-lg-9"><input type="text" placeholder="EMI Date" class="form-control" id="EMIDate" value="@ViewBag.EMIDate" ></div>
-                    </div>
-                    <div class="form-group">
                         <label class="col-lg-3 "> EMI Paid Date</label>
                         <div class="col-lg-9"><input type="date" placeholder="EMI Paid Date" class="form-control" id="EMIPaidDate" value=""></div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 "> Status</label>
-                        <div class="col-lg-9">
-                            @Html.DropDownList("status", new SelectList((System.Collections.IEnumerable)ViewData["EMIStatus"], "Value", "Text"), "Select Status", new { @class = "form-control ", @id = "status", Title = "status" })
+                 
+                    <div class="row form-group">
+                        <div class="col-md-3" id="PrintDemandPromissory">
+                            @*<a class="btn btn-primary" href="/Master/PrintDemandPromissory?ApplicantID=@Model.ApplicantID"><i class="fa fa-print " aria-hidden="true"></i> Promissory Note  </a>*@
                         </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-md-3" id="PrintDemandPromissory">
-                                @*<a class="btn btn-primary" href="/Master/PrintDemandPromissory?ApplicantID=@Model.ApplicantID"><i class="fa fa-print " aria-hidden="true"></i> Promissory Note  </a>*@
-                            </div>
-                            <div class="col-md-8 pull-right">
-                                <div class="pull-right">
-                                    <a class="btn btn-primary" href="/Master/CollectionList">Cancel</a>
-                                    <button class="btn btn-primary" id="btnsave" type="button">Save </button>
-                                </div>
+                        <div class="col-md-8 pull-right">
+                            <div class="pull-right">
+                                <a class="btn btn-primary" href="/Master/CollectionList">Cancel</a>
+                                <button class="btn btn-primary" id="btnsave" type="button">Save </button>
                             </div>
                         </div>
-</form>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
