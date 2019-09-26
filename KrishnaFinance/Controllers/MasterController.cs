@@ -403,13 +403,15 @@ namespace KrishnaFinance.Controllers
             var pageIndex = (page ?? 1);
             const int pageSize = 10;
             int totalCount = 10;
+            int RollID = Convert.ToInt32(Session["RoleID"].ToString());
             ApplicationList clist = new ApplicationList();
 
             IEnumerable<ApplicationList> result = _db.ApplicationList.SqlQuery(@"exec GetApplication
-                   @pPageIndex, @pPageSize,@Name",
+                   @pPageIndex, @pPageSize,@Name,@RollID",
                new SqlParameter("@pPageIndex", pageIndex),
                new SqlParameter("@pPageSize", pageSize),
-               new SqlParameter("@Name", Name == null ? (object)DBNull.Value : Name)
+               new SqlParameter("@Name", Name == null ? (object)DBNull.Value : Name),
+                 new SqlParameter("@RollID", RollID)
                ).ToList<ApplicationList>();
 
             totalCount = 0;
@@ -615,6 +617,7 @@ namespace KrishnaFinance.Controllers
         public ActionResult GetClientEMIReport(int? ApplicantID)        {            ApplicantEmiReport data = new ApplicantEmiReport();            try            {                                   FinanceDbContext _db = new FinanceDbContext();                    var result = _db.ApplicantEmiReport.SqlQuery(@"exec GetApplicationDetailsForEMIReport                     @ApplicantID",                       new SqlParameter("@ApplicantID", ApplicantID)                       ).ToList<ApplicantEmiReport>();                    data = result.FirstOrDefault();                    IEnumerable<EMIList> result2 = _db.EMIList.SqlQuery(@"exec GetApplicationWaiseEMIDetails                     @ApplicantID",                        new SqlParameter("@ApplicantID", ApplicantID)                                                  ).ToList<EMIList>();                    data._objEMIList = result2;                                                }            catch (Exception e) { }            return View("ClientEMIReport", data);        }
 
         public ActionResult DashBoardChart()
+
         {
             FinanceDbContext _db = new FinanceDbContext();
             List<DashboardChart> result = _db.DashboardChart.SqlQuery(@"exec DashbordChartDetails").ToList<DashboardChart>();

@@ -11,14 +11,14 @@
     {
         if (item.Status == "TotalApplication")
         {
-            <div class="col-lg-2">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
+            <div class="col-lg-2"  >
+                <div class="ibox float-e-margins" >
+                    <div class="ibox-title" >
 
                         <h5>Applications</h5>
                     </div>
-                    <div class="ibox-content">
-                        <h1 class="no-margins">@item.count</h1>
+                    <div class="ibox-content" style="background-color:darkcyan; font-family:Arial;color:white" >
+                        <h1 class="no-margins" >@item.count</h1>
                         <small>Total Applications</small>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <div class="ibox-title">
                         <h5>Approved</h5>
                     </div>
-                    <div class="ibox-content">
+                    <div class="ibox-content" style="background-color:darkkhaki; font-family:Arial;color:white">
                         <h1 class="no-margins">@item.count</h1>
                         <small>Total Approved </small>
                     </div>
@@ -66,7 +66,7 @@
                     <div class="ibox-title">
                         <h5>Loan</h5>
                     </div>
-                    <div class="ibox-content">
+                    <div class="ibox-content" style="background-color:orange; font-family:Arial;color:white">
                         <h1 class="no-margins">@item.count</h1>
                         <small>Total Loan</small>
                     </div>
@@ -81,7 +81,7 @@
                     <div class="ibox-title">
                         <h5>EMI Paid</h5>
                     </div>
-                    <div class="ibox-content">
+                    <div class="ibox-content" style="background-color:green; font-family:Arial;color:white">
                         <h1 class="no-margins">@item.count</h1>
                         <small>Total Paid</small>
                     </div>
@@ -96,9 +96,9 @@
                     <div class="ibox-title">
                         <h5>EMI Not Paid</h5>
                     </div>
-                    <div class="ibox-content">
+                    <div class="ibox-content" style="background-color:tomato; font-family:Arial;color:white">
                         <h1 class="no-margins">@item.count</h1>
-                        <small>Total Not Paid</small>
+                        <small>Total EMI Not Paid</small>
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                     <div class="ibox-title">
                         <h5>EMI Dues</h5>
                     </div>
-                    <div class="ibox-content">
+                    <div class="ibox-content" style="background-color:cornflowerblue; font-family:Arial;color:white">
                         <h1 class="no-margins">@item.count</h1>
                         <small>Total Dues</small>
                     </div>
@@ -180,7 +180,7 @@
     {
         Title = new Title
         {
-            Text = "TOTAL LOAN AMOUNT 2019"
+            Text = "Total Loan Amount 2019"
         },
         //Subtitle = new Subtitle
         //{
@@ -201,7 +201,7 @@ new YAxis
 {
 Title = new YAxisTitle
 {
-Text =   "Total loan amount of year 2019"
+Text =   "Total Loan Amount of year 2019"
 }
 }
 },

@@ -85,12 +85,12 @@
                     <p>
                         I/ We
                         has / have borrowed Rs.&nbsp;&nbsp;<span id="number">@Model.LoanRequest</span>
-                        ( <span id="words"></span> )  from   <b>TRUSHANA FINANCE</b> @Model.PermanentAddress .
+                        ( <span id="words"></span> )  from   <b>TRUSHANA FINANCE</b> @Model.CompanyAddress .
 
 
                         <br />
 
-                        I have issued Cheques Numbers from &nbsp;&nbsp;&nbsp; @Model.ChequesFrom &nbsp;to&nbsp; @Model.ChequesTo   
+                        I have issued Cheques Numbers from &nbsp;&nbsp;&nbsp; @Model.ChequesFrom &nbsp;to&nbsp; @Model.ChequesTo
                         of (@Model.BankName , @Model.BranchName) duly filled in and signed by me
                     </p>
                 </div>
@@ -122,6 +122,10 @@
 <script>
     function myFunction() {
         window.print();
+
+        window.close(function () {
+            $('.print').css('display', 'block');
+        })
     }
    
 

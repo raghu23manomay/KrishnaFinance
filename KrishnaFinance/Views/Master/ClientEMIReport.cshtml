@@ -6,7 +6,7 @@
         <div class="row">
 
             <center> <h2>TRUSHANA FINANCE</h2></center>
-            <center> <h4>Email Account Statment </h4></center>
+            <center> <h4>EMI Account Statment </h4></center>
         </div>
         <div class="row">
             <center> <h4> @Model.ApplicantName</h4></center>
@@ -77,6 +77,9 @@
 <script>
     function myFunction() {
         window.print();
+        window.close(function () {
+            $('.print').css('display', 'block');
+        })
     }
 
 </script>

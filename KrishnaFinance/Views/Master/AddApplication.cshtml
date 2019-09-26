@@ -103,33 +103,38 @@
                         <label> Name</label>
                         @Html.HiddenFor(a => a.ApplicantID, new { @id = "ApplicantID" })
                         <input id="ApplicantFullName" type="text" class="form-control" placeholder=" Name" value="@Model.ApplicantFullName">
-                        <div class="text-danger" id="ApplicantFullName"></div>
+                        <div class="text-danger" id="EApplicantFullName"></div>
                     </div>
 
                     <div class="form-group">
                         <label for="position" class="col-form-label">Age</label>
                         <input id="ApplicantAge" type="text" class="form-control" placeholder="Age" value="@Model.ApplicantAge">
+                        <div class="text-danger" id="EApplicantAge"></div>
                     </div>
                 </div>
                 <div class="col-sm-6 b-r">
                     <div class="form-group">
                         <label>Loan Amount</label>
                         <input id="LoanRequest" type="text" class="form-control" placeholder="Loan Amount" value="@Model.LoanRequest">
+                        <div class="text-danger" id="ELoanRequest"></div>
                     </div>
                     <div class="form-group">
                         <label for="position" class="col-form-label">Loan Reason</label>
                         <input id="LoanReason" type="text" class="form-control" placeholder="Reason" value="@Model.LoanReason">
+                        <div class="text-danger" id="ELoanReason"></div>
                     </div>
                 </div>
                 <div class="col-sm-6 b-r">
                     <div class="form-group">
                         <label for="position" class="col-form-label"> Occupation</label>
                         <input id="ApplicantOccupation" type="text" class="form-control" placeholder="Occupation" value="@Model.ApplicantOccupation">
+                        <div class="text-danger" id="EApplicantOccupation"></div>
                     </div>
                     <div class="form-group">
 
                         <label>Mobile No</label>
-                        <input id="MobileNo" type="text" class="form-control" placeholder="Mobile No" value="@Model.MobileNo">
+                        <input id="MobileNo" type="text" class="form-control" placeholder="Mobile No" value="@Model.MobileNo" >
+                        <div class="text-danger" id="EMobileNo"></div>
                     </div>
                 </div>
                 <div class="col-sm-6 b-r">
@@ -137,10 +142,12 @@
 
                         <label for="position" class="col-form-label"> Monthly Income</label>
                         <input id="ApplicantMonthlyIncome" type="text" class="form-control" placeholder="Monthly Income" value="@Model.ApplicantMonthlyIncome">
+                        <div class="text-danger" id="EApplicantMonthlyIncome"></div>
                     </div>
                     <div class="form-group">
                         <label for="position" class="col-form-label">Permanent Address</label>
                         <input id="PermanentAddress" type="text" class="form-control" placeholder="Permanent Address" value="@Model.PermanentAddress">
+                        <div class="text-danger" id="EPermanentAddress"></div>
                     </div>
                 </div>
                 <div class="col-sm-6 b-r">
@@ -149,6 +156,7 @@
                         <input type="checkbox" id="PAddress" title="" style="margin: 0 0 0;" />
                         <small>same Permanent Address</small>
                         <input id="PresentAddress" type="text" class="form-control" placeholder="Present Address" value="@Model.PresentAddress">
+                        <div class="text-danger" id="EPresentAddress"></div>
                     </div>
 
 
@@ -156,6 +164,7 @@
                     <div class="form-group">
                         <label for="position" class="col-form-label">Office Address</label>
                         <input id="OfficeAddress" type="text" class="form-control" placeholder="Office Address" value="@Model.OfficeAddress">
+                        <div class="text-danger" id="EOfficeAddress"></div>
                     </div>
                 </div>
                 <div class="col-sm-6 b-r">
@@ -163,6 +172,7 @@
                         <label for="position" class="col-form-label">Pan Card</label>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Pan Card" id="PanNo" value="@Model.PanNo" />
+                            <div class="text-danger" id="EPanNo"></div>
                             <span class="input-group-addon">
 
                                 <input type="file" id="AddPanFile" class="PanCardPath" style="display:none" />
@@ -190,6 +200,7 @@
                         <label for="position" class="col-form-label">Aadhar Card </label>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Aadhar Card " id="AdharCardNo" value="@Model.AdharCardNo" />
+                            <div class="text-danger" id="EAdharCardNo"></div>
                             <span class="input-group-addon">
                                 <input type="file" id="AddAdharFile" class="AadharCardPath" style="display:none" />
                                 <i class="fa fa-paperclip" id="AddAadharCard" title="Attach AadharCard Xero"></i>
@@ -215,21 +226,25 @@
                     <div class="form-group">
                         <label for="position" class="col-form-label">Bank Name</label>
                         <input id="BankName" type="text" class="form-control" placeholder="Bank Name" value="@Model.BankName">
+                        <div class="text-danger" id="EBankName"></div>
                     </div>
                     <div class="form-group">
                         <label for="position" class="col-form-label">Cheques From</label>
                         <input id="ChequesFrom" type="text" class="form-control" placeholder="Cheques Number" value="@Model.ChequesFrom">
+                        <div class="text-danger" id="EChequesFrom"></div>
                     </div>
                 </div>
                 <div class="col-sm-6 b-r">
                     <div class="form-group">
                         <label for="position" class="col-form-label">Branch Name</label>
                         <input id="BranchName" type="text" class="form-control" placeholder="Branch Name" value="@Model.BranchName">
+                        <div class="text-danger" id="EBranchName"></div>
                     </div>
                    
                     <div class="form-group">
                         <label for="position" class="col-form-label"> To</label>
                         <input id="ChequesTo" type="text" class="form-control" placeholder="Cheques Number" value="@Model.ChequesTo">
+                        <div class="text-danger" id="EChequesTo"></div>
                     </div>
 
                 </div>
@@ -244,20 +259,24 @@
                     <div class="form-group">
                         <label for="position" class="col-form-label">  Name</label>
                         <input id="CoAplicantFullName" type="text" class="form-control" placeholder=" Name" value="@Model.CoAplicantFullName">
+                        <div class="text-danger" id="ECoAplicantFullName"></div>
                     </div>
                     <div class="form-group">
                         <label for="position" class="col-form-label"> Age</label>
                         <input id="CoAplicantAge" type="text" class="form-control" placeholder=" Age" value="@Model.CoAplicantAge">
+                        <div class="text-danger" id="ECoAplicantAge"></div>
                     </div>
                 </div>
                 <div class="col-sm-6 b-r">
                     <div class="form-group">
                         <label for="position" class="col-form-label"> Occupation</label>
                         <input id="CoAplicantOccupation" type="text" class="form-control" placeholder=" Occupation" value="@Model.CoAplicantOccupation">
+                        <div class="text-danger" id="ECoAplicantOccupation"></div>
                     </div>
                     <div class="form-group">
                         <label for="position" class="col-form-label"> Monthly Income</label>
                         <input id="CoApplicantMonthlyIncome" type="text" class="form-control" placeholder=" Monthly Income" value="@Model.CoApplicantMonthlyIncome">
+                        <div class="text-danger" id="ECoApplicantMonthlyIncome"></div>
                     </div>
                 </div>
 
@@ -273,6 +292,8 @@
 
     <script>
         $(document).ready(function () {
+          
+
             //Add more Co-Applicant
             $("#Addmore").on("click", function () {
                 var data = '<div class="body mainDiv">  <i class="fa fa-times deleterow" aria-hidden="true"></i> <div class="row"><div class="col-sm-4"> <div class=""> <label for="position" class="col-form-label"> Full Name</label> <input id="CoApplicantFullName" type="text" class="form-control" placeholder="Co-Applicant’s Full Name"></div>  </div><div class="col-sm-4"> <div class=""> <label for="position" class="col-form-label"> Age</label>   <input id="CoApplicantAge" type="text" class="form-control" placeholder="Co-Applicant’s Age"> </div> </div> </div>  <div class="row">   <div class="col-sm-4">   <div class="">  <label for="position" class="col-form-label"> Occupation</label>  <input id="CoApplicantOccupation" type="text" class="form-control" placeholder="Co-Applicant’s Occupation">   </div>  </div>         <div class="col-sm-4">     <div class="">          <label for="position" class="col-form-label"> Monthly Income</label>   <input id="CoApplicantMonthlyIncome" type="text" class="form-control" placeholder=" Monthly Income"> </div> </div> </div> </div>';
@@ -431,7 +452,177 @@
 
 
             $('#Save').on('click', function () {
-               
+                //Validation
+                var error = 0;
+              
+                if ($('#ApplicantFullName').val() == 0) {
+                    error = 1;
+                    $('#EApplicantFullName').html("Enter Full Name.");
+                    $('#EApplicantFullName').show();
+
+                }
+                else {
+                    $('#EApplicantFullName').hide();
+                } if ($('#ApplicantAge').val() == 0) {
+                    error = 1;
+                    $('#EApplicantAge').html("Enter Age.");
+                    $('#EApplicantAge').show();
+
+                }
+                else {
+                    $('#EApplicantAge').hide();
+                } if ($('#ApplicantOccupation').val() == 0) {
+                    error = 1;
+                    $('#EApplicantOccupation').html("Enter Occupation.");
+                    $('#EApplicantOccupation').show();
+
+                }
+                else {
+                    $('#EApplicantOccupation').hide();
+                }
+                if ($('#MobileNo').val() == 0 ) {
+                   
+                    error = 1;
+                    $('#EMobileNo').html("Enter Valid Mobile Number.");
+                    $('#EMobileNo').show();
+
+                } 
+                
+                else {
+                    $('#EMobileNo').hide();
+                }
+
+                if ($('#PanNo').val() == 0) {
+                    error = 1;
+                    $('#EPanNo').html("Enter Pan Card Number.");
+                    $('#EPanNo').show();
+
+                }
+                else {
+                    $('#EPanNo').hide();
+                } if ($('#AdharCardNo').val() == 0) {
+                    error = 1;
+                    $('#EAdharCardNo').html("Enter Aadhar Card Number.");
+                    $('#EAdharCardNo').show();
+
+                }
+                else {
+                    $('#EAdharCardNo').hide();
+                } if ($('#ApplicantMonthlyIncome').val() == 0) {
+                    error = 1;
+                    $('#EApplicantMonthlyIncome').html("Enter Monthly Income .");
+                    $('#EApplicantMonthlyIncome').show();
+
+                }
+                else {
+                    $('#EApplicantMonthlyIncome').hide();
+                } if ($('#LoanRequest').val() == 0) {
+                    error = 1;
+                    $('#ELoanRequest').html("Enter Loan Request Amount.");
+                    $('#ELoanRequest').show();
+
+                }
+                else {
+                    $('#ELoanRequest').hide();
+                }
+                if ($('#LoanReason').val() == 0) {
+                    error = 1;
+                    $('#ELoanReason').html("Enter Loan Reason .");
+                    $('#ELoanReason').show();
+
+                }
+                else {
+                    $('#ELoanReason').hide();
+                } if ($('#PresentAddress').val() == 0) {
+                    error = 1;
+                    $('#EPresentAddress').html("Enter Present Address.");
+                    $('#EPresentAddress').show();
+
+                }
+                else {
+                    $('#EPresentAddress').hide();
+                } if ($('#OfficeAddress').val() == 0) {
+                    error = 1;
+                    $('#EOfficeAddress').html("Enter Office Address.");
+                    $('#EOfficeAddress').show();
+
+                }
+                else {
+                    $('#EOfficeAddress').hide();
+                } if ($('#PermanentAddress').val() == 0) {
+                    error = 1;
+                    $('#EPermanentAddress').html("Enter Permanent Address.");
+                    $('#EPermanentAddress').show();
+
+                }
+                else {
+                    $('#EPermanentAddress').hide();
+                } if ($('#BankName').val() == 0) {
+                    error = 1;
+                    $('#EBankName').html("Enter Bank Name.");
+                    $('#EBankName').show();
+
+                }
+                else {
+                    $('#EBankName').hide();
+                } if ($('#BranchName').val() == 0) {
+                    error = 1;
+                    $('#EBranchName').html("Enter Branch Name.");
+                    $('#EBranchName').show();
+
+                }
+                else {
+                    $('#EBranchName').hide();
+                } if ($('#ChequesFrom').val() == 0) {
+                    error = 1;
+                    $('#EChequesFrom').html("Enter Cheques From.");
+                    $('#EChequesFrom').show();
+
+                }
+                else {
+                    $('#EChequesFrom').hide();
+                } if ($('#ChequesTo').val() == 0) {
+                    error = 1;
+                    $('#EChequesTo').html("Enter Cheques To.");
+                    $('#EChequesTo').show();
+
+                }
+                else {
+                    $('#EChequesTo').hide();
+                } if ($('#CoAplicantFullName').val() == 0) {
+                    error = 1;
+                    $('#ECoAplicantFullName').html("Enter Full Name.");
+                    $('#ECoAplicantFullName').show();
+
+                }
+                else {
+                    $('#ECoAplicantFullName').hide();
+                } if ($('#CoAplicantAge').val() == 0) {
+                    error = 1;
+                    $('#ECoAplicantAge').html("Enter Age.");
+                    $('#ECoAplicantAge').show();
+
+                }
+                else {
+                    $('#ECoAplicantAge').hide();
+                } if ($('#CoAplicantOccupation').val() == 0) {
+                    error = 1;
+                    $('#ECoAplicantOccupation').html("Enter Occupation.");
+                    $('#ECoAplicantOccupation').show();
+
+                }
+                else {
+                    $('#ECoAplicantOccupation').hide();
+                } if ($('#CoApplicantMonthlyIncome').val() == 0) {
+                    error = 1;
+                    $('#ECoApplicantMonthlyIncome').html("Enter Monthly Income.");
+                    $('#ECoApplicantMonthlyIncome').show();
+
+                }
+                else {
+                    $('#ECoApplicantMonthlyIncome').hide();
+                }
+                //Save
                 $.ajax({
                     type: "POST",
                     cache: false,
@@ -441,7 +632,7 @@
                         ApplicantAge: $("#ApplicantAge ").val(),
                         ApplicantOccupation: $("#ApplicantOccupation ").val(),
                         MobileNo: $("#MobileNo ").val(),
-                        PanNo: $("#PanNo          ").val(),
+                        PanNo: $("#PanNo").val(),
                         AdharCardNo: $("#AdharCardNo").val(),
                         ApplicantMonthlyIncome: $("#ApplicantMonthlyIncome").val(),
                         LoanRequest: $("#LoanRequest ").val(),
@@ -464,11 +655,11 @@
                         , ApplicantID: $("#ApplicantID").val()
                     },
                     success: function (result) {
-                        //  alert(result);
-                        location.href = "ApplicationList";
+                        //alert(result);
+                        //location.href = "ApplicationList";
 
 
-                        //location.reload(this);
+                        location.reload(this);
                     },
                     error: function (errorData) {
                     }

@@ -14,7 +14,7 @@
                     <thead>
                         <tr>
 
-
+                            <th>Sr.No</th>
                             <th>EMI Date</th>
                             <th>Name</th>
                             <th>Loan Amount </th>
@@ -26,19 +26,24 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @{
+                            int i = 1;
+                        }
                         @foreach (var item in Model)
                         {
 
-                            <tr>
-                                <td>@item.EMIDate</td>
-                                <td>@item.ApplicantFullName</td>
-                                <td>@item.LoanAmount</td>
-                                <td>@item.MobileNo</td>
-                                <td width="width: 100px;">@item.Duration Months</td>
-                                <td>@item.TotalAmount</td>
-                                <td>@item.Status</td>
-                                <td></td>
-                            </tr>
+                        <tr>
+                            <td>@i</td>
+                            <td>@item.EMIDate</td>
+                            <td>@item.ApplicantFullName</td>
+                            <td>@item.LoanAmount</td>
+                            <td>@item.MobileNo</td>
+                            <td width="width: 100px;">@item.Duration Months</td>
+                            <td>@item.TotalAmount</td>
+                            <td>@item.Status</td>
+                            <td></td>
+                        </tr>
+                            i = i + 1;
                         }
                     </tbody>
                 </table>
@@ -50,6 +55,9 @@
 <script>
     function myFunction() {
         window.print();
+        window.close(function () {
+            $('.print').css('display', 'block');
+        })
     }
 
 

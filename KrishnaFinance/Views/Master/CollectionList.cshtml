@@ -42,8 +42,6 @@
     $(document).ready(function () {
  
         $('#NotPaid').click(function () {
-          
-
             $.ajax({
                 type: "POST",
                 cache: false,
@@ -53,7 +51,7 @@
                 },
                 success: function (result)
                 {
-
+                    $('#cgrid').html(result);
                     //location.reload(this);
                 },
                 error: function (errorData) {
