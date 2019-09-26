@@ -1230,8 +1230,6 @@
     <Content Include="Views\Master\Settings.cshtml" />
     <Content Include="Views\Master\ApplicationForm.cshtml" />
     <Content Include="Views\Master\EMINonClearance.cshtml" />
-    <Content Include="Views\Master\NotPaidGrid.cshtml" />
-    <Content Include="Views\Master\NotPaidList.cshtml" />
     <Content Include="Views\Master\ClientEMIReport.cshtml" />
     <Content Include="Views\Master\DashBoardChart.cshtml" />
     <Content Include="Views\Master\NotPaidReports.cshtml" />

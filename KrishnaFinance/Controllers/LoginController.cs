@@ -41,7 +41,7 @@ namespace KrishnaFinance.Controllers
                 Session["UserID"] = L.UserID;
                 Session["RoleID"] = L.RoleID;
                 Session["RoleName"] = L.RoleName;
-                return RedirectToAction("ApplicationList", "Master");
+                return RedirectToAction("DashBoardChart", "Master");
             }
 
             return View();
