@@ -1235,6 +1235,8 @@
     <Content Include="Views\Master\NotPaidReports.cshtml" />
     <Content Include="Views\Master\DuesReports.cshtml" />
     <Content Include="Views\Master\PaidReports.cshtml" />
+    <Content Include="Views\Master\Settlement.cshtml" />
+    <Content Include="Views\Master\PrintNOC.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
