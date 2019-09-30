@@ -56,7 +56,7 @@
                             {
                                 <a href="../Master/addApplication?ApplicantID=@item.ApplicantID"> <i class="fa fa-paper-plane  m-r-sm" id="btnApproveRequest" aria-hidden="true" title="Send For Approval"></i></a>
                             }
-                            else
+                            else if(item.ApprovalStatus != "Approval pending")
                             {
                                 <a href="../Master/GetClientEMIReport?ApplicantID=@item.ApplicantID">  <i class="fa fa-file-text-o" aria-hidden="true"></i></a>
                             }

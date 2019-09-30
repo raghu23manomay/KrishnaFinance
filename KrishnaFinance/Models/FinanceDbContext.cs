@@ -20,6 +20,7 @@ namespace KrishnaFinance.Models
         }
         public DbSet<ReportsGrid> ReportsGrid { get; set; }
         public DbSet<GetTransection> GetTransection { get; set; }
+        public DbSet<PrintNOC> PrintNOC { get; set; }
         public DbSet<Collectiondata> Collectiondata { get; set; }
         public DbSet<ApplicationList> ApplicationList { get; set; }
         public DbSet<CollectionList> CollectionList { get; set; }
@@ -32,7 +33,8 @@ namespace KrishnaFinance.Models
         public DbSet<ApplicantEmiReport> ApplicantEmiReport { get; set; }
         public DbSet<DashboardChart> DashboardChart { get; set; }
         public DbSet<DashboardData> DashboardData { get; set; }
-        
+        public DbSet<FetchSettlement> FetchSettlement { get; set; }
+
     }
     
 }

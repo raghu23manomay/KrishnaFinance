@@ -288,6 +288,65 @@ namespace KrishnaFinance.Models
                
 
     }
+    //public class Settlement
+
+    //{
+    //    [Key]
+    //    public int ApplicantID { get; set; }
+    //    public string ApplicantFullName { get; set; }
+    //    public decimal LoanAmount { get; set; }
+    //    public int PaidEMINO { get; set; }
+    //    public decimal PaidEMIAmount { get; set; }
+    //    public int ReamingEMI { get; set; }
+    //    public decimal ReamingEMIAmount { get; set; }
+    //    public decimal ServiceCharges { get; set; }
+    //    public decimal Total { get; set; }
+    //    public decimal BankTransactionID { get; set; }
+    //    public decimal Cash { get; set; }
+    //    public decimal cheque { get; set; }
+    //    public decimal Online { get; set; }
+
+    //}
+
+    public class FetchSettlement
+    {
+        [Key]
+        public int ApplicantID { get; set; }
+        public string FullName { get; set; }        
+        public decimal Amount { get; set; }
+        public int PaidEMICount { get; set; }
+        public int RemaningEMICount { get; set; }
+        public decimal PaidAmount { get; set; }
+        public decimal RemaningAmount { get; set; }
+
+    }
+    public class InsertSettlement
+    {
+        [Key]
+        public int SettlementID                 {get;set;}
+        public int ApplicantID                  {get;set;}
+     
+        public decimal ServiceCharges           {get;set;}
+        public decimal TotalAmount              {get;set;}
+        public string PaymentMethod             {get;set;}
+        public string ChequeNumber              {get;set;}
+        public string BankTransactionID { get; set; }
+    }
+
+    public class PrintNOC
+
+    {
+        [Key]
+        public int ApplicantID { get; set; }
+        public decimal CompanyPrice { get; set; }
+        public string CompanyAddress { get; set; }
+        public string CompanyMobileNo { get; set; }
+        public string ApplicantFullName { get; set; }
+        public int ApplicantAge { get; set; }
+        public string PermanentAddress { get; set; }
+        public decimal LoanRequest { get; set; }
+      
+    }
 
 } 
 

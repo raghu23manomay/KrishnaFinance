@@ -21,8 +21,91 @@ namespace KrishnaFinance.Controllers
         {
             return View();
         }
+        public ActionResult PrintNOC(int ApplicantID = 1)
+        {
+            try
+            {
 
 
+                FinanceDbContext _db = new FinanceDbContext();
+
+                var result = _db.PrintNOC.SqlQuery(@"exec UspGetPrintNOC @ApplicantID",
+                new SqlParameter("@ApplicantID", ApplicantID)
+                 ).ToList<PrintNOC>();
+                var data = result.FirstOrDefault();
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("PrintNOC", data)
+                        : View("PrintNOC", data);
+            }
+            catch (Exception ex)
+            {
+                var mgs = ex.Message;
+                return View();
+
+            }
+            finally
+            {
+
+            }
+        }
+        public ActionResult Settlement(int ApplicantID = 0)
+        {
+            try
+            {              
+
+                FinanceDbContext _db = new FinanceDbContext();
+              
+                var result = _db.FetchSettlement.SqlQuery(@"exec GetSettlementDetails @ApplicantID",
+                new SqlParameter("@ApplicantID", ApplicantID)
+                 ).ToList<FetchSettlement>();
+                var data = result.FirstOrDefault();
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("Settlement", data)
+                        : View("Settlement", data);
+            }
+            catch (Exception ex)
+            {
+                var mgs = ex.Message;
+                return View();
+
+            }
+            finally
+            {
+
+            }
+        }
+       
+        [HttpPost]
+        public ActionResult InsertSettlement(InsertSettlement IS)
+        {
+            try
+            {
+                FinanceDbContext _db = new FinanceDbContext();
+                var result = _db.Database.ExecuteSqlCommand(@"exec UspInsertSettlement 
+@SettlementID,
+@ApplicantID,
+@ServiceCharges,
+@TotalAmount,
+@PaymentMethod,
+@ChequeNumber,
+@BankTransactionID",
+new SqlParameter("@SettlementID", IS.SettlementID),
+new SqlParameter("@ApplicantID", IS.ApplicantID),
+new SqlParameter("@ServiceCharges", IS.ServiceCharges),
+new SqlParameter("@TotalAmount", IS.TotalAmount),
+new SqlParameter("@PaymentMethod", IS.PaymentMethod),
+new SqlParameter("@ChequeNumber", IS.ChequeNumber),
+new SqlParameter("@BankTransactionID", IS.BankTransactionID));
+
+                return Json("  Settlement Sucessfullly");
+
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format("<b>Message:</b> {0}<br /><br />", ex.Message);
+                return Json(message);
+            }
+        }
         public ActionResult Settings()
         {
             return View();
@@ -47,16 +130,18 @@ namespace KrishnaFinance.Controllers
       
         //EMI Update
         [HttpPost]
-        public ActionResult EMIUpdate(int TransectionID, string BankTransactionID,DateTime EMIPaidDate,int status)
+        public ActionResult EMIUpdate(int TransectionID, string BankTransactionID,DateTime EMIPaidDate,int status ,decimal AdditionalCharges,int ApplicantID=1)
         {
             try
             {
                 FinanceDbContext _db = new FinanceDbContext();
-                var result = _db.Database.ExecuteSqlCommand(@"exec UspEMIUpdate @TransectionID,@BankTransactionID, @EMIPaidDate, @status",
+                var result = _db.Database.ExecuteSqlCommand(@"exec UspEMIUpdate @TransectionID,@BankTransactionID, @EMIPaidDate, @status ,@AdditionalCharges,@ApplicantID",
                        new SqlParameter("@TransectionID", TransectionID),
                          new SqlParameter("@BankTransactionID", BankTransactionID),
                          new SqlParameter("@EMIPaidDate", EMIPaidDate),
-                         new SqlParameter("@status", status));
+                         new SqlParameter("@status", status),
+                          new SqlParameter("@AdditionalCharges", AdditionalCharges),
+                           new SqlParameter("@ApplicantID", ApplicantID));
                        return Json("EMI Paid Sucessfullly");
 
             }

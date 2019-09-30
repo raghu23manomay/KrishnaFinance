@@ -18,16 +18,18 @@
             <thead>
                 <tr>
 
-                  
+
                     <th>EMI Date</th>
                     <th>Name</th>
                     <th>Loan Amount </th>
-                    <th>Mobile</th>
-                    <th>Duration</th>
-                    <th>InterestRate</th>
-                    <th>Principal Amount</th>
+                    @*<th>Mobile</th>*@
+                    @*<th>Duration</th>*@
+                    @*<th>InterestRate</th>
+        <th>Principal Amount</th>*@
                     <th>Total Amount</th>
                     <th>Status</th>
+                    
+                    <th>Action</th>
 
                 </tr>
             </thead>
@@ -41,27 +43,33 @@
                     <td>
 
 
-                        @if (item.Status == "Not Paid" || item.Status == "dues")
-                        {
-                        <a href="@Url.Action("Collectiondata", "Master",new {ApplicantID = @item.ApplicantID,TransectionID=@item.TransectionID})">@item.ApplicantFullName</a>
+                      
+                      @item.ApplicantFullName
 
-                            @*<a href="../Master/Collectiondata?TransactionID=@item.TransectionID">@item.ApplicantFullName</a>*@
-                        }
-                        else
-                        {
-                            @item.ApplicantFullName
-
-                        }
+                            
+                       
 
                     </td>
                  
                     <td>@item.LoanAmount</td>
-                    <td>@item.MobileNo</td>
-                    <td>@item.Duration</td>
-                    <td>@item.InterestRate</td>
-                    <td>@item.PrincipalAmount</td>
+                    @*<td>@item.MobileNo</td>*@
+                    @*<td>@item.Duration</td>*@
+                    @*<td>@item.InterestRate</td>
+                    <td>@item.PrincipalAmount</td>*@
                     <td>@item.TotalAmount</td>
                     <td>@item.Status</td>
+
+                    <td>
+                        @if (item.Status == "Not Paid" || item.Status == "dues")
+                        {
+                            <a href="@Url.Action("Collectiondata", "Master",new {ApplicantID = @item.ApplicantID,TransectionID=@item.TransectionID})"> Pay</a>
+                        }
+                        else
+                        {
+                           
+
+                        }
+                    </td>
                     <td>
 
 

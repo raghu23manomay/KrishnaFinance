@@ -1,0 +1,114 @@
+﻿
+@model KrishnaFinance.Models.PrintNOC
+
+<div class="container-fluid">
+    <div class="row">
+
+        <center> <h2>TRUSHANA FINANCE</h2></center>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            Address:&nbsp;@Model.CompanyAddress<br />
+            License No:&nbsp;12345<br />
+            Phone / Mobile:&nbsp;@Model.CompanyMobileNo<br />
+        </div>
+    </div>
+    <b>-------------------------------------------------------------------------------------------------------------------------------------------------------</b>
+    <div class="row">
+        <div class="col-sm-6">
+            Ref:
+        </div>
+        <div class="col-sm-6">
+            Date: &nbsp;@DateTime.Now
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <b>NO DUES CERTIFICAT</b>
+        </div>
+
+
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            To,<br />
+            Mr/ Mrs.&nbsp;@Model.ApplicantFullName<br />
+            Address:&nbsp;@Model.PermanentAddress<br />
+
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            ----------------<br />
+            Sir/ Madam,
+
+
+        </div>
+
+    </div><br />
+    <br />
+    <div class="row">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-6">
+            <b>Sub:    Closure of loan account No.465456464687                 with us</b>
+
+
+        </div><br />
+        <br />
+
+    </div>
+    <div class="row">
+
+        <div class="col-md-8">
+            <p>
+                This is to certify that you had availed a loan of Rs.&nbsp;@Model.LoanRequest ( Rupees). Since you have repaid the same along with the interest,
+                the same stands now closed. The certificate is issued as per your request and requirement.
+            </p>
+
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            Yours Faithfully,
+        </div>
+        <br />
+        <br />
+
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            ( Mr/ Mrs:@Model.ApplicantFullName)
+        </div>
+        <br />
+        <br />
+
+    </div>
+</div>
+<div class="row">
+    <button type="button" class="btn btn-primary btn-md Save pull-right" id="Print" onclick="myFunction()">Print  <i class="fa fa-print " aria-hidden="true"></i></button>
+</div>
+<script>
+    function myFunction() {
+        window.print();
+
+        window.close(function () {
+            $('.print').css('display', 'block');
+        })
+    }
+
+
+
+</script>
+

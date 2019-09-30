@@ -1,0 +1,193 @@
+﻿
+
+@model KrishnaFinance.Models.FetchSettlement
+
+
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<style>
+    .Rightside {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: black;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-7">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Settlement </h5>
+
+            </div>
+            <div class="ibox-content">
+                <input type="text" placeholder="ApplicantID" class="form-control hidden" id="ApplicantID" value=" @Model.ApplicantID">
+              
+
+                <form class="form-horizontal">
+                    <input type="text" class="hidden" value="" id="TransectionID" />
+                    <div class="form-group">
+                        <label class="col-lg-4 ">Name :</label>
+                        <div class="col-lg-6">
+                            <b> @Model.FullName</b>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 "> Loan Amount :</label>
+                        <div class="col-lg-6">
+                            @Model.Amount
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 "> Paid EMI  :</label>
+                        <div class="col-lg-6">
+                            @Model.PaidEMICount
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 "> Paid EMI Amount:</label>
+                        <div class="col-lg-6">
+                            @Model.PaidAmount
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 "> Remaining  EMI:</label>
+                        <div class="col-lg-6">
+                            @Model.RemaningEMICount
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 "> Remaining  EMI Amount:</label>
+                        <div class="col-lg-6">
+                            @Model.RemaningAmount
+                            <input type="text" placeholder="RemaningAmount" class="form-control hidden" id="RemaningAmount" value=" @Model.RemaningAmount">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 "> Service Charges:</label>
+                        <div class="col-lg-6">
+                            <input type="text" placeholder="Service Charges" class="form-control" id="ServiceCharges" value="">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-4 "> Total </label>
+                        <div class="col-lg-6"><input type="text" placeholder="Total" class="form-control" id="Total" value=" @Model.RemaningAmount" disabled></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 "> Select Payment method </label>
+                        <div class="col-lg-2">
+                            <input type="radio" id="Cash" name="Cash" value="" checked> Cash
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="radio" id="cheque" name="method" value="cheque"> cheque
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="radio" id="Online" name="method" value="Online"> Online
+                        </div>
+
+                    </div>
+                    @*<div class="form-group" id="CashBox">
+                        <label class="col-lg-4 "> Total Amount</label>
+                        <div class="col-lg-6"><input type="text" placeholder="TotalAmount" class="form-control" id="TotalAmount" value=""></div>
+                    </div>*@
+                    <div class="form-group" id="chequeBox">
+                        <label class="col-lg-4 "> Cheque Number</label>
+                        <div class="col-lg-6"><input type="text" placeholder="Cheque Number" class="form-control" id="ChequeNumber" value="0"></div>
+                    </div>
+                    <div class="form-group" id="TransactionBox">
+                        <label class="col-lg-4 "> Transaction ID</label>
+                        <div class="col-lg-6"><input type="text" placeholder="Transaction ID" class="form-control" id="BankTransactionID" value="0"></div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-3" id="BtnNOC">
+                            <a class="btn btn-primary" href="/Master/PrintNOC?ApplicantID=@Model.ApplicantID"><i class="fa fa-print " aria-hidden="true"></i> Print N.O.C  </a>
+                        </div>
+                        <div class="col-md-8 pull-right">
+                            <div class="pull-right">
+                                <a class="btn btn-primary" href="/Master/CollectionList">Cancel</a>
+                                <button class="btn btn-primary" id="btnsave" type="button">Save </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#TransactionBox').hide();
+        $('#chequeBox').hide();
+        $('#CashBox').hide();
+        //$('#BtnNOC').hide();
+
+      
+           
+     
+
+        $("input[id$='Cash']").click(function () {
+          
+            $("#CashBox").show();
+           
+           
+        });
+        $("input[id$='cheque']").click(function () {
+
+            $("#chequeBox").show();
+           
+        });
+        $("input[id$='Online']").click(function () {
+
+            $("#TransactionBox").show();
+
+        });
+
+        $('#ServiceCharges').on('keyup', function () {
+            var remaningAmt = $('#RemaningAmount').val();
+            var ServiceAmt = $('#ServiceCharges').val();
+            var Total = (remaningAmt * 1) + (ServiceAmt * 1);
+            $('#Total').val(Total);
+
+        });
+
+        $('#btnsave').on('click', function () {
+           
+           
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Master/InsertSettlement",
+                data: {
+                   
+                    SettlementID: $("#SettlementID").val(),
+                    ApplicantID: $("#ApplicantID").val(),
+                    ServiceCharges: $("#ServiceCharges   ").val(),
+                    TotalAmount: $("#Total").val(),
+                    PaymentMethod: $("input[name='method']:checked").val(),
+                    ChequeNumber: $("#ChequeNumber").val(),
+                    BankTransactionID: $("#BankTransactionID").val()
+                },
+                success: function (result) {
+                    alert(result);
+                  
+                },
+                error: function (errorData) {
+                }
+            });
+
+        });
+    });
+
+</script>
+

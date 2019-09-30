@@ -15,40 +15,72 @@
     <div class="col-lg-7">
         <div class="ibox">
             <div class="ibox-title">
-                <h5>Collection </h5>
-               
+                <h5> EMI Payment  </h5>
+                <div class="pull-right">
+                  
+                </div>
             </div>
             <div class="ibox-content">
 
                 <form class="form-horizontal">
                     <input type="text" class="hidden" value="@Model.TransectionID" id="TransectionID" />
+                    <input type="text" class="hidden" value="@Model.ApplicantID" id="ApplicantID" />
                     <div class="form-group">
-                        <label class="col-lg-3 "> Status</label>
+                        <label class="col-lg-3 "> Payment Status</label>
                         <div class="col-lg-9">
                             @Html.DropDownList("status", new SelectList((System.Collections.IEnumerable)ViewData["EMIStatus"], "Value", "Text"), "Select Status", new { @class = "form-control ", @id = "status", Title = "status" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 ">EMI Amount</label>
-                        <div class="col-lg-9"><input type="text" placeholder="EMI Amount" class="form-control" id="TotalAmount" value="@Model.TotalEMI"></div>
+                        <div class="col-lg-9"><input type="text" placeholder="EMI Amount" class="form-control" id="TotalAmount" value="@Model.TotalEMI" disabled></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 ">Additional Charges</label>
+                        <div class="col-lg-9"><input type="text" placeholder="Additional Charges" class="form-control" id="AdditionalCharges"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 ">Total</label>
+                        <div class="col-lg-9"><input type="text" placeholder="Total" class="form-control" id="Total" value="" disabled></div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 "> EMI Date</label>
-                        <div class="col-lg-9"><input type="text" placeholder="EMI Date" class="form-control" id="EMIDate" value="@ViewBag.EMIDate"></div>
+                        <div class="col-lg-9"><input type="text" placeholder="EMI Date" class="form-control" id="EMIDate" value="@ViewBag.EMIDate" disabled></div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 "> Transaction ID</label>
-                        <div class="col-lg-9"><input type="text" placeholder="Transaction ID" class="form-control" id="BankTransactionID" value=""></div>
-                    </div>
+
                     <div class="form-group">
                         <label class="col-lg-3 "> EMI Paid Date</label>
-                        <div class="col-lg-9"><input type="date" placeholder="EMI Paid Date" class="form-control" id="EMIPaidDate" value=""></div>
+                        <div class="col-lg-9"><input type="text" placeholder="EMI Paid Date" class="form-control" id="EMIPaidDate" value="@DateTime.Now" disabled></div>
                     </div>
-                 
-                    <div class="row form-group">
-                        <div class="col-md-3" id="PrintDemandPromissory">
-                            @*<a class="btn btn-primary" href="/Master/PrintDemandPromissory?ApplicantID=@Model.ApplicantID"><i class="fa fa-print " aria-hidden="true"></i> Promissory Note  </a>*@
+                    <div class="form-group">
+                        <label class="col-lg-4 "> Select Payment method </label>
+                        @*<div class="col-lg-2">
+                            <input type="radio" id="Cash" name="Cash" value=""> Cash
+                        </div>*@
+                        <div class="col-lg-2">
+                            <input type="radio" id="cheque" name="cheque" value=""> cheque
                         </div>
+                        <div class="col-lg-2">
+                            <input type="radio" id="Online" name="Online" value=""> Online
+                        </div>
+
+                    </div>
+                    <div class="form-group" id="CashBox">
+                        <label class="col-lg-4 "> Total Amount</label>
+                        <div class="col-lg-6"><input type="text" placeholder="TotalAmount" class="form-control" id="TotalAmount" value=""></div>
+                    </div>
+                    <div class="form-group" id="chequeBox">
+                        <label class="col-lg-4 "> Cheque Number</label>
+                        <div class="col-lg-6"><input type="text" placeholder="Cheque Number" class="form-control" id="ChequeNumber" value=""></div>
+                    </div>
+                    <div class="form-group" id="TransactionBox">
+                        <label class="col-lg-4 "> Transaction ID</label>
+                        <div class="col-lg-6"><input type="text" placeholder="Transaction ID" class="form-control" id="BankTransactionID" value=""></div>
+                    </div>
+
+
+                    <div class="row form-group">
+
                         <div class="col-md-8 pull-right">
                             <div class="pull-right">
                                 <a class="btn btn-primary" href="/Master/CollectionList">Cancel</a>
@@ -64,7 +96,12 @@
     <div class="col-lg-5">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5> Collection Details</h5>
+                <h5> Applicant Details</h5>
+                <div class="pull-right" >
+                    <div  style="margin-top:-6px" >
+                        <a class="btn btn-primary" href="/Master/Settlement?ApplicantID=@Model.ApplicantID"> Full Settlement  </a>
+                    </div>
+                </div>
             </div>
             <div class="ibox-content">
                 <div class="row">
@@ -126,7 +163,34 @@
 <script>
     $(document).ready(function () {
 
+        $('#AdditionalCharges').on('keyup', function () {
+            var remaningAmt = $('#TotalAmount').val();
+            var ServiceAmt = $('#AdditionalCharges').val();
+            var Total = (remaningAmt * 1) + (ServiceAmt * 1);
+            $('#Total').val(Total);
 
+        });
+
+        $('#TransactionBox').hide();
+        $('#chequeBox').hide();
+        $('#CashBox').hide();
+
+        $("input[name$='Cash']").click(function () {
+
+            $("#CashBox").show();
+
+
+        });
+        $("input[name$='cheque']").click(function () {
+
+            $("#chequeBox").show();
+
+        });
+        $("input[name$='Online']").click(function () {
+
+            $("#TransactionBox").show();
+
+        });
 
         $('#btnsave').on('click', function () {
            
@@ -138,7 +202,9 @@
                     TransectionID: $("#TransectionID").val(),
                     BankTransactionID: $("#BankTransactionID").val(),
                     EMIPaidDate: $("#EMIPaidDate").val(),
-                    status: $("#status").val()
+                    status: $("#status").val(),
+                    AdditionalCharges: $("#AdditionalCharges").val(),
+                    ApplicantID: $("#ApplicantID").val()
                     
                 },
                 success: function (result) {
