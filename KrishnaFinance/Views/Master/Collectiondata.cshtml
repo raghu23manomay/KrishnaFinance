@@ -63,10 +63,10 @@
                 <input type="radio" id="Cash" name="Cash" value=""> Cash
             </div>*@
                         <div class="col-lg-2">
-                            <input type="radio" id="cheque" name="cheque" value=""> cheque
+                            <input type="radio" class="pay" id="paymenttype" name="paymenttype" value="cheque"> cheque
                         </div>
                         <div class="col-lg-2">
-                            <input type="radio" id="Online" name="Online" value=""> Online
+                            <input type="radio" class="pay" id="paymenttype" name="paymenttype" value="Online"> Online
                         </div>
 
                     </div>
@@ -211,6 +211,21 @@
         $('#TransactionBox').hide();
         $('#chequeBox').hide();
         $('#CashBox').hide();
+
+        $('.pay').on('click', function () {
+            var val = $(this).attr("value");
+            if (val == 'cheque')
+            {
+                $("#chequeBox").show();
+                $("#TransactionBox").hide();
+
+            }
+            else if (val == 'Online')
+            {
+                $("#TransactionBox").show();
+                $("#chequeBox").hide();
+            }
+        });
 
         $("input[name$='Cash']").click(function () {
 
