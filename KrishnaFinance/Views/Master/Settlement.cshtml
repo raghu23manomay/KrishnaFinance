@@ -69,25 +69,25 @@
                     <div class="form-group">
                         <label class="col-lg-4 "> Service Charges:</label>
                         <div class="col-lg-6">
-                            <input type="text" placeholder="Service Charges" class="form-control" id="ServiceCharges" value="">
+                            <input type="text" placeholder="Service Charges" class="form-control Charges" id="ServiceCharges" value="@Model.ServiceCharges" disabled>
                         </div>
                     </div>
 
 
                     <div class="form-group">
                         <label class="col-lg-4 "> Total </label>
-                        <div class="col-lg-6"><input type="text" placeholder="Total" class="form-control" id="Total" value=" @Model.RemaningAmount" disabled></div>
+                        <div class="col-lg-6"><input type="text" placeholder="Total" class="form-control " id="Total" value=" @Model.RemaningAmount" disabled></div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-4 "> Select Payment method </label>
-                        <div class="col-lg-2">
+                        @*<div class="col-lg-2">
                             <input type="radio" id="Cash" name="Cash" value="" checked> Cash
+                        </div>*@
+                        <div class="col-lg-2">
+                            <input type="radio" id="cheque" class="pay" name="method" value="cheque"> cheque
                         </div>
                         <div class="col-lg-2">
-                            <input type="radio" id="cheque" name="method" value="cheque"> cheque
-                        </div>
-                        <div class="col-lg-2">
-                            <input type="radio" id="Online" name="method" value="Online"> Online
+                            <input type="radio" id="Online" class="pay" name="method" value="Online"> Online
                         </div>
 
                     </div>
@@ -152,10 +152,27 @@
             $("#TransactionBox").show();
 
         });
+        $('.pay').on('click', function () {
+            var val = $(this).attr("value");
+            if (val == 'cheque') {
+                $("#chequeBox").show();
+                $("#TransactionBox").hide();
 
-        $('#ServiceCharges').on('keyup', function () {
+            }
+            else if (val == 'Online') {
+                $("#TransactionBox").show();
+                $("#chequeBox").hide();
+            }
+        });
+         var remaningAmt = $('#RemaningAmount').val();
+          
+            var ServiceAmt = @Model.ServiceCharges;
+            var Total = (remaningAmt * 1) + (ServiceAmt * 1);
+            $('#Total').val(Total);
+        $('.Charges').on('keyup', function () {
             var remaningAmt = $('#RemaningAmount').val();
-            var ServiceAmt = $('#ServiceCharges').val();
+          
+            var ServiceAmt = @Model.ServiceCharges;
             var Total = (remaningAmt * 1) + (ServiceAmt * 1);
             $('#Total').val(Total);
 

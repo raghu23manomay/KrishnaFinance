@@ -215,17 +215,18 @@ new SqlParameter("@BankTransactionID", IS.BankTransactionID));
       
         //EMI Update
         [HttpPost]
-        public ActionResult EMIUpdate(int TransectionID, string BankTransactionID,DateTime EMIPaidDate,int status ,decimal AdditionalCharges,int ApplicantID=1)
+        public ActionResult EMIUpdate(int TransectionID, string BankTransactionID,DateTime EMIPaidDate,int status ,decimal AdditionalCharges, decimal EMIDuePenalty, int ApplicantID=1)
         {
             try
             {
                 FinanceDbContext _db = new FinanceDbContext();
-                var result = _db.Database.ExecuteSqlCommand(@"exec UspEMIUpdate @TransectionID,@BankTransactionID, @EMIPaidDate, @status ,@AdditionalCharges,@ApplicantID",
+                var result = _db.Database.ExecuteSqlCommand(@"exec UspEMIUpdate @TransectionID,@BankTransactionID, @EMIPaidDate, @status ,@AdditionalCharges,@EMIDuePenalty,@ApplicantID",
                        new SqlParameter("@TransectionID", TransectionID),
                          new SqlParameter("@BankTransactionID", BankTransactionID),
                          new SqlParameter("@EMIPaidDate", EMIPaidDate),
                          new SqlParameter("@status", status),
                           new SqlParameter("@AdditionalCharges", AdditionalCharges),
+                            new SqlParameter("@EMIDuePenalty", EMIDuePenalty),
                            new SqlParameter("@ApplicantID", ApplicantID));
                        return Json("EMI Paid Sucessfullly");
 

@@ -37,11 +37,11 @@
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 ">Additional Charges</label>
-                        <div class="col-lg-9"><input type="text" placeholder="Additional Charges" class="form-control Charges" id="AdditionalCharges" value="0"></div>
+                        <div class="col-lg-9"><input type="text" placeholder="Additional Charges" class="form-control Charges" id="AdditionalCharges" value="0" disabled></div>
                     </div>
                     <div class="form-group" id="Bounce">
                         <label class="col-lg-3 ">EMI Bounce Charges</label>
-                        <div class="col-lg-9"><input type="text" placeholder="EMI Bounce Charges" class="form-control Charges" id="EMIBounceCharges" value=""></div>
+                        <div class="col-lg-9"><input type="text" placeholder="EMI Bounce Charges" class="form-control Charges" id="EMIBounceCharges" value="0" disabled></div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 ">Total</label>
@@ -254,7 +254,8 @@
                     TransectionID: $("#TransectionID").val(),
                     BankTransactionID: $("#BankTransactionID").val(),
                     EMIPaidDate: $("#EMIPaidDate").val(),
-                    status: $("#status").val(),
+                    status: $("#status").val(), 
+                    EMIDuePenalty: $("#EMIBounceCharges").val(),
                     AdditionalCharges: $("#AdditionalCharges").val(),
                     ApplicantID: $("#ApplicantID").val()
 

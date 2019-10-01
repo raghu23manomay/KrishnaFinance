@@ -11,115 +11,123 @@
     {
         if (item.Status == "TotalApplication")
         {
-            <div class="col-lg-2"  >
-                <div class="ibox float-e-margins" >
-                    <div class="ibox-title" >
-
-                        <h5>Applications</h5>
-                    </div>
-                    <div class="ibox-content" style="background-color:darkcyan; font-family:Arial;color:white" >
-                        <h1 class="no-margins" >@item.count</h1>
-                        <small>Total Applications</small>
-                    </div>
-                </div>
-            </div>
-        }
-
-
-        if (item.Status == "TotalApprovedApplication")
-        {
-            <div class="col-lg-2">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Approved</h5>
-                    </div>
-                    <div class="ibox-content" style="background-color:darkkhaki; font-family:Arial;color:white">
-                        <h1 class="no-margins">@item.count</h1>
-                        <small>Total Approved </small>
-                    </div>
-                </div>
-
-            </div>
-        }
-
-        @*if (item.Status == "TotalRejectedApplication")
-            {
+            <a href="../Master/ApplicationList">
                 <div class="col-lg-2">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Rejected</h5>
+
+                            <h5>Applications</h5>
                         </div>
-                        <div class="ibox-content">
+                        <div class="ibox-content" style="background-color:darkcyan; font-family:Arial;color:white">
                             <h1 class="no-margins">@item.count</h1>
-
-                            <small>Total Rejected </small>
+                            <small>Total Applications</small>
                         </div>
                     </div>
                 </div>
-            }*@
+                </a>
+                }
 
 
-        if (item.Status == "TotalLoanAmount")
-        {
-            <div class="col-lg-2">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Loan</h5>
+                if (item.Status == "TotalApprovedApplication")
+                {
+                <div class="col-lg-2">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Approved</h5>
+                        </div>
+                        <div class="ibox-content" style="background-color:darkkhaki; font-family:Arial;color:white">
+                            <h1 class="no-margins">@item.count</h1>
+                            <small>Total Approved </small>
+                        </div>
                     </div>
-                    <div class="ibox-content" style="background-color:orange; font-family:Arial;color:white">
-                        <h1 class="no-margins">@item.count</h1>
-                        <small>Total Loan</small>
+
+                </div>
+                }
+
+                @*if (item.Status == "TotalRejectedApplication")
+                    {
+                        <div class="col-lg-2">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>Rejected</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins">@item.count</h1>
+
+                                    <small>Total Rejected </small>
+                                </div>
+                            </div>
+                        </div>
+                    }*@
+
+
+                if (item.Status == "TotalLoanAmount")
+                {
+                <div class="col-lg-2">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Loan</h5>
+                        </div>
+                        <div class="ibox-content" style="background-color:orange; font-family:Arial;color:white">
+                            <h1 class="no-margins">@item.count</h1>
+                            <small>Total Loan</small>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
+                }
 
-        if (item.Status == "Paid")
-        {
-            <div class="col-lg-2">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>EMI Paid</h5>
+                if (item.Status == "Paid")
+                {
+                <a href="@Url.Action("EMIClearance", "Master",new {Paid = 1})">
+                    <div class="col-lg-2">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>EMI Paid</h5>
+                            </div>
+                            <div class="ibox-content" style="background-color:green; font-family:Arial;color:white">
+                                <h1 class="no-margins">@item.count</h1>
+                                <small>Total Paid</small>
+                            </div>
+                        </div>
                     </div>
-                    <div class="ibox-content" style="background-color:green; font-family:Arial;color:white">
-                        <h1 class="no-margins">@item.count</h1>
-                        <small>Total Paid</small>
-                    </div>
-                </div>
-            </div>
-        }
+                </a>
+                }
 
-        if (item.Status == "Not Paid")
-        {
-            <div class="col-lg-2">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>EMI Not Paid</h5>
+                if (item.Status == "Not Paid")
+                {
+                <a href="@Url.Action("NotPaidReports", "Master",new {Paid = 0})">
+                    <div class="col-lg-2">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>EMI Not Paid</h5>
+                            </div>
+                            <div class="ibox-content" style="background-color:tomato; font-family:Arial;color:white">
+                                <h1 class="no-margins">@item.count</h1>
+                                <small>Total EMI Not Paid</small>
+                            </div>
+                        </div>
                     </div>
-                    <div class="ibox-content" style="background-color:tomato; font-family:Arial;color:white">
-                        <h1 class="no-margins">@item.count</h1>
-                        <small>Total EMI Not Paid</small>
-                    </div>
-                </div>
-            </div>
-        }
+                </a>
+                }
 
-        if (item.Status == "dues")
-        {
-            <div class="col-lg-2">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>EMI Dues</h5>
+                if (item.Status == "dues")
+                {
+                <a href="@Url.Action("EMIDues", "Master",new {Paid = 2})">
+                    <div class="col-lg-2">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>EMI Dues</h5>
+                            </div>
+                            <div class="ibox-content" style="background-color:cornflowerblue; font-family:Arial;color:white">
+                                <h1 class="no-margins">@item.count</h1>
+                                <small>Total Dues</small>
+                            </div>
+                        </div>
                     </div>
-                    <div class="ibox-content" style="background-color:cornflowerblue; font-family:Arial;color:white">
-                        <h1 class="no-margins">@item.count</h1>
-                        <small>Total Dues</small>
-                    </div>
-                </div>
-            </div>
-        }
-    }
-</div>
+                </a>
+                }
+                }
+        </div>
 
         @*<div class="row">
                 <div class="col-lg-3">

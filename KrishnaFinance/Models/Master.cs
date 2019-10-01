@@ -320,6 +320,7 @@ namespace KrishnaFinance.Models
         public int RemaningEMICount { get; set; }
         public decimal PaidAmount { get; set; }
         public decimal RemaningAmount { get; set; }
+        public decimal ServiceCharges { get; set; }
 
     }
     public class InsertSettlement
