@@ -1,0 +1,62 @@
+﻿@model IEnumerable<KrishnaFinance.Models.LoanStatusReport>
+<div class="row" style="margin-bottom:20px">
+  
+</div>
+<div class="ibox">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+
+                            <th>Sr.No</th>
+                            <th>Clinet Name</th>
+                            <th>Total Loan Paid </th>
+                            <th>Received </th>
+                            <th>Out Standing</th>
+                            <th>Total Principal Received</th>
+                            <th>Total Intrest Received</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int i = 1;
+                        }
+                        @foreach (var item in Model)
+                        {
+
+                        <tr>
+                            <td>@i</td>
+                            <td>@item.ApplicantFullName</td>
+                            <td>@item.TotalLoanPaid</td>
+                            <td>@item.Received</td>
+                            <td>@item.OutStanding</td>
+                            <td>@item.TotalPrincipalReceived</td>
+                            <td>@item.TotalIntrestReceived</td>
+
+
+                        </tr>
+                            i = i + 1;
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function myFunction() {
+        window.print();
+        window.close(function () {
+            $('.print').css('display', 'block');
+        })
+    }
+
+
+
+</script>
+

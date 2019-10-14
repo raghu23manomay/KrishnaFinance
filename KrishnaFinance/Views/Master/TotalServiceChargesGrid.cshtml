@@ -1,0 +1,67 @@
+﻿
+@model IEnumerable<KrishnaFinance.Models.TotalServiceCharges>
+<div class="row" style="margin-bottom:20px">
+  
+</div>
+<div class="ibox">
+    <div class="container-fluid">
+        
+
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+
+                            <th>Sr.No</th>
+                            <th>Client Name</th>
+                            <th>GST NO</th>
+                            <th>Basic Amount</th>
+                            <th>CGST </th>
+                            <th>SGST </th>
+                            <th>Total </th>
+
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int i = 1;
+                        }
+                        @foreach (var item in Model)
+                        {
+
+                        <tr>
+                            <td>@i</td>
+                            <td>@item.ApplicantFullName</td>
+                            <td>Not Available</td>
+                            <td>@item.BasicAmount</td>
+                            <td>@item.CGST </td>
+                            <td>@item.SGST </td>
+                            <td>@item.Total</td>
+
+                        </tr>
+                            i = i + 1;
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function myFunction() {
+        window.print();
+        window.close(function () {
+            $('.print').css('display', 'block');
+        })
+    }
+
+
+
+</script>
+

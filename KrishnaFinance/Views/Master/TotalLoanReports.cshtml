@@ -1,0 +1,71 @@
+﻿
+@model IEnumerable<KrishnaFinance.Models.TotalLoanReports>
+<div class="row" style="margin-bottom:20px">
+    <button type="button" class="btn btn-primary btn-md Save pull-right" id="Print" onclick="myFunction()">Print  <i class="fa fa-print " aria-hidden="true"></i></button>
+</div>
+<div class="ibox">
+    <div class="container-fluid">
+        <div class="row" style="margin-bottom:20px">
+            <center> <h2>Total Loan Reports</h2></center>
+        </div>
+
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+
+                            <th>Sr.No</th>
+                            <th>Client Name</th>
+                            <th>Date Of Saction/ Approval</th>
+                            <th>Total Amount Sactioned</th>
+                            <th> Disburesd Amount</th>
+                           
+                         
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int i = 1;
+                        }
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>@i</td>
+                                <td>@item.ApplicantFullName</td>
+                                <td>@item.DateOfApproval</td>
+                                <td>@item.TotalAmountSanctioned</td>
+                                <td>@item.DisburesdAmount</td>
+                              
+
+                            </tr>
+                            i = i + 1;
+                        }
+
+                    </tbody>
+                   
+                </table>
+               
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+   
+
+
+
+    function myFunction() {
+        window.print();
+        window.close(function () {
+            $('.print').css('display', 'block');
+        })
+    }
+
+
+
+</script>

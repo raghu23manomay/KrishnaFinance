@@ -1237,6 +1237,11 @@
     <Content Include="Views\Master\PaidReports.cshtml" />
     <Content Include="Views\Master\Settlement.cshtml" />
     <Content Include="Views\Master\PrintNOC.cshtml" />
+    <Content Include="Views\Master\TotalLoanReports.cshtml" />
+    <Content Include="Views\Master\TotalServiceCharges.cshtml" />
+    <Content Include="Views\Master\TotalServiceChargesGrid.cshtml" />
+    <Content Include="Views\Master\LoanStatusReport.cshtml" />
+    <Content Include="Views\Master\LoanStatusList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

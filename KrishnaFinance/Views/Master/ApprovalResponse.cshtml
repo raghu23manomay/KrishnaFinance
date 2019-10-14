@@ -11,17 +11,17 @@
 </style>
 <div class="row">
     <div class="col-lg-7">
-        <div class="ibox">
-            <div class="ibox-title">
-                <h5>Loan Approval</h5>
+        <form class="form-horizontal">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Loan Approval</h5>
+                </div>
+                <div class="ibox-content">
 
-            </div>
-            <div class="ibox-content">
 
-                <form class="form-horizontal">
                     <div class="form-group">
                         <label class="col-lg-3">Approval Status</label>
-                        <div class="col-md-9">
+                        <div class="col-md-9 float-e-margins">
                             @Html.HiddenFor(a => a.ApplicantID, new { @id = "ApplicantID" })
                             @Html.DropDownList("status", new SelectList((System.Collections.IEnumerable)ViewData["ApprovalStatus"], "Value", "Text", Model.status), "Select Status", new { @class = "form-control col-md-9", @id = "status", Title = "status" })
 
@@ -32,35 +32,35 @@
                         <label class="col-lg-3">Loan Amount</label>
 
                         <div class="col-lg-9">
-                            <input type="text" placeholder="Email" class="form-control" id="Amount" value="@Model.Amount">
+                            <input type="text" placeholder="Loan Amount" class="form-control" id="Amount" value="@Model.Amount" disabled>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-3">Interest Rate</label>
-
-                        <div class="col-lg-9"><input type="text" placeholder="Interest Rate" class="form-control" id="InterestRate" value="@Model.InterestRate"></div>
+                        <label class="col-lg-3 "> Duration <small>(In Month)</small> </label>
+                        @*@Html.DropDownList("DurationLoan", new SelectList((System.Collections.IEnumerable)ViewData["Duration"], "Value", "Text", Model.Duration), "Select Duration", new { @class = "form-control col-md-9", @id = "Duration", Title = "Duration" })*@
+                        <div class="col-lg-9"><input type="text" placeholder="Duration" class="form-control" id="Duration" value="@Model.Duration" disabled></div>
+                        @*<div class="text-danger" id="EDuration"></div>*@
                     </div>
-
                     <div class="form-group">
-                        <label class="col-lg-3">Principal Amount</label>
-
+                        <label class="col-lg-3">Interest Rate (%)</label>
+                        <div class="col-lg-9"><input type="text" placeholder="Interest Rate" class="form-control" id="InterestRate" value="@Model.InterestRate " disabled></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3">Processing Fees</label>
                         <div class="col-lg-9">
-                            <input type="text" placeholder="Principal Amount" class="form-control" id="PrincipalAmount" value="@Model.PrincipalAmount">
+                            <input type="text" placeholder="Processing Fees" class="form-control" id="ProcessingFees" value="@Model.ProcessingFees" disabled>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-3">EMI Date</label>
-
+                        <label class="col-lg-3">GST On Processing Fees </label>
                         <div class="col-lg-9">
-                           @if(Model.status == 0)
-                           {
-                               <input type="date" placeholder="EMI Date" class="form-control" id="EMIDate" value="@DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd")" disabled>
-                           }
-                           else
-                           {
-                               <input type="date" placeholder="EMI Date" class="form-control" id="EMIDate" value="@ViewBag.EMI">
-                           }
-                            
+                            <input type="text" placeholder="GST On Loan Amount" class="form-control" id="GSTOnDisbursement" value="@Model.GSTOnDisbursement  " disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3">Sactioned Amount</label>
+                        <div class="col-lg-9">
+                            <input type="text" placeholder="Disburesd Amount" class="form-control" id="DisburesdAmount" value="0.00 " disabled>
                         </div>
                     </div>
                     <div class="form-group">
@@ -70,7 +70,7 @@
                             @if (Model.status == 0)
                             {
                                 <input type="date" placeholder="Disbursement Date" class="form-control" id="DisbursementDate" value="@DateTime.Now.ToString("yyyy-MM-dd")" disabled>
-                                
+
                             }
                             else
                             {
@@ -80,25 +80,53 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-3 "> Duration <small>(In Month)</small> </label>
-                        <div class="col-lg-9">
-                            @Html.DropDownList("DurationLoan", new SelectList((System.Collections.IEnumerable)ViewData["Duration"], "Value", "Text", Model.Duration), "Select Duration", new { @class = "form-control col-md-9", @id = "Duration", Title = "Duration" })
-                            @*<div class="col-lg-9"><input type="text" placeholder="Duration" class="form-control" id="Duration" value="@Model.Duration"></div>*@
-                            <div class="text-danger" id="EDuration"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 ">Total Amount</label>
-
-                        <div class="col-lg-9"><input type="text" placeholder="Total Amount" class="form-control" id="TotalAmount" value="@Model.TotalAmount"></div>
-                    </div>
-                    <div class="form-group">
                         <label class="col-lg-3 "> Approval Remark</label>
 
                         <div class="col-lg-9"><input type="text" placeholder="Remark" class="form-control" id="Remark" value="@Model.Remark"></div>
                     </div>
 
-                    <div class="row form-group">
+                </div>
+            </div>
+            @*EMI Detail*@
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>EMI Detail</h5>
+
+                </div>
+                <div class="ibox-content">
+                    <div class="form-group">
+                        <label class="col-lg-3">Principal Amount</label>
+                        <div class="col-lg-9">
+                            <input type="text" placeholder="Principal Amount" class="form-control" id="PrincipalAmount" value="@Model.PrincipalAmount" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3">Interest Amount</label>
+                        <div class="col-lg-9"><input type="text" placeholder="Interest Amount" class="form-control" id="InterestAmount" value="@Model.InterestAmount" disabled></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 ">Total EMI Amount</label>
+
+                        <div class="col-lg-9"><input type="text" placeholder="Total Amount" class="form-control" id="TotalAmount" value="@Model.TotalAmount" disabled></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3">EMI Start Date</label>
+
+                        <div class="col-lg-9">
+                            @if (Model.status == 0)
+                            {
+                                <input type="date" placeholder="EMI Date" class="form-control" id="EMIDate" value="@DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd")" disabled>
+                            }
+                            else
+                            {
+                                <input type="date" placeholder="EMI Date" class="form-control" id="EMIDate" value="@ViewBag.EMI">
+                            }
+
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
                         <div class="col-md-3" id="PrintDemandPromissory">
                             <a class="btn btn-primary" href="/Master/PrintDemandPromissory?ApplicantID=@Model.ApplicantID"><i class="fa fa-print " aria-hidden="true"></i> Promissory Note  </a>
                         </div>
@@ -110,19 +138,21 @@
                         </div>
                     </div>
 
-                </form>
+                </div>
 
             </div>
-        </div>
-    </div>
 
+        </form>
+                </div>
+           
+       
     <div class="col-lg-5">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5> Applicant Details</h5>
             </div>
             <div class="ibox-content">
-                <div class="row">
+                <div class="form-group">
                     <div class="form-group ">
                         <div class="col-sm-6 Rightside "  >
                             Applicant :
@@ -265,11 +295,27 @@
     </div>
 </div>
 <script>
+
     $(document).ready(function () {
+      
+        var loanAmount = $('#Amount').val();
+        var PF = $('#ProcessingFees').val();
+        var gst =@Model.GSTOnDisbursement;
+        var gstamt = PF * gst / 100;
+        var tch = (PF * 1) + (gstamt * 1);
+        var du =@Model.Duration;
+        var EMIp = (loanAmount * 1) / du;
+        var TotalDusbus = parseFloat((loanAmount * 1) - (tch * 1));
+        $('#DisburesdAmount').val(TotalDusbus);
+        var IM = $('#InterestAmount').val();
+        $('#PrincipalAmount').val(EMIp);
+        var tot = (EMIp * 1) + (IM* 1);
+        $('#TotalAmount').val(tot);
+     
 
-       
-
+      
         $('#btnsave').on('click', function () {
+            debugger;
     //validation
             var error = 0;
 
@@ -283,27 +329,35 @@
                 $('#EDuration').hide();
             }
             $.ajax({
+              
                 type: "POST",
                 cache: false,
                 url: "/Master/ApprovalResponse",
                 data: {
-                    ApplicantID: $("#ApplicantID ").val(),
+                    ApplicantID: $("#ApplicantID").val(),
                     CreatedBy: 1,
                     status: $("#status").val(),
                     Amount: $("#Amount").val(),
-                    InterestRate: $("#InterestRate ").val(),
-                    PrincipalAmount: $("#PrincipalAmount ").val(),
-                    TotalAmount: $("#TotalAmount ").val(),
-                    Remark: $("#Remark ").val(),
+                    InterestRate: $("#InterestRate").val(),
+                    PrincipalAmount: $("#PrincipalAmount").val(),
+                    TotalAmount: $("#TotalAmount").val(),
+                    Remark: $("#Remark").val(),
                     Duration: $("#Duration").val(),
                     EMIDate: $("#EMIDate").val(),
-                    DisbursementDate: $("#DisbursementDate").val()
+                    DisbursementDate: $("#DisbursementDate").val(),
+                    ProcessingFees: $("#ProcessingFees").val(),
+                    GSTOnDisbursement: $("#GSTOnDisbursement").val(),
+                    DisburesdAmount: $("#DisburesdAmount").val(),
+                    InterestAmount: $("#InterestAmount").val()
                 },
                 success: function (result) {
                     alert(result);
            
                 },
+
                 error: function (errorData) {
+                    debugger;
+                    alert(1)
                 }
             });
 

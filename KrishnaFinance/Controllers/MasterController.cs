@@ -59,16 +59,26 @@ namespace KrishnaFinance.Controllers
 @Duration,
 @EMIDuePenalty,
 @EMIDueAmount,
+@ProcessingFees,
 @GSTOnDisbursement,
+@CGST,
+@SGST,
 @ServiceCharges,
-@PreClosingCharges",
+@PreClosingCharges,
+@InterestAmount,
+@InterestRate",
 new SqlParameter("@SettingID", MS.SettingID),
 new SqlParameter("@Duration", MS.Duration),
 new SqlParameter("@EMIDuePenalty", MS.EMIDuePenalty),
 new SqlParameter("@EMIDueAmount", MS.EMIDueAmount),
+new SqlParameter("@ProcessingFees", MS.ProcessingFees),
 new SqlParameter("@GSTOnDisbursement", MS.GSTOnDisbursement),
+new SqlParameter("@CGST", MS.CGST),
+new SqlParameter("@SGST", MS.SGST),
 new SqlParameter("@ServiceCharges", MS.ServiceCharges),
-new SqlParameter("@PreClosingCharges", MS.PreClosingCharges));
+new SqlParameter("@PreClosingCharges", MS.PreClosingCharges),
+new SqlParameter("@InterestAmount", MS.InterestAmount),
+new SqlParameter("@InterestRate", MS.InterestRate));
 
                 return Json("   Setting Changes Sucessfullly");
 
@@ -618,12 +628,12 @@ new SqlParameter("@BankTransactionID", IS.BankTransactionID));
             
         }
         [HttpPost]
-        public ActionResult ApprovalResponse(int ApplicantID, int CreatedBy , int status, decimal Amount ,decimal InterestRate , decimal PrincipalAmount , decimal TotalAmount , string Remark , String Duration, DateTime EMIDate ,DateTime DisbursementDate)
+        public ActionResult ApprovalResponse(int ApplicantID, int CreatedBy , int status, decimal Amount ,decimal InterestRate , decimal PrincipalAmount , decimal TotalAmount , string Remark , String Duration, DateTime EMIDate ,DateTime DisbursementDate,decimal ProcessingFees, decimal GSTOnDisbursement,decimal DisburesdAmount,decimal InterestAmount)
         {
             try
             {
                 FinanceDbContext _db = new FinanceDbContext();
-                var result = _db.Database.ExecuteSqlCommand(@"exec uspLoanApprovalResponse @ApplicantID , @CreatedBy,@status,@Amount,@InterestRate,@PrincipalAmount,@TotalAmount,@Remark,@Duration,@EMIDate,@DisbursementDate",
+                var result = _db.Database.ExecuteSqlCommand(@"exec uspLoanApprovalResponse @ApplicantID , @CreatedBy,@status,@Amount,@InterestRate,@PrincipalAmount,@TotalAmount,@Remark,@Duration,@EMIDate,@DisbursementDate,@ProcessingFees,@GSTOnDisbursement,@DisburesdAmount,@InterestAmount",
                      new SqlParameter("@ApplicantID", ApplicantID),
                      new SqlParameter("@CreatedBy", CreatedBy), 
                      new SqlParameter("@status", status),
@@ -634,7 +644,11 @@ new SqlParameter("@BankTransactionID", IS.BankTransactionID));
                      new SqlParameter("@Remark", Remark) ,
                      new SqlParameter("@Duration", Duration),
                        new SqlParameter("@EMIDate", EMIDate),
-                      new SqlParameter("@DisbursementDate", DisbursementDate));
+                      new SqlParameter("@DisbursementDate", DisbursementDate),
+                       new SqlParameter("@ProcessingFees", ProcessingFees),
+                        new SqlParameter("@GSTOnDisbursement", GSTOnDisbursement),
+                          new SqlParameter("@DisburesdAmount", DisburesdAmount),
+                           new SqlParameter("@InterestAmount", InterestAmount));
 
                 return Json("Application Approved Sucessfullly");
 
@@ -900,6 +914,139 @@ new SqlParameter("@BankTransactionID", IS.BankTransactionID));
             }
 
        
+        }
+        public ActionResult TotalLoanReports(int? Status = 0)
+        {
+            try
+            {
+
+
+                FinanceDbContext _db = new FinanceDbContext();
+
+                IEnumerable<TotalLoanReports> result = _db.TotalLoanReports.SqlQuery(@"exec UspTotalLoanReport  @Status",
+                new SqlParameter("@Status", Status)
+                 ).ToList<TotalLoanReports>();
+                var data = result;
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("TotalLoanReports", data)
+                        : View("TotalLoanReports", data);
+            }
+            catch (Exception ex)
+            {
+                var mgs = ex.Message;
+                return View();
+
+            }
+            finally
+            {
+
+            }
+        }
+        public ActionResult TotalServiceCharges(int? MonthID = 0,int type=4)
+        {
+
+            try
+            {
+
+
+                FinanceDbContext _db = new FinanceDbContext();
+
+                IEnumerable<TotalServiceCharges> result = _db.TotalServiceCharges.SqlQuery(@"exec UspGetTotalServiceCharges  @MonthID,@type",
+                new SqlParameter("@MonthID", MonthID),
+                    new SqlParameter("@type", type)
+                 ).ToList<TotalServiceCharges>();
+                var data = result;
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("TotalServiceCharges", data)
+                        : View("TotalServiceCharges", data);
+            }
+            catch (Exception ex)
+            {
+                var mgs = ex.Message;
+                return View();
+
+            }
+            finally
+            {
+
+            }
+           
+        }
+        public ActionResult TotalServiceChargesGrid(int? MonthID = 0, int type = 4)
+        {
+          
+
+           
+
+
+                FinanceDbContext _db = new FinanceDbContext();
+
+                IEnumerable<TotalServiceCharges> result = _db.TotalServiceCharges.SqlQuery(@"exec UspGetTotalServiceCharges  @MonthID,@type",
+                new SqlParameter("@MonthID", MonthID),
+                    new SqlParameter("@type", type)
+                 ).ToList<TotalServiceCharges>();
+                 var data = result;
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("TotalServiceChargesGrid", data)
+                        : View("TotalServiceChargesGrid", data);
+            
+            
+        }
+        public ActionResult LoanStatusReport(int? MonthID = 0, int type = 4)
+        {
+            try
+            {
+
+
+                FinanceDbContext _db = new FinanceDbContext();
+
+                IEnumerable<LoanStatusReport> result = _db.LoanStatusReport.SqlQuery(@"exec GetLoanStatus  @MonthID,@type",
+                new SqlParameter("@MonthID", MonthID),
+                  new SqlParameter("@type", type)
+                 ).ToList<LoanStatusReport>();
+                var data = result;
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("LoanStatusReport", data)
+                        : View("LoanStatusReport", data);
+            }
+            catch (Exception ex)
+            {
+                var mgs = ex.Message;
+                return View();
+
+            }
+            finally
+            {
+
+            }
+        }
+        public ActionResult LoanStatusList(int? MonthID = 0, int type = 4)
+        {
+            try
+            {
+
+
+                FinanceDbContext _db = new FinanceDbContext();
+
+                IEnumerable<LoanStatusReport> result = _db.LoanStatusReport.SqlQuery(@"exec GetLoanStatus  @MonthID,@type",
+                new SqlParameter("@MonthID", MonthID),
+                  new SqlParameter("@type", type)
+                 ).ToList<LoanStatusReport>();
+                var data = result;
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("LoanStatusList", data)
+                        : View("LoanStatusList", data);
+            }
+            catch (Exception ex)
+            {
+                var mgs = ex.Message;
+                return View();
+
+            }
+            finally
+            {
+
+            }
         }
     }
 }

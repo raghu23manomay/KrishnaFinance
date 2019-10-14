@@ -104,6 +104,12 @@ namespace KrishnaFinance.Models
         public int Duration { get; set; }
         public DateTime EMIDate { get; set; }
         public DateTime DisbursementDate { get; set; }
+         public decimal ProcessingFees { get; set; }
+        public decimal  GSTOnDisbursement { get; set; }
+        public decimal  DisburesdAmount { get; set; }
+        public decimal InterestAmount { get; set; }
+        
+
     }
 
     public class PrintApplication
@@ -359,12 +365,56 @@ namespace KrishnaFinance.Models
         public decimal EMIDuePenalty { get; set; }
         public decimal EMIDueAmount { get; set; }
         public decimal GSTOnDisbursement { get; set; }
+        public decimal ProcessingFees { get; set; }
+        public decimal CGST { get; set; }
+        public decimal SGST { get; set; }
         public decimal ServiceCharges { get; set; }
         public decimal PreClosingCharges { get; set; }
-      
+        public decimal InterestAmount { get; set; }
+        public decimal InterestRate { get; set; }
+
+
+    }
+    public class TotalLoanReports
+
+    {
+        [Key]
+        public int ApplicantID { get; set; }
+        public String ApplicantFullName { get; set; }
+        public decimal TotalAmountSanctioned { get; set; }
+        public decimal DisburesdAmount { get; set; }
+        public string DateOfApproval { get; set; }
+        public decimal TotalDisburesdAmount { get; set; }
+
 
     }
 
+    public class TotalServiceCharges
+
+    {
+        [Key]
+        public int ApplicantID { get; set; }
+        public String ApplicantFullName { get; set; }
+        public decimal BasicAmount { get; set; }
+        public decimal CGST { get; set; }
+        public decimal SGST { get; set; }
+        public decimal Total { get; set; }
+
+    }
+    public class LoanStatusReport
+
+    {
+        [Key]
+        public int ApplicantID { get; set; }
+        public String ApplicantFullName { get; set; }
+        public decimal TotalLoanPaid { get; set; }
+        public decimal Received { get; set; }
+        public decimal OutStanding { get; set; }
+        public decimal TotalPrincipalReceived { get; set; }
+         public decimal TotalIntrestReceived { get; set; }
+ 
+
+}
 } 
 
 

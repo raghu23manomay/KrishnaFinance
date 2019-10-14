@@ -1,0 +1,151 @@
+﻿
+
+
+<style>
+    .wrapper-content {
+        padding: 0px 3px 59px;
+    }
+</style>
+<div class="panel panel-default">
+
+    <div class="panel-body ">
+
+        <div role="tabpanel">
+
+
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class=" "><a href="#" aria-controls="profile" role="tab" data-toggle="tab" id="Monthly">Monthly</a></li>
+                <li role="presentation" class=" "><a href="#" aria-controls="profile" role="tab" data-toggle="tab" id="Quarterly">Quarterly</a></li>
+                <li role="presentation" class=" "><a href="#" aria-controls="profile" role="tab" data-toggle="tab" id="Yearly">Yearly</a></li>
+            </ul>
+            <div class="row col-md-12">
+
+                <div class="col-sm-2" style="padding:5px">
+
+
+                    <select id='Month1' class="months form-control">
+                        <option value=''>--Select Month--</option>
+                        <option value='1'>Janaury</option>
+                        <option value='2'>February</option>
+                        <option value='3'>March</option>
+                        <option selected value='4'>April</option>
+                        <option value='5'>May</option>
+                        <option value='6'>June</option>
+                        <option value='7'>July</option>
+                        <option value='8'>August</option>
+                        <option value='9'>September</option>
+                        <option value='10'>October</option>
+                        <option value='11'>November</option>
+                        <option value='12'>December</option>
+                    </select>
+                    <select id='QuarterId' class="months form-control">
+                        <option value=''> Quarter </option>
+                        <option value='1'>Q1</option>
+                        <option value='2'>Q2</option>
+                        <option value='3'>Q3</option>
+                        <option selected value='4'>Q4</option>
+
+                    </select>
+                    <select id='HalfYear' class="months form-control">
+                        <option value='0'> Half Year </option>
+                        <option value='1'>H1</option>
+                        <option value='2'>H2</option>
+
+
+                    </select>
+                </div>
+                <div class="col-sm-4" style="padding:0px">
+                    <center> <h2>Loan Status</h2></center>
+                </div>
+                <div class="col-sm-4 pull-right" style="padding:5px">
+                    <button type="button" class="btn btn-primary btn-md Save pull-right" id="Print" onclick="myFunction()">Print  <i class="fa fa-print " aria-hidden="true"></i></button>
+
+                </div>
+            </div>
+
+            <div id="cgrid" style="padding: 10px;">
+
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+</div>
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#Month1').hide();
+        $('#QuarterId').hide();
+        $('#HalfYear').hide();
+        $('#Monthly').click(function () {
+            $('#Month1').show();
+            $('#QuarterId').hide();
+            $('#HalfYear').hide();
+
+            $('#Month1').change(function () {
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: "/Master/LoanStatusReport",
+                    data: {
+                        MonthID: $('#Month1').val(),
+                        type: 1
+                    },
+                    success: function (result) {
+                       $('#cgrid').html(result);
+                        //location.reload(this);
+                    },
+                    error: function (errorData) {
+                    }
+                });
+            });
+
+        });
+        $('#Quarterly').click(function () {
+            $('.months').hide();
+            $('#QuarterId').show();
+            $('#HalfYear').hide();
+            $('#QuarterId').change(function () {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Master/LoanStatusReport",
+                data: {
+                    type: 3,
+                    MonthID: $('#QuarterId').val(),
+                },
+                success: function (result) {
+                    $('#cgrid').html(result);
+                    //location.reload(this);
+                },
+                error: function (errorData) {
+                }
+                });
+            });
+        });
+      
+        $('#Yearly').click(function () {
+            $('.months').hide();
+            $('#QuarterId').hide();
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Master/LoanStatusReport",
+                data: {
+                    type: 4
+                },
+                success: function (result) {
+                    $('#cgrid').html(result);
+                    //location.reload(this);
+                },
+                error: function (errorData) {
+                }
+            });
+        });
+    });
+</script>

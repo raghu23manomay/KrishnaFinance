@@ -24,45 +24,48 @@
                         </div>
                     </div>
                 </div>
-                </a>
-                }
+            </a>
+        }
 
 
-                if (item.Status == "TotalApprovedApplication")
-                {
+        if (item.Status == "TotalApprovedApplication")
+        {
+
+            <div class="col-lg-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Approved</h5>
+                    </div>
+                    <div class="ibox-content" style="background-color:darkkhaki; font-family:Arial;color:white">
+                        <h1 class="no-margins">@item.count</h1>
+                        <small>Total Approved </small>
+                    </div>
+                </div>
+
+            </div>
+           
+        }
+
+        @*if (item.Status == "TotalRejectedApplication")
+            {
                 <div class="col-lg-2">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Approved</h5>
+                            <h5>Rejected</h5>
                         </div>
-                        <div class="ibox-content" style="background-color:darkkhaki; font-family:Arial;color:white">
+                        <div class="ibox-content">
                             <h1 class="no-margins">@item.count</h1>
-                            <small>Total Approved </small>
+
+                            <small>Total Rejected </small>
                         </div>
                     </div>
-
                 </div>
-                }
-
-                @*if (item.Status == "TotalRejectedApplication")
-                    {
-                        <div class="col-lg-2">
-                            <div class="ibox float-e-margins">
-                                <div class="ibox-title">
-                                    <h5>Rejected</h5>
-                                </div>
-                                <div class="ibox-content">
-                                    <h1 class="no-margins">@item.count</h1>
-
-                                    <small>Total Rejected </small>
-                                </div>
-                            </div>
-                        </div>
-                    }*@
+            }*@
 
 
-                if (item.Status == "TotalLoanAmount")
-                {
+        if (item.Status == "TotalLoanAmount")
+        {
+            <a href="../Master/TotalLoanReports">
                 <div class="col-lg-2">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
@@ -74,6 +77,7 @@
                         </div>
                     </div>
                 </div>
+            </a>
                 }
 
                 if (item.Status == "Paid")

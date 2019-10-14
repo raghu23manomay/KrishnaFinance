@@ -18,8 +18,10 @@ namespace KrishnaFinance.Models
             : base("Name=FinanceDbContext")
         {
         }
-        
-              public DbSet<MasterSetting> MasterSetting { get; set; }
+        public DbSet<LoanStatusReport> LoanStatusReport { get; set; }
+        public DbSet<TotalServiceCharges> TotalServiceCharges { get; set; }
+        public DbSet<TotalLoanReports> TotalLoanReports { get; set; }
+        public DbSet<MasterSetting> MasterSetting { get; set; }
         public DbSet<ReportsGrid> ReportsGrid { get; set; }
         public DbSet<GetTransection> GetTransection { get; set; }
         public DbSet<PrintNOC> PrintNOC { get; set; }
