@@ -201,7 +201,7 @@ namespace KrishnaFinance.Models
         public DateTime EMIDate { get; set; }
         public DateTime EMIPaidDate { get; set; }
         public int status { get; set; }
-     
+      
 
     }
     public class GetTransection
@@ -217,7 +217,9 @@ namespace KrishnaFinance.Models
         public DateTime EMIDate { get; set; }
         public DateTime DisbursementDate { get; set; }
         public decimal TotalEMI { get; set; }
-        
+        public decimal EMIDuePenalty { get; set; }
+        public decimal ServiceCharges { get; set; }
+
     }
     public class ReportsGrid
 
@@ -346,6 +348,20 @@ namespace KrishnaFinance.Models
         public string PermanentAddress { get; set; }
         public decimal LoanRequest { get; set; }
       
+    }
+    public class MasterSetting
+
+    {
+        [Key]
+        public int SettingID { get; set; }
+        public int Duration { get; set; }
+        public decimal EMIDuePenalty { get; set; }
+        public decimal EMIDueAmount { get; set; }
+        public decimal GSTOnDisbursement { get; set; }
+        public decimal ServiceCharges { get; set; }
+        public decimal PreClosingCharges { get; set; }
+      
+
     }
 
 } 

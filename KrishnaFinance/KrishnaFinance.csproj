@@ -1227,7 +1227,7 @@
     <Content Include="Views\Master\Collectiondata.cshtml" />
     <Content Include="Views\Reports.cshtml" />
     <Content Include="Views\Master\Reports.cshtml" />
-    <Content Include="Views\Master\Settings.cshtml" />
+    <Content Include="Views\Master\MasterSetting.cshtml" />
     <Content Include="Views\Master\ApplicationForm.cshtml" />
     <Content Include="Views\Master\EMINonClearance.cshtml" />
     <Content Include="Views\Master\ClientEMIReport.cshtml" />

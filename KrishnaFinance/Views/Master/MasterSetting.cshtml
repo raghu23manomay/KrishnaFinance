@@ -1,4 +1,5 @@
 ﻿
+@model KrishnaFinance.Models.MasterSetting
 
 <script src="~/Scripts/jquery-2.1.1.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -12,41 +13,41 @@
         </div>
         <div class="ibox-content">
             <form class="form-horizontal">
-             
+                <input type="text" placeholder="Duration" class="form-control hidden" id="SettingID" value="@Model.SettingID">
                 <div class="form-group">
                     <label class="col-lg-3">Loan Duration</label>
                     <div class="col-lg-9">
-                        <input type="text" placeholder="Duration" class="form-control" id="Duration" value="">
+                        <input type="text" placeholder="Duration" class="form-control" id="Duration" value="@Model.Duration">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3">EMI Due Penalty</label>
                     <div class="col-lg-9">
-                        <input type="text" placeholder="EMI Due Penalty" class="form-control" id="EMIDuePenalty" value="">
+                        <input type="text" placeholder="EMI Due Penalty" class="form-control" id="EMIDuePenalty" value="@Model.EMIDuePenalty">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3">Processing Fees</label>
                     <div class="col-lg-9">
-                        <input type="text" placeholder="EMI Due Amount" class="form-control" id="EMIDueAmount" value="">
+                        <input type="text" placeholder="EMI Due Amount" class="form-control" id="EMIDueAmount" value="@Model.EMIDueAmount">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3">GST On Disbursement</label>
                     <div class="col-lg-9">
-                        <input type="text" placeholder="GST On Disbursement" class="form-control" id="GSTOnDisbursement" value="">
+                        <input type="text" placeholder="GST On Disbursement" class="form-control" id="GSTOnDisbursement" value="@Model.GSTOnDisbursement">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3">Service Charges</label>
                     <div class="col-lg-9">
-                        <input type="text" placeholder="Service Charges" class="form-control" id="ServiceCharges" value="">
+                        <input type="text" placeholder="Service Charges" class="form-control" id="ServiceCharges" value="@Model.ServiceCharges">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3">Pre Closing Charges</label>
                     <div class="col-lg-9">
-                        <input type="text" placeholder="Pre Closing Charges" class="form-control" id="PreClosingCharges" value="">
+                        <input type="text" placeholder="Pre Closing Charges" class="form-control" id="PreClosingCharges" value="@Model.PreClosingCharges">
                     </div>
                 </div>
                 <div class="row form-group">
@@ -64,27 +65,33 @@
     </div>
 </div>
 
-        <script>
-            $(document).ready(function () {
+<script>
+    $(document).ready(function () {
 
-                $('#btnsave').on('click', function () {
+        $('#btnsave').on('click', function () {
 
-                    $.ajax({
-                        type: "POST",
-                        cache: false,
-                        url: "/Master/Settings",
-                        data: {
-                            Duration: $('#Duration').val()
-                        },
-                        success: function (result) {
-                            alert(result);
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Master/InsertMasterSetting",
+                data: {
+                    SettingID: $("#SettingID").val(),
+                    Duration: $("#Duration").val(),
+                    EMIDuePenalty: $("#EMIDuePenalty").val(),
+                    EMIDueAmount: $("#EMIDueAmount").val(),
+                    GSTOnDisbursement: $("#GSTOnDisbursement").val(),
+                    ServiceCharges: $("#ServiceCharges").val(),
+                    PreClosingCharges: $("#PreClosingCharges").val()
+                },
+                success: function (result) {
+                    alert(result);
 
-                        },
-                        error: function (errorData) {
-                        }
-                    });
-
-                });
+                },
+                error: function (errorData) {
+                }
             });
 
-        </script>
+        });
+    });
+
+</script>

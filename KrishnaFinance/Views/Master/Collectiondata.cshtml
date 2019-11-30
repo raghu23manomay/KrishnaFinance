@@ -37,7 +37,11 @@
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 ">Additional Charges</label>
-                        <div class="col-lg-9"><input type="text" placeholder="Additional Charges" class="form-control" id="AdditionalCharges"></div>
+                        <div class="col-lg-9"><input type="text" placeholder="Additional Charges" class="form-control Charges" id="AdditionalCharges"></div>
+                    </div>
+                    <div class="form-group" id="Bounce">
+                        <label class="col-lg-3 ">EMI Bounce Charges</label>
+                        <div class="col-lg-9"><input type="text" placeholder="EMI Bounce Charges" class="form-control Charges" id="EMIBounceCharges" value="0"></div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 ">Total</label>
@@ -53,10 +57,10 @@
                         <div class="col-lg-9"><input type="text" placeholder="EMI Paid Date" class="form-control" id="EMIPaidDate" value="@DateTime.Now" disabled></div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-4 "> Select Payment method </label>
+                        <label class="col-lg-4 ">  Payment method </label>
                         @*<div class="col-lg-2">
-                            <input type="radio" id="Cash" name="Cash" value=""> Cash
-                        </div>*@
+                <input type="radio" id="Cash" name="Cash" value=""> Cash
+            </div>*@
                         <div class="col-lg-2">
                             <input type="radio" id="cheque" name="cheque" value=""> cheque
                         </div>
@@ -84,7 +88,7 @@
                         <div class="col-md-8 pull-right">
                             <div class="pull-right">
                                 <a class="btn btn-primary" href="/Master/CollectionList">Cancel</a>
-                                <button class="btn btn-primary" id="btnsave" type="button">Save </button>
+                                <a class="btn btn-primary" href="/Master/CollectionList" id="btnsave" type="button">Save</a>
                             </div>
                         </div>
                     </div>
@@ -162,14 +166,47 @@
 
 <script>
     $(document).ready(function () {
+        $('#Bounce').hide();
 
-        $('#AdditionalCharges').on('keyup', function () {
-            var remaningAmt = $('#TotalAmount').val();
+        $('.Charges').on('keyup', function () {
+            var remaningAmt = $('#TotalAmount').val();  
             var ServiceAmt = $('#AdditionalCharges').val();
-            var Total = (remaningAmt * 1) + (ServiceAmt * 1);
+            var EMIBounce = $('#EMIBounceCharges').val();
+           
+            var Total = (remaningAmt * 1) + (ServiceAmt * 1) + (EMIBounce * 1);
             $('#Total').val(Total);
 
         });
+  
+        $('#status').on('change', function () {
+           
+            if ($(this).val() == 2) {
+
+                $('#Bounce').show();
+
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: "/Master/getfine",
+                    data: {
+                        status: 1
+
+                    },
+                    success: function (result) {
+                        alert(result);
+
+                    },
+                    error: function (errorData) {
+                    }
+                });
+
+
+            }
+            else if ($(this).val() == 1) {
+                $('#Bounce').hide();
+            }
+        });
+
 
         $('#TransactionBox').hide();
         $('#chequeBox').hide();

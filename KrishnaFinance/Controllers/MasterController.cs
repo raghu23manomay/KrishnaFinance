@@ -21,6 +21,91 @@ namespace KrishnaFinance.Controllers
         {
             return View();
         }
+        //public ActionResult getfine(int SettingID = 1)
+        //{
+        //    try
+        //    {
+
+
+        //        FinanceDbContext _db = new FinanceDbContext();
+
+        //        var result = _db.MasterSetting.SqlQuery(@"exec UspGetMasterSetting @SettingID",
+        //        new SqlParameter("@SettingID", SettingID)
+        //         ).ToList<MasterSetting>();
+        //        var data = result.FirstOrDefault();
+        //        return Request.IsAjaxRequest()
+        //                ? (ActionResult)PartialView("MasterSetting", data)
+        //                : View("MasterSetting", data);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var mgs = ex.Message;
+        //        return View();
+
+        //    }
+        //    finally
+        //    {
+
+        //    }
+        //}
+        [HttpPost]
+        public ActionResult InsertMasterSetting(MasterSetting MS)
+        {
+            try
+            {
+                FinanceDbContext _db = new FinanceDbContext();
+                var result = _db.Database.ExecuteSqlCommand(@"exec UspUpdateMasterSetting 
+@SettingID,
+@Duration,
+@EMIDuePenalty,
+@EMIDueAmount,
+@GSTOnDisbursement,
+@ServiceCharges,
+@PreClosingCharges",
+new SqlParameter("@SettingID", MS.SettingID),
+new SqlParameter("@Duration", MS.Duration),
+new SqlParameter("@EMIDuePenalty", MS.EMIDuePenalty),
+new SqlParameter("@EMIDueAmount", MS.EMIDueAmount),
+new SqlParameter("@GSTOnDisbursement", MS.GSTOnDisbursement),
+new SqlParameter("@ServiceCharges", MS.ServiceCharges),
+new SqlParameter("@PreClosingCharges", MS.PreClosingCharges));
+
+                return Json("   Setting Changes Sucessfullly");
+
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format("<b>Message:</b> {0}<br /><br />", ex.Message);
+                return Json(message);
+            }
+        }
+        public ActionResult MasterSetting(int SettingID = 1)
+        {
+            try
+            {
+
+
+                FinanceDbContext _db = new FinanceDbContext();
+
+                var result = _db.MasterSetting.SqlQuery(@"exec UspGetMasterSetting @SettingID",
+                new SqlParameter("@SettingID", SettingID)
+                 ).ToList<MasterSetting>();
+                var data = result.FirstOrDefault();
+                return Request.IsAjaxRequest()
+                        ? (ActionResult)PartialView("MasterSetting", data)
+                        : View("MasterSetting", data);
+            }
+            catch (Exception ex)
+            {
+                var mgs = ex.Message;
+                return View();
+
+            }
+            finally
+            {
+
+            }
+        }
         public ActionResult PrintNOC(int ApplicantID = 1)
         {
             try
